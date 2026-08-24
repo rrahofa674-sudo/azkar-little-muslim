@@ -115,7 +115,18 @@
         💾 حفظ التذكير
       </button>
     </div>
+<div class="card">
+  <div class="icon">😴</div>
+  <h2>أذكار النوم</h2>
 
+  <input type="time" id="sleepTime">
+
+  <br>
+
+  <button onclick="saveSleep()">
+    💾 حفظ التذكير
+  </button>
+</div>
 
     <div id="status"></div>
 
@@ -135,7 +146,8 @@
     document.getElementById("eveningTime").value =
       localStorage.getItem("eveningReminder") || "";
 
-
+document.getElementById("sleepTime").value =
+  localStorage.getItem("sleepReminder") || "";
     function saveMorning() {
 
       let time =
@@ -155,21 +167,37 @@
 
     function saveEvening() {
 
-      let time =
-        document.getElementById("eveningTime").value;
+  let time =
+    document.getElementById("eveningTime").value;
 
-      if (!time) {
-        alert("اختاري وقت أذكار المساء 🌙");
-        return;
-      }
+  if (!time) {
+    alert("اختاري وقت أذكار المساء 🌙");
+    return;
+  }
 
-      localStorage.setItem("eveningReminder", time);
+  localStorage.setItem("eveningReminder", time);
 
-      document.getElementById("status").innerText =
-        "✅ تم حفظ تذكير أذكار المساء";
-    }
+  document.getElementById("status").innerText =
+    "✅ تم حفظ تذكير أذكار المساء";
+}
 
-  </script>
+
+function saveSleep() {
+
+  let time =
+    document.getElementById("sleepTime").value;
+
+  if (!time) {
+    alert("اختاري وقت أذكار النوم 😴");
+    return;
+  }
+
+  localStorage.setItem("sleepReminder", time);
+
+  document.getElementById("status").innerText =
+    "✅ تم حفظ تذكير أذكار النوم";
+}
+    </script>
 
 </body>
 </html>
