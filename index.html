@@ -3,227 +3,371 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#087f75">
+
   <title>أذكار الطفل المسلم</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#78d9ff, #e5f8d5);
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.15), transparent 25%),
+        linear-gradient(145deg, #062e2b, #0b5d58 45%, #092f3b);
+      color: white;
       min-height: 100vh;
-      color: #333;
     }
 
     .app {
-      max-width: 500px;
+      max-width: 600px;
       margin: auto;
       min-height: 100vh;
       overflow: hidden;
-      background: linear-gradient(
-        #72d6ff 0%,
-        #dff8d0 55%,
-        #fff4d4 100%
-      );
+      padding-bottom: 100px;
     }
 
-    /* العنوان */
+    /* ===== الرأس ===== */
+
     .header {
+      position: relative;
+      overflow: hidden;
       text-align: center;
-      padding: 25px 15px 10px;
+      padding: 35px 15px 30px;
+
+      background:
+        linear-gradient(145deg, #0b766e, #064b55);
+
+      border-radius: 0 0 45px 45px;
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.30);
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      top: -90px;
+      right: -50px;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      bottom: -70px;
+      left: -40px;
     }
 
     .sun {
-      font-size: 55px;
+      position: relative;
+      z-index: 2;
+      font-size: 60px;
+      filter: drop-shadow(0 8px 8px rgba(0,0,0,.35));
     }
 
     .title {
-      font-size: 34px;
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+      font-size: 32px;
       font-weight: 900;
-      color: #39a844;
-      text-shadow: 2px 3px white;
-      margin-top: 5px;
+      text-shadow: 0 4px 8px rgba(0,0,0,.35);
     }
 
     .title span {
-      color: #ff751f;
+      color: #9ff5df;
     }
 
     .subtitle {
+      position: relative;
+      z-index: 2;
       display: inline-block;
       margin-top: 12px;
-      background: #8bd36a;
-      color: white;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 25px;
-      font-size: 16px;
+
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+
+      backdrop-filter: blur(10px);
+
+      font-size: 15px;
       font-weight: bold;
-      box-shadow: 0 4px 8px #0002;
+
+      box-shadow:
+        0 8px 18px rgba(0,0,0,.20);
     }
 
-    /* الأطفال */
+    /* ===== الأطفال ===== */
+
     .characters {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 15px;
+      padding: 25px 15px 15px;
     }
 
     .child {
       text-align: center;
       font-size: 65px;
+      filter: drop-shadow(0 8px 7px rgba(0,0,0,.3));
     }
 
     .child-name {
+      margin-top: 5px;
       font-size: 14px;
       font-weight: bold;
     }
 
-    /* الرسالة */
+    /* ===== الرسالة ===== */
+
     .message {
-      background: #fff8df;
-      border: 3px solid #f2dca0;
-      border-radius: 25px;
-      padding: 15px;
-      margin: 5px 25px 20px;
+      margin: 8px 20px 22px;
+      padding: 18px;
+
       text-align: center;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: bold;
-      box-shadow: 0 5px 10px #0002;
+
+      background: rgba(255,255,255,.10);
+
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 25px;
+
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.22),
+        inset 0 1px 2px rgba(255,255,255,.15);
+
+      backdrop-filter: blur(12px);
     }
 
-    /* بطاقات الأذكار */
+    /* ===== بطاقات الأذكار ===== */
+
     .cards {
-      background: #fff8df;
-      border-radius: 30px 30px 0 0;
-      padding: 18px 12px;
+      padding: 10px 15px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 13px;
+      gap: 15px;
     }
 
     .card {
-      border: none;
-      min-height: 140px;
-      border-radius: 25px;
-      padding: 12px;
+      position: relative;
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,.18);
+
+      min-height: 145px;
+
+      border-radius: 27px;
+      padding: 18px 10px;
+
       color: white;
       font-weight: bold;
+      font-size: 16px;
+
       cursor: pointer;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.20),
+          rgba(255,255,255,.06)
+        );
+
       box-shadow:
-        0 7px 0 rgba(0,0,0,0.12),
-        inset 0 2px 5px rgba(255,255,255,0.5);
-      transition: 0.15s;
+        0 14px 25px rgba(0,0,0,.28),
+        inset 0 2px 3px rgba(255,255,255,.18);
+
+      transition: .25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+
+      width: 80px;
+      height: 80px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.07);
+
+      top: -25px;
+      right: -20px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+
+      box-shadow:
+        0 22px 35px rgba(0,0,0,.35),
+        inset 0 2px 3px rgba(255,255,255,.20);
     }
 
     .card:active {
-      transform: translateY(5px);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.12);
+      transform: translateY(3px) scale(.97);
     }
 
     .icon {
-      font-size: 48px;
+      position: relative;
+      z-index: 2;
+
       display: block;
-      margin-bottom: 8px;
+
+      font-size: 48px;
+      margin-bottom: 12px;
+
+      filter:
+        drop-shadow(0 7px 6px rgba(0,0,0,.35));
     }
 
     .card-title {
-      font-size: 18px;
+      position: relative;
+      z-index: 2;
     }
 
-    .morning {
-      background: linear-gradient(#ffc928, #f49b13);
-    }
+    /* ===== النجوم ===== */
 
-    .evening {
-      background: linear-gradient(#4aa8f0, #2174cf);
-    }
-
-    .sleep {
-      background: linear-gradient(#9874e8, #7045bf);
-    }
-
-    .food {
-      background: linear-gradient(#7dcc45, #4da32b);
-    }
-
-    .home {
-      background: linear-gradient(#42cbbd, #199c91);
-    }
-
-    .prayer {
-      background: linear-gradient(#ff8195, #ed536d);
-    }
-
-    .favorite {
-      background: linear-gradient(#ff8295, #f04d70);
-    }
-
-    .reminder {
-      background: linear-gradient(#a979ed, #7650c5);
-    }
-
-    /* النجوم */
     .stars {
-      background: #fff4c9;
-      margin: 15px 5px;
-      border-radius: 25px;
-      padding: 15px;
+      margin: 22px 15px;
+
+      padding: 18px;
+
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      box-shadow: 0 4px 8px #0002;
+      justify-content: space-around;
+
+      border-radius: 25px;
+
+      background: rgba(255,255,255,.10);
+
+      border: 1px solid rgba(255,255,255,.15);
+
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.25);
+
+      backdrop-filter: blur(10px);
     }
 
     .big-star {
-      font-size: 50px;
+      font-size: 45px;
+      filter: drop-shadow(0 6px 5px rgba(0,0,0,.3));
     }
 
     .stars-text {
       text-align: center;
       font-weight: bold;
+      font-size: 16px;
     }
 
     .stars-number {
-      font-size: 30px;
-      color: #ff8c00;
+      margin-top: 5px;
+      font-size: 25px;
     }
 
-    /* شريط التنقل */
+    /* ===== القائمة السفلية ===== */
+
     .bottom-nav {
-      position: sticky;
-      bottom: 0;
-      background: #79c94b;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      padding: 8px 5px;
-      box-shadow: 0 -3px 10px #0002;
+      position: fixed;
+
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+
+      max-width: 576px;
+      margin: auto;
+
+      display: flex;
+      justify-content: space-around;
+
+      padding: 9px 5px;
+
+      background: rgba(5,40,38,.90);
+
+      border: 1px solid rgba(255,255,255,.13);
+
+      border-radius: 25px;
+
+      backdrop-filter: blur(15px);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+
+      z-index: 100;
     }
 
     .nav-button {
       border: none;
       background: transparent;
+
       color: white;
-      font-weight: bold;
+
+      font-size: 12px;
+
       cursor: pointer;
-      font-size: 13px;
-      padding: 6px 2px;
+
+      padding: 5px 10px;
+
+      border-radius: 15px;
+
+      transition: .2s;
+    }
+
+    .nav-button.active {
+      background: rgba(255,255,255,.12);
+    }
+
+    .nav-button:active {
+      transform: scale(.92);
     }
 
     .nav-icon {
       display: block;
-      font-size: 25px;
+      font-size: 23px;
       margin-bottom: 3px;
     }
 
-    .active {
-      background: white;
-      color: #4caa36;
-      border-radius: 18px;
+    /* ===== الهاتف ===== */
+
+    @media (max-width: 400px) {
+
+      .title {
+        font-size: 28px;
+      }
+
+      .child {
+        font-size: 55px;
+      }
+
+      .card {
+        min-height: 135px;
+      }
+
+      .icon {
+        font-size: 42px;
+      }
+
+      .bottom-nav {
+        left: 8px;
+        right: 8px;
+      }
+
+      .nav-button {
+        padding: 5px 7px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -232,7 +376,8 @@
 
 <div class="app">
 
-  <!-- العنوان -->
+  <!-- الرأس -->
+
   <header class="header">
 
     <div class="sun">☀️</div>
@@ -249,6 +394,7 @@
 
 
   <!-- الأطفال -->
+
   <section class="characters">
 
     <div class="child">
@@ -268,89 +414,127 @@
   </section>
 
 
-  <!-- رسالة -->
+  <!-- الرسالة -->
+
   <div class="message">
     ❤️ احفظ الله يحفظك ❤️
   </div>
 
 
-  <!-- الأذكار -->
+  <!-- بطاقات الأذكار -->
+
   <section class="cards">
 
     <button class="card morning"
       onclick="openSection('أذكار الصباح')">
+
       <span class="icon">☀️</span>
       <span class="card-title">أذكار الصباح</span>
+
     </button>
+
 
     <button class="card evening"
       onclick="openSection('أذكار المساء')">
+
       <span class="icon">🌙</span>
       <span class="card-title">أذكار المساء</span>
+
     </button>
+
 
     <button class="card sleep"
       onclick="openSection('أذكار النوم')">
+
       <span class="icon">⭐</span>
       <span class="card-title">أذكار النوم</span>
+
     </button>
+
 
     <button class="card food"
       onclick="openSection('أذكار الطعام')">
+
       <span class="icon">🍎</span>
       <span class="card-title">أذكار الطعام</span>
+
     </button>
+
 
     <button class="card home"
       onclick="openSection('أذكار المنزل')">
+
       <span class="icon">🏠</span>
       <span class="card-title">أذكار المنزل</span>
+
     </button>
+
 
     <button class="card prayer"
       onclick="openSection('أذكار الصلاة')">
+
       <span class="icon">🕌</span>
       <span class="card-title">أذكار الصلاة</span>
+
     </button>
 
-    <button class="card favorite"
+
+    <button class="card favorite-card"
       onclick="openSection('أذكاري المفضلة')">
+
       <span class="icon">❤️</span>
       <span class="card-title">أذكاري المفضلة</span>
+
     </button>
+
 
     <button class="card reminder"
       onclick="openSection('تذكير الأذكار')">
+
       <span class="icon">🔔</span>
       <span class="card-title">تذكير الأذكار</span>
+
     </button>
 
   </section>
 
 
   <!-- النجوم -->
+
   <section class="stars">
 
-    <div class="big-star">⭐</div>
-
-    <div class="stars-text">
-      <div>نجومك اليوم</div>
-
-      <div class="stars-number">
-        <span id="starCount">0</span>
-        ⭐
-      </div>
+    <div class="big-star">
+      ⭐
     </div>
 
-    <div>🎁</div>
+    <div class="stars-text">
+
+      <div>
+        نجومك اليوم
+      </div>
+
+      <div class="stars-number">
+
+        <span id="starCount">0</span>
+        ⭐
+
+      </div>
+
+    </div>
+
+    <div>
+      🎁
+    </div>
 
   </section>
 
 
   <!-- القائمة السفلية -->
+
   <nav class="bottom-nav">
 
-    <button class="nav-button active"
+    <button
+      class="nav-button active"
       onclick="goHome()">
 
       <span class="nav-icon">🏠</span>
@@ -358,7 +542,9 @@
 
     </button>
 
-    <button class="nav-button"
+
+    <button
+      class="nav-button"
       onclick="openSection('تعلم')">
 
       <span class="nav-icon">📖</span>
@@ -366,7 +552,9 @@
 
     </button>
 
-    <button class="nav-button"
+
+    <button
+      class="nav-button"
       onclick="openSection('إنجازاتي')">
 
       <span class="nav-icon">🏆</span>
@@ -374,7 +562,9 @@
 
     </button>
 
-    <button class="nav-button"
+
+    <button
+      class="nav-button"
       onclick="openSection('الإعدادات')">
 
       <span class="nav-icon">⚙️</span>
@@ -389,6 +579,8 @@
 
 <script>
 
+  /* النجوم */
+
   let stars =
     Number(localStorage.getItem("childStars")) || 0;
 
@@ -396,15 +588,20 @@
     .textContent = stars;
 
 
+  /* فتح الأقسام مؤقتًا */
+
   function openSection(name) {
 
     alert(
-      "🌟 " + name +
+      "🌟 " +
+      name +
       "\n\nسنضيف هذه الصفحة في الخطوة القادمة ❤️"
     );
 
   }
 
+
+  /* الرئيسية */
 
   function goHome() {
 
