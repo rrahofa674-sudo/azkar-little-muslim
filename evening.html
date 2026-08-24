@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087f75">
+
+  <title>أذكار المساء</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.12), transparent 25%),
+        linear-gradient(145deg, #071c38, #123b61 45%, #092f3b);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 600px;
+      margin: auto;
+      padding-bottom: 40px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 15px;
+      background: linear-gradient(145deg, #123f68, #082c45);
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
+
+    .icon {
+      font-size: 60px;
+      filter: drop-shadow(0 7px 7px rgba(0,0,0,.4));
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      opacity: .9;
+      font-size: 15px;
+    }
+
+    .progress {
+      margin: 20px;
+      padding: 15px;
+      text-align: center;
+      border-radius: 22px;
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+
+    .count {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .zekr {
+      margin: 15px;
+      padding: 22px 18px;
+      border-radius: 25px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.25),
+        inset 0 1px 2px rgba(255,255,255,.12);
+    }
+
+    .zekr-text {
+      font-size: 21px;
+      line-height: 2;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      color: white;
+      border-radius: 18px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      background: rgba(255,255,255,.14);
+      box-shadow: 0 7px 15px rgba(0,0,0,.20);
+    }
+
+    .counter {
+      background: #087f75;
+      min-width: 90px;
+    }
+
+    button:active {
+      transform: scale(.94);
+    }
+
+    .favorite {
+      font-size: 22px;
+    }
+
+    .back {
+      display: block;
+      margin: 25px auto;
+      background: rgba(255,255,255,.12);
+    }
+
+    .completed {
+      opacity: .65;
+      border: 2px solid rgba(159,245,223,.5);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+    <div class="icon">🌙</div>
+
+    <h1>أذكار المساء</h1>
+
+    <div class="subtitle">
+      اختم يومك بذكر الله 🌿
+    </div>
+  </header>
+
+  <div class="progress">
+    🌟 نجومك اليوم
+
+    <div class="count">
+      <span id="stars">0</span> ⭐
+    </div>
+  </div>
+
+  <div id="azkar"></div>
+
+  <button class="back" onclick="goBack()">
+    🏠 العودة للرئيسية
+  </button>
+
+</div>
+
+<script>
+
+const azkar = [
+
+  {
+    text: "أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.",
+    count: 1
+  },
+
+  {
+    text: "اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير.",
+    count: 1
+  },
+
+  {
+    text: "رضيت بالله ربًا، وبالإسلام دينًا، وبمحمد ﷺ نبيًا.",
+    count: 3
+  },
+
+  {
+    text: "أعوذ بكلمات الله التامات من شر ما خلق.",
+    count: 3
+  },
+
+  {
+    text: "سبحان الله وبحمده.",
+    count: 100
+  }
+
+];
+
+let stars =
+  Number(localStorage.getItem("childStars")) || 0;
+
+document.getElementById("stars").textContent = stars;
+
+const container =
+  document.getElementById("azkar");
+
+azkar.forEach((zekr, index) => {
+
+  const card = document.createElement("div");
+
+  card.className = "zekr";
+
+  card.innerHTML = `
+
+    <div class="zekr-text">
+      ${zekr.text}
+    </div>
+
+    <div class="controls">
+
+      <button
+        class="counter"
+        onclick="countZekr(${index}, this)">
+        0 / ${zekr.count}
+      </button>
+
+      <button
+        class="favorite"
+        onclick="favoriteZekr(${index})">
+        ❤️
+      </button>
+
+    </div>
+
+  `;
+
+  container.appendChild(card);
+
+});
+
+let counters = {};
+
+function countZekr(index, button) {
+
+  if (!counters[index]) {
+    counters[index] = 0;
+  }
+
+  if (counters[index] < azkar[index].count) {
+
+    counters[index]++;
+
+    button.textContent =
+      counters[index] + " / " + azkar[index].count;
+
+    if (counters[index] === azkar[index].count) {
+
+      button.parentElement.parentElement
+        .classList.add("completed");
+
+      stars++;
+
+      localStorage.setItem(
+        "childStars",
+        stars
+      );
+
+      document.getElementById("stars")
+        .textContent = stars;
+    }
+  }
+}
+
+function favoriteZekr(index) {
+
+  let favorites =
+    JSON.parse(
+      localStorage.getItem("favoriteAzkar")
+    ) || [];
+
+  if (!favorites.includes(azkar[index].text)) {
+
+    favorites.push(azkar[index].text);
+
+    localStorage.setItem(
+      "favoriteAzkar",
+      JSON.stringify(favorites)
+    );
+
+    alert("❤️ تمت إضافة الذكر إلى المفضلة");
+
+  } else {
+
+    alert("❤️ الذكر موجود بالفعل في المفضلة");
+
+  }
+}
+
+function goBack() {
+
+  window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+</html>
