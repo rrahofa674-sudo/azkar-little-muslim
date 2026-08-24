@@ -613,6 +613,70 @@
   }
 
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import {
+    getMessaging,
+    getToken,
+    onMessage
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
+    authDomain: "muslim-kids-azkar.firebaseapp.com",
+    projectId: "muslim-kids-azkar",
+    storageBucket: "muslim-kids-azkar.firebasestorage.app",
+    messagingSenderId: "204235175360",
+    appId: "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging(app);
+
+  async function enableNotifications() {
+    try {
+      const permission = await Notification.requestPermission();
+
+      if (permission !== "granted") {
+        alert("لم يتم السماح بالإشعارات 🔔");
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.register(
+        "/firebase-messaging-sw.js"
+      );
+
+      const token = await getToken(messaging, {
+        BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw
+        serviceWorkerRegistration: registration
+      });
+
+      if (token) {
+        console.log("FCM Token:", token);
+        localStorage.setItem("fcmToken", token);
+        alert("تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️");
+      }
+
+    } catch (error) {
+      console.error("Notification error:", error);
+      alert("حدث خطأ أثناء تفعيل الإشعارات");
+    }
+  }
+
+  window.enableNotifications = enableNotifications;
+
+  onMessage(messaging, (payload) => {
+    console.log("رسالة أثناء فتح الموقع:", payload);
+
+    if (payload.notification) {
+      new Notification(
+        payload.notification.title || "أذكار الطفل المسلم",
+        {
+          body: payload.notification.body || "حان وقت الأذكار 🌷"
+        }
+      );
+    }
+  });
+</script>
 </body>
 </html>
