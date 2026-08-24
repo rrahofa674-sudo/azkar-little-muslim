@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أذكار الطفل المسلم</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#78d9ff, #e5f8d5);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .app {
+      max-width: 500px;
+      margin: auto;
+      min-height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(
+        #72d6ff 0%,
+        #dff8d0 55%,
+        #fff4d4 100%
+      );
+    }
+
+    /* العنوان */
+    .header {
+      text-align: center;
+      padding: 25px 15px 10px;
+    }
+
+    .sun {
+      font-size: 55px;
+    }
+
+    .title {
+      font-size: 34px;
+      font-weight: 900;
+      color: #39a844;
+      text-shadow: 2px 3px white;
+      margin-top: 5px;
+    }
+
+    .title span {
+      color: #ff751f;
+    }
+
+    .subtitle {
+      display: inline-block;
+      margin-top: 12px;
+      background: #8bd36a;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px #0002;
+    }
+
+    /* الأطفال */
+    .characters {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .child {
+      text-align: center;
+      font-size: 65px;
+    }
+
+    .child-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* الرسالة */
+    .message {
+      background: #fff8df;
+      border: 3px solid #f2dca0;
+      border-radius: 25px;
+      padding: 15px;
+      margin: 5px 25px 20px;
+      text-align: center;
+      font-size: 21px;
+      font-weight: bold;
+      box-shadow: 0 5px 10px #0002;
+    }
+
+    /* بطاقات الأذكار */
+    .cards {
+      background: #fff8df;
+      border-radius: 30px 30px 0 0;
+      padding: 18px 12px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+    }
+
+    .card {
+      border: none;
+      min-height: 140px;
+      border-radius: 25px;
+      padding: 12px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow:
+        0 7px 0 rgba(0,0,0,0.12),
+        inset 0 2px 5px rgba(255,255,255,0.5);
+      transition: 0.15s;
+    }
+
+    .card:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+
+    .icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 18px;
+    }
+
+    .morning {
+      background: linear-gradient(#ffc928, #f49b13);
+    }
+
+    .evening {
+      background: linear-gradient(#4aa8f0, #2174cf);
+    }
+
+    .sleep {
+      background: linear-gradient(#9874e8, #7045bf);
+    }
+
+    .food {
+      background: linear-gradient(#7dcc45, #4da32b);
+    }
+
+    .home {
+      background: linear-gradient(#42cbbd, #199c91);
+    }
+
+    .prayer {
+      background: linear-gradient(#ff8195, #ed536d);
+    }
+
+    .favorite {
+      background: linear-gradient(#ff8295, #f04d70);
+    }
+
+    .reminder {
+      background: linear-gradient(#a979ed, #7650c5);
+    }
+
+    /* النجوم */
+    .stars {
+      background: #fff4c9;
+      margin: 15px 5px;
+      border-radius: 25px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 4px 8px #0002;
+    }
+
+    .big-star {
+      font-size: 50px;
+    }
+
+    .stars-text {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .stars-number {
+      font-size: 30px;
+      color: #ff8c00;
+    }
+
+    /* شريط التنقل */
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      background: #79c94b;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 5px;
+      box-shadow: 0 -3px 10px #0002;
+    }
+
+    .nav-button {
+      border: none;
+      background: transparent;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 6px 2px;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 3px;
+    }
+
+    .active {
+      background: white;
+      color: #4caa36;
+      border-radius: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- العنوان -->
+  <header class="header">
+
+    <div class="sun">☀️</div>
+
+    <div class="title">
+      أذكار <span>الطفل المسلم</span>
+    </div>
+
+    <div class="subtitle">
+      🌿 أذكاري اليومية.. قلب مطمئن 🌿
+    </div>
+
+  </header>
+
+
+  <!-- الأطفال -->
+  <section class="characters">
+
+    <div class="child">
+      👦
+      <div class="child-name">
+        هيا نذكر الله 🌟
+      </div>
+    </div>
+
+    <div class="child">
+      👧
+      <div class="child-name">
+        لنبدأ معًا 💚
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- رسالة -->
+  <div class="message">
+    ❤️ احفظ الله يحفظك ❤️
+  </div>
+
+
+  <!-- الأذكار -->
+  <section class="cards">
+
+    <button class="card morning"
+      onclick="openSection('أذكار الصباح')">
+      <span class="icon">☀️</span>
+      <span class="card-title">أذكار الصباح</span>
+    </button>
+
+    <button class="card evening"
+      onclick="openSection('أذكار المساء')">
+      <span class="icon">🌙</span>
+      <span class="card-title">أذكار المساء</span>
+    </button>
+
+    <button class="card sleep"
+      onclick="openSection('أذكار النوم')">
+      <span class="icon">⭐</span>
+      <span class="card-title">أذكار النوم</span>
+    </button>
+
+    <button class="card food"
+      onclick="openSection('أذكار الطعام')">
+      <span class="icon">🍎</span>
+      <span class="card-title">أذكار الطعام</span>
+    </button>
+
+    <button class="card home"
+      onclick="openSection('أذكار المنزل')">
+      <span class="icon">🏠</span>
+      <span class="card-title">أذكار المنزل</span>
+    </button>
+
+    <button class="card prayer"
+      onclick="openSection('أذكار الصلاة')">
+      <span class="icon">🕌</span>
+      <span class="card-title">أذكار الصلاة</span>
+    </button>
+
+    <button class="card favorite"
+      onclick="openSection('أذكاري المفضلة')">
+      <span class="icon">❤️</span>
+      <span class="card-title">أذكاري المفضلة</span>
+    </button>
+
+    <button class="card reminder"
+      onclick="openSection('تذكير الأذكار')">
+      <span class="icon">🔔</span>
+      <span class="card-title">تذكير الأذكار</span>
+    </button>
+
+  </section>
+
+
+  <!-- النجوم -->
+  <section class="stars">
+
+    <div class="big-star">⭐</div>
+
+    <div class="stars-text">
+      <div>نجومك اليوم</div>
+
+      <div class="stars-number">
+        <span id="starCount">0</span>
+        ⭐
+      </div>
+    </div>
+
+    <div>🎁</div>
+
+  </section>
+
+
+  <!-- القائمة السفلية -->
+  <nav class="bottom-nav">
+
+    <button class="nav-button active"
+      onclick="goHome()">
+
+      <span class="nav-icon">🏠</span>
+      الرئيسية
+
+    </button>
+
+    <button class="nav-button"
+      onclick="openSection('تعلم')">
+
+      <span class="nav-icon">📖</span>
+      تعلم
+
+    </button>
+
+    <button class="nav-button"
+      onclick="openSection('إنجازاتي')">
+
+      <span class="nav-icon">🏆</span>
+      إنجازاتي
+
+    </button>
+
+    <button class="nav-button"
+      onclick="openSection('الإعدادات')">
+
+      <span class="nav-icon">⚙️</span>
+      الإعدادات
+
+    </button>
+
+  </nav>
+
+</div>
+
+
+<script>
+
+  let stars =
+    Number(localStorage.getItem("childStars")) || 0;
+
+  document.getElementById("starCount")
+    .textContent = stars;
+
+
+  function openSection(name) {
+
+    alert(
+      "🌟 " + name +
+      "\n\nسنضيف هذه الصفحة في الخطوة القادمة ❤️"
+    );
+
+  }
+
+
+  function goHome() {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+</script>
+
+</body>
+</html>
