@@ -79,7 +79,7 @@
     function showFavorites() {
 
       let favorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
+        JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
 
       let container =
         document.getElementById("favoritesList");
@@ -123,19 +123,19 @@
 
     function removeFavorite(index) {
 
-      let favorites =
-        JSON.parse(localStorage.getItem("favorites")) || [];
+  let favorites =
+    JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
 
-      favorites.splice(index, 1);
+  favorites.splice(index, 1);
 
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify(favorites)
-      );
+  localStorage.setItem(
+    "favoriteAzkar",
+    JSON.stringify(favorites)
+  );
 
-      showFavorites();
+  showFavorites();
 
-    }
+}
 
 
     showFavorites();
