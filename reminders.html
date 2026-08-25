@@ -198,6 +198,22 @@ function saveSleep() {
     "✅ تم حفظ تذكير أذكار النوم";
 }
     </script>
+  <button
+  onclick="testNotification()"
+  style="
+    display:block;
+    margin:20px auto;
+    padding:14px 24px;
+    border:none;
+    border-radius:15px;
+    background:#1565c0;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+  "
+>
+  🔔 اختبار إشعار الآن
+</button>
 <button
   id="enableNotificationsBtn"
   onclick="enableNotifications()"
@@ -272,7 +288,36 @@ function saveSleep() {
   }
 
   window.enableNotifications = enableNotifications;
+window.testNotification = async function () {
 
+  if (Notification.permission !== "granted") {
+    alert("❌ يجب أولًا تفعيل الإشعارات");
+    return;
+  }
+
+  try {
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    await registration.showNotification(
+      "أذكار الطفل المسلم 🌷",
+      {
+        body: "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
+        icon: "/azkar-little-muslim/icon-192.png",
+        badge: "/azkar-little-muslim/icon-192.png"
+      }
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("❌ لم يتم إرسال الإشعار");
+
+  }
+
+};
   onMessage(messaging, (payload) => {
     console.log("رسالة وصلت والموقع مفتوح:", payload);
   });
