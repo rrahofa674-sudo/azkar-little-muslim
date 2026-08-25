@@ -200,6 +200,7 @@ function saveSleep() {
     </script>
 <button
   id="enableNotificationsBtn"
+  onclick="enableNotifications()"
   style="
     display:block;
     margin:20px auto;
@@ -254,9 +255,9 @@ function saveSleep() {
 );
 
       const token = await getToken(messaging, {
-        BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw
-        serviceWorkerRegistration: registration
-      });
+  vapidKey: "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
+  serviceWorkerRegistration: registration
+});
 
       if (token) {
         localStorage.setItem("fcmToken", token);
