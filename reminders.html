@@ -277,7 +277,17 @@ function saveSleep() {
 
       if (token) {
         localStorage.setItem("fcmToken", token);
-alert("FCM Token:\n\n" + token);
+const box = document.createElement("textarea");
+box.value = token;
+box.style.position = "fixed";
+box.style.top = "10px";
+box.style.left = "10px";
+box.style.width = "90%";
+box.style.height = "200px";
+box.style.zIndex = "99999";
+document.body.appendChild(box);
+box.focus();
+box.select();
         alert("✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️");
         console.log("FCM Token:", token);
       }
