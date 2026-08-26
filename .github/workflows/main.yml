@@ -1,0 +1,17 @@
+name: Firebase Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-firebase-secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Firebase Service Account
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > firebase-service-account.json
+          node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('firebase-service-account.json')); console.log('Firebase secret is valid ✅')"
+          rm firebase-service-account.json
