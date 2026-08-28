@@ -241,7 +241,8 @@ function saveSleep() {
   import {
     getMessaging,
     getToken,
-    onMessage
+deleteToken,
+onMessage
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
   const firebaseConfig = {
@@ -270,7 +271,9 @@ function saveSleep() {
   "/azkar-little-muslim/firebase-messaging-sw.js"
 );
 
-      const token = await getToken(messaging, {
+      await deleteToken(messaging);
+
+const token = await getToken(messaging, {
   vapidKey: "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
   serviceWorkerRegistration: registration
 });
