@@ -230,19 +230,22 @@ function saveSleep() {
   "
 >
 
-  🔔 تفعيل الإشعارات
+🔔 تفعيل الإشعارات
 </button>
-  
-  <p id="testMessage" style="text-align:center;color:green;font-size:18px;">
+
+<p id="testMessage" style="text-align:center;color:green;font-size:18px;">
   ✅ JavaScript يعمل
 </p>
-  <script type="module">
+
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
   import {
     getMessaging,
     getToken,
     onMessage
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+
 
   const firebaseConfig = {
     apiKey: "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
@@ -253,87 +256,128 @@ function saveSleep() {
     appId: "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
   };
 
+
   const app = initializeApp(firebaseConfig);
+
   console.log("Firebase يعمل ❤️");
+
   const messaging = getMessaging(app);
 
+
   async function enableNotifications() {
+
     try {
+
       const permission = await Notification.requestPermission();
 
       if (permission !== "granted") {
+
         alert("لم يتم السماح بالإشعارات 🔔");
+
         return;
       }
 
-      const registration = await navigator.serviceWorker.register(
-  "/azkar-little-muslim/firebase-messaging-sw.js"
-);
 
-      await deleteToken(messaging);
+      const registration =
+        await navigator.serviceWorker.register(
+          "/azkar-little-muslim/firebase-messaging-sw.js"
+        );
 
-const token = await getToken(messaging, {
-  vapidKey: "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
-  serviceWorkerRegistration: registration
-});
+
+      const token = await getToken(messaging, {
+
+        vapidKey:
+          "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
+
+        serviceWorkerRegistration: registration
+
+      });
+
 
       if (token) {
+
         localStorage.setItem("fcmToken", token);
-const box = document.createElement("textarea");
-box.value = token;
-box.style.position = "fixed";
-box.style.top = "10px";
-box.style.left = "10px";
-box.style.width = "90%";
-box.style.height = "200px";
-box.style.zIndex = "99999";
-document.body.appendChild(box);
-box.focus();
-box.select();
-        alert("✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️");
+
         console.log("FCM Token:", token);
+
+        alert(
+          "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
+        );
+
+      } else {
+
+        alert("❌ لم يتم الحصول على FCM Token");
+
       }
 
     } catch (error) {
+
       console.error("Notification error:", error);
+
       alert("❌ حدث خطأ أثناء تفعيل الإشعارات");
+
     }
+
   }
+
 
   window.enableNotifications = enableNotifications;
-window.testNotification = async function () {
 
-  if (Notification.permission !== "granted") {
-    alert("❌ يجب أولًا تفعيل الإشعارات");
-    return;
-  }
 
-  try {
+  window.testNotification = async function () {
 
-    const registration =
-      await navigator.serviceWorker.ready;
+    if (Notification.permission !== "granted") {
 
-    await registration.showNotification(
-      "أذكار الطفل المسلم 🌷",
-      {
-        body: "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
-        icon: "/azkar-little-muslim/icon-192.png",
-        badge: "/azkar-little-muslim/icon-192.png"
-      }
+      alert("❌ يجب أولًا تفعيل الإشعارات");
+
+      return;
+    }
+
+
+    try {
+
+      const registration =
+        await navigator.serviceWorker.ready;
+
+
+      await registration.showNotification(
+
+        "أذكار الطفل المسلم 🌷",
+
+        {
+          body:
+            "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
+
+          icon:
+            "/azkar-little-muslim/icon-192.png",
+
+          badge:
+            "/azkar-little-muslim/icon-192.png"
+        }
+
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("❌ لم يتم إرسال الإشعار");
+
+    }
+
+  };
+
+
+  onMessage(messaging, (payload) => {
+
+    console.log(
+      "رسالة وصلت والموقع مفتوح:",
+      payload
     );
 
-  } catch (error) {
-
-    console.error(error);
-
-    alert("❌ لم يتم إرسال الإشعار");
-
-  }
-
-};
-  onMessage(messaging, (payload) => {
-    console.log("رسالة وصلت والموقع مفتوح:", payload);
   });
+
 </script>
+
 </body>
 </html>
