@@ -236,9 +236,11 @@ function saveSleep() {
 <p id="testMessage" style="text-align:center;color:green;font-size:18px;">
   ✅ JavaScript يعمل
 </p>
-
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
   import {
     getMessaging,
@@ -247,151 +249,279 @@ function saveSleep() {
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
 
+  // Firebase
   const firebaseConfig = {
+
     apiKey: "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
-    authDomain: "muslim-kids-azkar.firebaseapp.com",
-    projectId: "muslim-kids-azkar",
-    storageBucket: "muslim-kids-azkar.firebasestorage.app",
-    messagingSenderId: "204235175360",
-    appId: "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+
+    authDomain:
+      "muslim-kids-azkar.firebaseapp.com",
+
+    projectId:
+      "muslim-kids-azkar",
+
+    storageBucket:
+      "muslim-kids-azkar.firebasestorage.app",
+
+    messagingSenderId:
+      "204235175360",
+
+    appId:
+      "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+
   };
 
 
-  const app = initializeApp(firebaseConfig);
+  const app =
+    initializeApp(firebaseConfig);
 
   console.log("Firebase يعمل ❤️");
 
-  const messaging = getMessaging(app);
+
+  const messaging =
+    getMessaging(app);
 
 
+  // تفعيل الإشعارات والحصول على FCM Token
   async function enableNotifications() {
 
     try {
 
-      const permission = await Notification.requestPermission();
+      // طلب السماح
+      const permission =
+        await Notification.requestPermission();
+
 
       if (permission !== "granted") {
 
-        alert("لم يتم السماح بالإشعارات 🔔");
+        alert(
+          "❌ لم يتم السماح بالإشعارات"
+        );
 
         return;
+
       }
 
 
+      // تسجيل Service Worker
       const registration =
         await navigator.serviceWorker.register(
           "/azkar-little-muslim/firebase-messaging-sw.js"
         );
 
 
-      const token = await getToken(messaging, {
+      // انتظار جاهزية Service Worker
+      await navigator.serviceWorker.ready;
 
-        vapidKey:
-          "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
 
-        serviceWorkerRegistration: registration
+      // الحصول على FCM Token
+      const token =
+        await getToken(
+          messaging,
+          {
 
-      });
+            vapidKey:
+              "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
+
+            serviceWorkerRegistration:
+              registration
+
+          }
+        );
 
 
       if (token) {
 
-  localStorage.setItem("fcmToken", token);
+        console.log(
+          "FCM Token:",
+          token
+        );
 
-  const box = document.createElement("textarea");
 
-  box.value = token;
+        // حفظ التوكن
+        localStorage.setItem(
+          "fcmToken",
+          token
+        );
 
-  box.style.position = "fixed";
-  box.style.top = "10px";
-  box.style.left = "5%";
-  box.style.width = "90%";
-  box.style.height = "220px";
-  box.style.zIndex = "99999";
-  box.style.fontSize = "14px";
-  box.style.padding = "10px";
 
-  document.body.appendChild(box);
+        // إنشاء مربع التوكن
+        const oldBox =
+          document.getElementById(
+            "fcmTokenBox"
+          );
 
-  box.focus();
-  box.select();
+        if (oldBox) {
 
-  alert("✅ تم الحصول على FCM Token. انسخيه من المربع.");
+          oldBox.value = token;
 
-} else {
+        } else {
 
-  alert("❌ لم يتم الحصول على FCM Token");
+          const box =
+            document.createElement(
+              "textarea"
+            );
 
-}
+          box.id =
+            "fcmTokenBox";
+
+          box.value =
+            token;
+
+          box.style.position =
+            "fixed";
+
+          box.style.top =
+            "10px";
+
+          box.style.left =
+            "5%";
+
+          box.style.width =
+            "90%";
+
+          box.style.height =
+            "220px";
+
+          box.style.zIndex =
+            "99999";
+
+          box.style.fontSize =
+            "14px";
+
+          box.style.padding =
+            "10px";
+
+          box.style.background =
+            "white";
+
+          box.style.color =
+            "black";
+
+          document.body.appendChild(
+            box
+          );
+
+          box.focus();
+
+          box.select();
+
+        }
+
+
+        alert(
+          "✅ تم الحصول على FCM Token بنجاح.\n\nانسخيه إلى GitHub Secret باسم FCM_TOKEN."
+        );
+
+
+      } else {
+
+        alert(
+          "❌ لم يتم الحصول على FCM Token"
+        );
+
+      }
+
 
     } catch (error) {
 
-      console.error("Notification error:", error);
+      console.error(
+        "Notification error:",
+        error
+      );
 
-      alert("❌ حدث خطأ أثناء تفعيل الإشعارات");
+
+      alert(
+        "❌ حدث خطأ أثناء تفعيل الإشعارات:\n\n" +
+        error.message
+      );
 
     }
 
   }
 
 
-  window.enableNotifications = enableNotifications;
+  // جعل الزر يستطيع تشغيل الدالة
+  window.enableNotifications =
+    enableNotifications;
 
 
-  window.testNotification = async function () {
+  // اختبار إشعار محلي
+  window.testNotification =
+    async function () {
 
-    if (Notification.permission !== "granted") {
+      if (
+        Notification.permission !==
+        "granted"
+      ) {
 
-      alert("❌ يجب أولًا تفعيل الإشعارات");
+        alert(
+          "❌ يجب أولًا تفعيل الإشعارات"
+        );
 
-      return;
-    }
+        return;
 
-
-    try {
-
-      const registration =
-        await navigator.serviceWorker.ready;
+      }
 
 
-      await registration.showNotification(
+      try {
 
-        "أذكار الطفل المسلم 🌷",
+        const registration =
+          await navigator.serviceWorker.ready;
 
-        {
-          body:
-            "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
 
-          icon:
-            "/azkar-little-muslim/icon-192.png",
+        await registration.showNotification(
 
-          badge:
-            "/azkar-little-muslim/icon-192.png"
-        }
+          "أذكار الطفل المسلم 🌷",
 
+          {
+
+            body:
+              "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
+
+            icon:
+              "/azkar-little-muslim/icon-192.png",
+
+            badge:
+              "/azkar-little-muslim/icon-192.png"
+
+          }
+
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Test notification error:",
+          error
+        );
+
+
+        alert(
+          "❌ لم يتم إرسال الإشعار:\n\n" +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  // استقبال رسائل Firebase عندما تكون الصفحة مفتوحة
+  onMessage(
+    messaging,
+    (payload) => {
+
+      console.log(
+        "🔔 رسالة وصلت والموقع مفتوح:",
+        payload
       );
 
-    } catch (error) {
-
-      console.error(error);
-
-      alert("❌ لم يتم إرسال الإشعار");
-
     }
+  );
 
-  };
-
-
-  onMessage(messaging, (payload) => {
-
-    console.log(
-      "رسالة وصلت والموقع مفتوح:",
-      payload
-    );
-
-  });
-
-</script>
+            </script>
 
 </body>
 </html>
