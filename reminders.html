@@ -318,19 +318,11 @@ function saveSleep() {
 
   alert("✅ تم الحصول على FCM Token. انسخيه من المربع.");
 
-  console.log("FCM Token:", token);
+} else {
+
+  alert("❌ لم يتم الحصول على FCM Token");
 
 }
-
-        alert(
-          "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
-        );
-
-      } else {
-
-        alert("❌ لم يتم الحصول على FCM Token");
-
-      }
 
     } catch (error) {
 
