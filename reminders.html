@@ -295,11 +295,32 @@ function saveSleep() {
 
 
       if (token) {
-alert("تم الحصول على التوكن بنجاح");
-console.log("FCM Token:", token);
-        localStorage.setItem("fcmToken", token);
 
-        console.log("FCM Token:", token);
+  localStorage.setItem("fcmToken", token);
+
+  const box = document.createElement("textarea");
+
+  box.value = token;
+
+  box.style.position = "fixed";
+  box.style.top = "10px";
+  box.style.left = "5%";
+  box.style.width = "90%";
+  box.style.height = "220px";
+  box.style.zIndex = "99999";
+  box.style.fontSize = "14px";
+  box.style.padding = "10px";
+
+  document.body.appendChild(box);
+
+  box.focus();
+  box.select();
+
+  alert("✅ تم الحصول على FCM Token. انسخيه من المربع.");
+
+  console.log("FCM Token:", token);
+
+}
 
         alert(
           "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
