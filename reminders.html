@@ -61,10 +61,13 @@
       border: none;
       padding: 12px 25px;
       border-radius: 15px;
-      background: #4caf50;
       color: white;
       font-size: 17px;
       cursor: pointer;
+    }
+
+    .save {
+      background: #4caf50;
     }
 
     .back {
@@ -72,35 +75,32 @@
       margin-top: 10px;
     }
 
+    .notification {
+      display: block;
+      width: 90%;
+      max-width: 350px;
+      margin: 20px auto;
+      padding: 14px 24px;
+      border-radius: 15px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .test {
+      background: #1565c0;
+    }
+
+    .enable {
+      background: #2e7d32;
+    }
+
     #status {
       margin-top: 20px;
       font-size: 17px;
       color: #388e3c;
       font-weight: bold;
-    }
-
-    #fcmTokenBox {
-      display: none;
-      width: 90%;
-      max-width: 600px;
-      height: 180px;
-      margin: 20px auto;
-      padding: 12px;
-      box-sizing: border-box;
-      border: 2px solid #4caf50;
-      border-radius: 15px;
-      background: white;
-      color: black;
-      font-size: 13px;
-      direction: ltr;
-      text-align: left;
-    }
-
-    #tokenStatus {
-      display: none;
-      margin: 10px;
-      color: #2e7d32;
-      font-weight: bold;
+      min-height: 25px;
     }
   </style>
 </head>
@@ -115,6 +115,7 @@
 
     <!-- أذكار الصباح -->
     <div class="card">
+
       <div class="icon">🌅</div>
 
       <h2>أذكار الصباح</h2>
@@ -123,14 +124,18 @@
 
       <br>
 
-      <button onclick="saveMorning()">
+      <button
+        class="save"
+        onclick="saveMorning()">
         💾 حفظ التذكير
       </button>
+
     </div>
 
 
     <!-- أذكار المساء -->
     <div class="card">
+
       <div class="icon">🌙</div>
 
       <h2>أذكار المساء</h2>
@@ -139,14 +144,18 @@
 
       <br>
 
-      <button onclick="saveEvening()">
+      <button
+        class="save"
+        onclick="saveEvening()">
         💾 حفظ التذكير
       </button>
+
     </div>
 
 
     <!-- أذكار النوم -->
     <div class="card">
+
       <div class="icon">😴</div>
 
       <h2>أذكار النوم</h2>
@@ -155,38 +164,45 @@
 
       <br>
 
-      <button onclick="saveSleep()">
+      <button
+        class="save"
+        onclick="saveSleep()">
         💾 حفظ التذكير
       </button>
+
     </div>
 
 
     <div id="status"></div>
 
 
-    <!-- حالة التوكن -->
-    <p id="tokenStatus">
-      ✅ FCM Token محفوظ على هذا الجهاز
-    </p>
+    <!-- اختبار إشعار -->
+    <button
+      class="notification test"
+      onclick="testNotification()">
+      🔔 اختبار إشعار الآن
+    </button>
 
 
-    <!-- مربع التوكن -->
-    <textarea
-      id="fcmTokenBox"
-      readonly
-      placeholder="سيظهر FCM Token هنا بعد تفعيل الإشعارات">
-    </textarea>
+    <!-- تفعيل الإشعارات -->
+    <button
+      class="notification enable"
+      onclick="enableNotifications()">
+      🔔 تفعيل الإشعارات
+    </button>
 
 
     <!-- العودة -->
-    <button class="back" onclick="history.back()">
+    <button
+      class="notification back"
+      onclick="history.back()">
       ↩️ العودة
     </button>
 
   </div>
 
 
-  <!-- وظائف الأوقات -->
+  <!-- وظائف التذكيرات -->
   <script>
 
     // تحميل الأوقات المحفوظة
@@ -202,6 +218,7 @@
 
 
     // حفظ أذكار الصباح
+
     function saveMorning() {
 
       const time =
@@ -226,6 +243,7 @@
 
 
     // حفظ أذكار المساء
+
     function saveEvening() {
 
       const time =
@@ -250,6 +268,7 @@
 
 
     // حفظ أذكار النوم
+
     function saveSleep() {
 
       const time =
@@ -275,58 +294,8 @@
   </script>
 
 
-  <!-- اختبار الإشعار -->
-  <button
-    onclick="testNotification()"
-    style="
-      display:block;
-      margin:20px auto;
-      padding:14px 24px;
-      border:none;
-      border-radius:15px;
-      background:#1565c0;
-      color:white;
-      font-size:17px;
-      cursor:pointer;
-    "
-  >
-    🔔 اختبار إشعار الآن
-  </button>
+  <!-- Firebase Cloud Messaging -->
 
-
-  <!-- تفعيل الإشعارات -->
-  <button
-    id="enableNotificationsBtn"
-    onclick="enableNotifications()"
-    style="
-      display:block;
-      margin:20px auto;
-      padding:14px 24px;
-      border:none;
-      border-radius:15px;
-      background:#2e7d32;
-      color:white;
-      font-size:17px;
-      cursor:pointer;
-    "
-  >
-    🔔 تفعيل الإشعارات
-  </button>
-
-
-  <p
-    id="testMessage"
-    style="
-      text-align:center;
-      color:green;
-      font-size:18px;
-    "
-  >
-    ✅ JavaScript يعمل
-  </p>
-
-
-  <!-- Firebase -->
   <script type="module">
 
     import {
@@ -342,6 +311,7 @@
 
 
     // إعداد Firebase
+
     const firebaseConfig = {
 
       apiKey:
@@ -365,59 +335,41 @@
     };
 
 
+    // تشغيل Firebase
+
     const app =
       initializeApp(firebaseConfig);
-
-
-    console.log(
-      "Firebase يعمل ❤️"
-    );
 
 
     const messaging =
       getMessaging(app);
 
 
-    
+    console.log(
+      "✅ Firebase Messaging يعمل"
+    );
 
 
-      const status =
-        document.getElementById(
-          "tokenStatus"
-        );
+    // تفعيل الإشعارات والحصول على FCM Token
 
-
-      if (savedToken && box) {
-
-        box.value =
-          savedToken;
-
-        box.style.display =
-          "block";
-
-
-        if (status) {
-
-          status.style.display =
-            "block";
-
-        }
-
-      }
-
-    }
-
-
-    // تشغيل استرجاع التوكن فور تحميل الصفحة
-    showSavedToken();
-
-
-    // تفعيل الإشعارات
     async function enableNotifications() {
 
       try {
 
-        // طلب الإذن
+        // التأكد من دعم الإشعارات
+
+        if (!("Notification" in window)) {
+
+          alert(
+            "❌ هذا المتصفح لا يدعم الإشعارات"
+          );
+
+          return;
+        }
+
+
+        // طلب إذن الإشعارات
+
         const permission =
           await Notification.requestPermission();
 
@@ -429,22 +381,24 @@
           );
 
           return;
-
         }
 
 
         // تسجيل Service Worker
+
         const registration =
           await navigator.serviceWorker.register(
             "/azkar-little-muslim/firebase-messaging-sw.js"
           );
 
 
-        // انتظار جاهزية Service Worker
+        // انتظار Service Worker
+
         await navigator.serviceWorker.ready;
 
 
         // الحصول على FCM Token
+
         const token =
           await getToken(
             messaging,
@@ -460,39 +414,33 @@
           );
 
 
-        if (token) {
-
-          console.log(
-            "FCM Token تم الحصول عليه"
-          );
-
-
-          // حفظ التوكن
-          localStorage.setItem(
-            "fcmToken",
-            token
-          );
-
-
-  
-
-
-          
-
-
-          alert(
-            "✅ تم حفظ FCM Token بنجاح.\n\nيمكنك الآن نسخه إلى GitHub Secret باسم FCM_TOKEN."
-          );
-
-
-        } else {
+        if (!token) {
 
           alert(
             "❌ لم يتم الحصول على FCM Token"
           );
 
+          return;
         }
 
+
+        // حفظ التوكن فقط في الجهاز
+        // لا يتم عرضه داخل الصفحة
+
+        localStorage.setItem(
+          "fcmToken",
+          token
+        );
+
+
+        console.log(
+          "✅ FCM Token تم حفظه بنجاح"
+        );
+
+
+        alert(
+          "✅ تم تفعيل الإشعارات وحفظ التوكن بنجاح 🔔❤️"
+        );
 
       } catch (error) {
 
@@ -512,61 +460,82 @@
     }
 
 
-    // جعل الزر يستطيع تشغيل الدالة
+    // جعل الدالة متاحة للزر
+
     window.enableNotifications =
       enableNotifications;
 
 
-// اختبار إشعار محلي
-    window.testNotification = async function () {
+    // اختبار إشعار محلي
 
-      if (Notification.permission !== "granted") {
+    window.testNotification =
+      async function () {
 
-        alert("❌ يجب أولًا تفعيل الإشعارات");
+        try {
 
-        return;
-      }
+          if (
+            Notification.permission !==
+            "granted"
+          ) {
 
-      try {
+            alert(
+              "❌ يجب أولًا تفعيل الإشعارات"
+            );
 
-        const registration =
-          await navigator.serviceWorker.ready;
-
-        await registration.showNotification(
-          "أذكار الطفل المسلم 🌷",
-          {
-            body: "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
-
-            icon:
-              "/azkar-little-muslim/icon-192.png",
-
-            badge:
-              "/azkar-little-muslim/icon-192.png"
+            return;
           }
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Test notification error:",
-          error
-        );
-
-        alert(
-          "❌ لم يتم إرسال الإشعار:\n\n" +
-          error.message
-        );
-      }
-    };
 
 
-    // استقبال رسائل Firebase عندما تكون الصفحة مفتوحة
+          const registration =
+            await navigator.serviceWorker.ready;
+
+
+          await registration.showNotification(
+
+            "أذكار الطفل المسلم 🌷",
+
+            {
+
+              body:
+                "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
+
+              icon:
+                "/azkar-little-muslim/icon-192.png",
+
+              badge:
+                "/azkar-little-muslim/icon-192.png"
+
+            }
+
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Test notification error:",
+            error
+          );
+
+
+          alert(
+            "❌ لم يتم إرسال الإشعار:\n\n" +
+            error.message
+          );
+
+        }
+
+      };
+
+
+    // استقبال رسائل Firebase
+    // عندما تكون الصفحة مفتوحة
+
     onMessage(
       messaging,
       (payload) => {
 
         console.log(
-          "🔔 رسالة Firebase وصلت والموقع مفتوح:",
+          "🔔 وصلت رسالة Firebase:",
           payload
         );
 
