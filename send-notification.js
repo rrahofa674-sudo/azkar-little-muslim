@@ -3,11 +3,12 @@ const admin = require("firebase-admin");
 async function sendNotification() {
   try {
 
-    // قراءة Firebase Service Account
-    const serviceAccount =
-      JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    // قراءة بيانات Firebase Service Account
+    const serviceAccount = JSON.parse(
+      process.env.FIREBASE_SERVICE_ACCOUNT
+    );
 
-    // تشغيل Firebase Admin
+    // تهيئة Firebase Admin
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount)
     });
@@ -16,7 +17,9 @@ async function sendNotification() {
     const token = process.env.FCM_TOKEN;
 
     if (!token) {
-      throw new Error("FCM_TOKEN غير موجود في GitHub Secrets");
+      throw new Error(
+        "FCM_TOKEN غير موجود في GitHub Secrets"
+      );
     }
 
     // إرسال الإشعار
@@ -31,8 +34,8 @@ async function sendNotification() {
 
       webpush: {
         notification: {
-          icon: "/azkar-little-muslim/icon-192.png",
-          badge: "/azkar-little-muslim/icon-192.png"
+          icon: "https://rrahofa674-sudo.github.io/azkar-little-muslim/icon-192.png",
+          badge: "https://rrahofa674-sudo.github.io/azkar-little-muslim/icon-192.png"
         }
       }
 
