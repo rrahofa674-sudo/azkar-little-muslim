@@ -2,8 +2,7 @@ const admin = require("firebase-admin");
 
 async function sendNotification() {
   try {
-
-    // قراءة بيانات Firebase Service Account
+    // قراءة بيانات Firebase من GitHub Secret
     const serviceAccount = JSON.parse(
       process.env.FIREBASE_SERVICE_ACCOUNT
     );
@@ -24,7 +23,6 @@ async function sendNotification() {
 
     // إرسال الإشعار
     const response = await admin.messaging().send({
-
       token: token,
 
       notification: {
@@ -38,14 +36,12 @@ async function sendNotification() {
           badge: "https://rrahofa674-sudo.github.io/azkar-little-muslim/icon-192.png"
         }
       }
-
     });
 
     console.log("✅ تم إرسال الإشعار بنجاح");
     console.log("Message ID:", response);
 
   } catch (error) {
-
     console.error("❌ فشل إرسال الإشعار:");
     console.error(error);
 
