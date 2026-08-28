@@ -2,10 +2,10 @@ name: Send Azkar Notifications
 
 on:
   schedule:
-    # 06:00 بتوقيت الجزائر (UTC+1)
+    # 06:05 بتوقيت الجزائر (UTC+1)
     - cron: "5 5 * * *"
 
-    # 17:00 بتوقيت الجزائر (UTC+1)
+    # 17:05 بتوقيت الجزائر (UTC+1)
     - cron: "5 16 * * *"
 
   workflow_dispatch:
@@ -15,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install Firebase Admin
         run: npm install firebase-admin
@@ -30,6 +31,4 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           FCM_TOKEN: ${{ secrets.FCM_TOKEN }}
-        run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT" > firebase-service-account.json
-          node send-notification.js
+        run: node send-notification.js
