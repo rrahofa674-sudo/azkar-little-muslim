@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#087f75">
-
-  <title>أذكار المساء</title>
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta name="theme-color" content="#087f75">  <title>أذكار المساء</title>  <style>
     * {
       box-sizing: border-box;
     }
@@ -16,8 +10,8 @@
       margin: 0;
       font-family: Arial, Tahoma, sans-serif;
       background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,.12), transparent 25%),
-        linear-gradient(145deg, #071c38, #123b61 45%, #092f3b);
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.15), transparent 25%),
+        linear-gradient(145deg, #062e2b, #0b5d58 45%, #092f3b);
       color: white;
       min-height: 100vh;
     }
@@ -31,14 +25,14 @@
     .header {
       text-align: center;
       padding: 30px 15px;
-      background: linear-gradient(145deg, #123f68, #082c45);
+      background: linear-gradient(145deg, #0b766e, #064b55);
       border-radius: 0 0 40px 40px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,.30);
     }
 
     .icon {
       font-size: 60px;
-      filter: drop-shadow(0 7px 7px rgba(0,0,0,.4));
+      filter: drop-shadow(0 7px 7px rgba(0,0,0,.35));
     }
 
     h1 {
@@ -57,7 +51,7 @@
       text-align: center;
       border-radius: 22px;
       background: rgba(255,255,255,.10);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
     }
 
     .count {
@@ -87,8 +81,9 @@
     .controls {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-top: 20px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -106,6 +101,10 @@
     .counter {
       background: #087f75;
       min-width: 90px;
+    }
+
+    .listen {
+      background: rgba(255,193,7,.22);
     }
 
     button:active {
@@ -126,40 +125,36 @@
       opacity: .65;
       border: 2px solid rgba(159,245,223,.5);
     }
-  </style>
-</head>
 
-<body>
+    .finish-message {
+      display: none;
+      margin: 20px 15px;
+      padding: 22px;
+      text-align: center;
+      border-radius: 25px;
+      background: rgba(255,255,255,.13);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      font-size: 22px;
+      font-weight: bold;
+    }
+  </style></head><body><div class="app">  <header class="header">
+    <div class="icon">🌙</div><h1>أذكار المساء</h1>
 
-<div class="app">
-
-  <header class="header">
-    <div class="icon">🌙</div>
-
-    <h1>أذكار المساء</h1>
-
-    <div class="subtitle">
-      اختم يومك بذكر الله 🌿
-    </div>
-  </header>
-
-  <div class="progress">
-    🌟 نجومك اليوم
-
-    <div class="count">
-      <span id="stars">0</span> ⭐
-    </div>
-  </div>
-
-  <div id="azkar"></div>
-
-  <button class="back" onclick="goBack()">
-    🏠 العودة للرئيسية
-  </button>
-
+<div class="subtitle">
+  اختم يومك بذكر الله 🌿
 </div>
 
-<script>
+  </header>  <div class="progress">
+    🌟 نجومك اليوم<div class="count">
+  <span id="stars">0</span> ⭐
+</div>
+
+  </div>  <div id="azkar"></div>  <div id="finishMessage" class="finish-message">
+    🎉 أحسنت يا بطل! 🌟<br>
+    بارك الله فيك ❤️
+  </div>  <button class="back" onclick="goBack()">
+    🏠 العودة للرئيسية
+  </button></div><script>
 
 const azkar = [
 
@@ -179,8 +174,8 @@ const azkar = [
   },
 
   {
-    text: "أعوذ بكلمات الله التامات من شر ما خلق.",
-    count: 3
+    text: "حسبي الله لا إله إلا هو عليه توكلت وهو رب العرش العظيم.",
+    count: 7
   },
 
   {
@@ -213,6 +208,12 @@ azkar.forEach((zekr, index) => {
     <div class="controls">
 
       <button
+        class="listen"
+        onclick="speakZekr(${index})">
+        🔊 استمع
+      </button>
+
+      <button
         class="counter"
         onclick="countZekr(${index}, this)">
         0 / ${zekr.count}
@@ -232,7 +233,80 @@ azkar.forEach((zekr, index) => {
 
 });
 
+
 let counters = {};
+
+
+/* 🔊 قراءة الذكر بصوت الهاتف */
+
+function speakZekr(index) {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert("عذرًا، جهازك لا يدعم تشغيل الصوت.");
+
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      azkar[index].text
+    );
+
+  utterance.lang = "ar-SA";
+  utterance.rate = 0.75;
+  utterance.pitch = 1.05;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+
+/* 🏆 تشجيع الطفل */
+
+function encouragement() {
+
+  const messages = [
+    "أحسنت يا بطل! 🌟",
+    "ما شاء الله عليك! 👏",
+    "رائع يا بطل! ⭐",
+    "ممتاز! بارك الله فيك ❤️"
+  ];
+
+  const message =
+    messages[
+      Math.floor(Math.random() * messages.length)
+    ];
+
+  speakText(message);
+}
+
+
+/* 🔊 نطق عبارة قصيرة */
+
+function speakText(text) {
+
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "ar-SA";
+  utterance.rate = 0.85;
+  utterance.pitch = 1.15;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+
+/* ⭐ عدّ الذكر */
 
 function countZekr(index, button) {
 
@@ -261,9 +335,40 @@ function countZekr(index, button) {
 
       document.getElementById("stars")
         .textContent = stars;
+
+      /* 🏆 تشجيع عند إكمال الذكر */
+
+      encouragement();
+
+      /* 🎉 التأكد من إكمال جميع الأذكار */
+
+      const completed =
+        azkar.every((item, i) =>
+          counters[i] === item.count
+        );
+
+      if (completed) {
+
+        setTimeout(() => {
+
+          const finish =
+            document.getElementById("finishMessage");
+
+          finish.style.display = "block";
+
+          speakText(
+            "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار المساء"
+          );
+
+        }, 1200);
+      }
     }
   }
+
 }
+
+
+/* ❤️ المفضلة */
 
 function favoriteZekr(index) {
 
@@ -288,7 +393,11 @@ function favoriteZekr(index) {
     alert("❤️ الذكر موجود بالفعل في المفضلة");
 
   }
+
 }
+
+
+/* 🏠 العودة */
 
 function goBack() {
 
@@ -296,7 +405,5 @@ function goBack() {
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
