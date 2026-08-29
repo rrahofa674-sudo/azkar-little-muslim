@@ -88,8 +88,9 @@
     .controls {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-top: 20px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -109,6 +110,10 @@
       min-width: 90px;
     }
 
+    .listen {
+      background: rgba(255,193,7,.22);
+    }
+
     button:active {
       transform: scale(.94);
     }
@@ -126,6 +131,18 @@
     .completed {
       opacity: .65;
       border: 2px solid rgba(159,245,223,.5);
+    }
+
+    .finish-message {
+      display: none;
+      margin: 20px 15px;
+      padding: 22px;
+      text-align: center;
+      border-radius: 25px;
+      background: rgba(255,255,255,.13);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      font-size: 22px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -150,6 +167,11 @@
   </div>
 
   <div id="azkar"></div>
+
+  <div id="finishMessage" class="finish-message">
+    🎉 أحسنت يا بطل! 🌟<br>
+    بارك الله فيك ❤️
+  </div>
 
   <button class="back" onclick="goBack()">
     🏠 العودة للرئيسية
@@ -211,6 +233,12 @@ azkar.forEach((zekr, index) => {
     <div class="controls">
 
       <button
+        class="listen"
+        onclick="speakZekr(${index})">
+        🔊 استمع
+      </button>
+
+      <button
         class="counter"
         onclick="countZekr(${index}, this)">
         0 / ${zekr.count}
@@ -232,6 +260,78 @@ azkar.forEach((zekr, index) => {
 
 
 let counters = {};
+
+
+/* 🔊 قراءة الذكر بصوت الهاتف */
+
+function speakZekr(index) {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert("عذرًا، جهازك لا يدعم تشغيل الصوت.");
+
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      azkar[index].text
+    );
+
+  utterance.lang = "ar-SA";
+  utterance.rate = 0.75;
+  utterance.pitch = 1.05;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+
+/* 🏆 تشجيع الطفل */
+
+function encouragement() {
+
+  const messages = [
+    "أحسنت يا بطل! 🌟",
+    "ما شاء الله عليك! 👏",
+    "رائع يا بطل! ⭐",
+    "ممتاز! بارك الله فيك ❤️"
+  ];
+
+  const message =
+    messages[
+      Math.floor(Math.random() * messages.length)
+    ];
+
+  speakText(message);
+}
+
+
+/* 🔊 نطق عبارة قصيرة */
+
+function speakText(text) {
+
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "ar-SA";
+  utterance.rate = 0.85;
+  utterance.pitch = 1.15;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+
+/* ⭐ عدّ الذكر */
 
 function countZekr(index, button) {
 
@@ -260,11 +360,39 @@ function countZekr(index, button) {
 
       document.getElementById("stars")
         .textContent = stars;
+
+      /* 🏆 تشجيع عند إكمال الذكر */
+      encouragement();
+
+      /* 🎉 التأكد من إكمال جميع الأذكار */
+
+      const completed =
+        azkar.every((item, i) =>
+          counters[i] === item.count
+        );
+
+      if (completed) {
+
+        setTimeout(() => {
+
+          const finish =
+            document.getElementById("finishMessage");
+
+          finish.style.display = "block";
+
+          speakText(
+            "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار الصباح"
+          );
+
+        }, 1200);
+      }
     }
   }
 
 }
 
+
+/* ❤️ المفضلة */
 
 function favoriteZekr(index) {
 
@@ -292,6 +420,8 @@ function favoriteZekr(index) {
 
 }
 
+
+/* 🏠 العودة */
 
 function goBack() {
 
