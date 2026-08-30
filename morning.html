@@ -257,12 +257,14 @@ azkar.forEach((zekr, index) => {
   container.appendChild(card);
 
 });
-
-
 let counters = {};
 
+let speakingIndex = null;
 
-/* 🔊 قراءة الذكر بصوت الهاتف */
+let speechVersion = 0;
+
+
+/* 🔊 قراءة الذكر وربطه بالعداد */
 
 function speakZekr(index) {
 
@@ -273,19 +275,87 @@ function speakZekr(index) {
     return;
   }
 
+
+  /* منع الضغط المتكرر أثناء القراءة */
+
+  if (speakingIndex === index) {
+    return;
+  }
+
+
+  /* إلغاء أي قراءة سابقة */
+
   window.speechSynthesis.cancel();
+
+  speechVersion++;
+
+  const currentVersion = speechVersion;
+
+  speakingIndex = index;
+
+
+  const listenButton =
+    document.querySelectorAll(".listen")[index];
+
+  listenButton.textContent =
+    "🔊 جاري القراءة...";
+
 
   const utterance =
     new SpeechSynthesisUtterance(
       azkar[index].text
     );
 
+
   utterance.lang = "ar-SA";
   utterance.rate = 0.75;
   utterance.pitch = 1.05;
   utterance.volume = 1;
 
+
+  /* ⭐ عند انتهاء القراءة فقط يزيد العداد */
+
+  utterance.onend = function() {
+
+    if (currentVersion !== speechVersion) {
+      return;
+    }
+
+
+    speakingIndex = null;
+
+    listenButton.textContent =
+      "🔊 استمع";
+
+
+    const counterButton =
+      document.querySelectorAll(".counter")[index];
+
+
+    /* 🔢 زيادة العداد بعد انتهاء الصوت */
+
+    countZekr(index, counterButton);
+
+  };
+
+
+  utterance.onerror = function() {
+
+    if (currentVersion !== speechVersion) {
+      return;
+    }
+
+
+    speakingIndex = null;
+
+    listenButton.textContent =
+      "🔊 استمع";
+
+  };
+
+
   window.speechSynthesis.speak(utterance);
+
 }
 
 
@@ -300,12 +370,15 @@ function encouragement() {
     "ممتاز! بارك الله فيك ❤️"
   ];
 
+
   const message =
     messages[
       Math.floor(Math.random() * messages.length)
     ];
 
+
   speakText(message);
+
 }
 
 
@@ -317,17 +390,22 @@ function speakText(text) {
     return;
   }
 
+
   window.speechSynthesis.cancel();
+
 
   const utterance =
     new SpeechSynthesisUtterance(text);
+
 
   utterance.lang = "ar-SA";
   utterance.rate = 0.85;
   utterance.pitch = 1.15;
   utterance.volume = 1;
 
+
   window.speechSynthesis.speak(utterance);
+
 }
 
 
@@ -339,97 +417,77 @@ function countZekr(index, button) {
     counters[index] = 0;
   }
 
+
   if (counters[index] < azkar[index].count) {
 
     counters[index]++;
 
+
     button.textContent =
-      counters[index] + " / " + azkar[index].count;
+      counters[index] +
+      " / " +
+      azkar[index].count;
+
+
+    /* ⭐ اكتمل الذكر */
 
     if (counters[index] === azkar[index].count) {
 
       button.parentElement.parentElement
         .classList.add("completed");
 
+
       stars++;
+
 
       localStorage.setItem(
         "childStars",
         stars
       );
 
+
       document.getElementById("stars")
         .textContent = stars;
 
-      /* 🏆 تشجيع عند إكمال الذكر */
+
+      /* 🏆 تشجيع */
+
       encouragement();
 
-      /* 🎉 التأكد من إكمال جميع الأذكار */
+
+      /* 🎉 هل اكتملت كل الأذكار؟ */
 
       const completed =
         azkar.every((item, i) =>
           counters[i] === item.count
         );
 
+
       if (completed) {
 
         setTimeout(() => {
 
           const finish =
-            document.getElementById("finishMessage");
+            document.getElementById(
+              "finishMessage"
+            );
 
-          finish.style.display = "block";
+
+          finish.style.display =
+            "block";
+
 
           speakText(
             "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار الصباح"
           );
 
+
         }, 1200);
+
       }
+
     }
-  }
-
-}
-
-
-/* ❤️ المفضلة */
-
-function favoriteZekr(index) {
-
-  let favorites =
-    JSON.parse(
-      localStorage.getItem("favoriteAzkar")
-    ) || [];
-
-  if (!favorites.includes(azkar[index].text)) {
-
-    favorites.push(azkar[index].text);
-
-    localStorage.setItem(
-      "favoriteAzkar",
-      JSON.stringify(favorites)
-    );
-
-    alert("❤️ تمت إضافة الذكر إلى المفضلة");
-
-  } else {
-
-    alert("❤️ الذكر موجود بالفعل في المفضلة");
 
   }
 
 }
-
-
-/* 🏠 العودة */
-
-function goBack() {
-
-  window.location.href = "index.html";
-
-}
-
-</script>
-
-</body>
-</html>
