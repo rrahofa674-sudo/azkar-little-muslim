@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
-<head>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta name="theme-color" content="#087f75">  <title>أذكار المساء</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087f75">  <title>أذكار المساء</title>  <style>
     * {
       box-sizing: border-box;
     }
@@ -144,8 +144,9 @@
   اختم يومك بذكر الله 🌿
 </div>
 
-  </header>  <div class="progress">
-    🌟 نجومك اليوم<div class="count">
+  </header>  <div class="progress">🌟 نجومك اليوم
+
+<div class="count">
   <span id="stars">0</span> ⭐
 </div>
 
@@ -185,13 +186,16 @@ const azkar = [
 
 ];
 
+
 let stars =
   Number(localStorage.getItem("childStars")) || 0;
 
 document.getElementById("stars").textContent = stars;
 
+
 const container =
   document.getElementById("azkar");
+
 
 azkar.forEach((zekr, index) => {
 
@@ -209,12 +213,14 @@ azkar.forEach((zekr, index) => {
 
       <button
         class="listen"
+        id="listen-${index}"
         onclick="speakZekr(${index})">
         🔊 استمع
       </button>
 
       <button
         class="counter"
+        id="counter-${index}"
         onclick="countZekr(${index}, this)">
         0 / ${zekr.count}
       </button>
@@ -234,10 +240,23 @@ azkar.forEach((zekr, index) => {
 });
 
 
+/* =========================
+   العدادات
+========================= */
+
 let counters = {};
 
 
-/* 🔊 قراءة الذكر بصوت الهاتف */
+/* =========================
+   التحكم في الصوت
+========================= */
+
+let speakingIndex = null;
+
+let speechVersion = 0;
+
+
+/* 🔊 قراءة الذكر وربطه بالعداد */
 
 function speakZekr(index) {
 
@@ -248,23 +267,96 @@ function speakZekr(index) {
     return;
   }
 
+
+  /* منع الضغط المتكرر أثناء تشغيل نفس الذكر */
+
+  if (speakingIndex === index) {
+    return;
+  }
+
+
+  /* إلغاء أي قراءة سابقة */
+
   window.speechSynthesis.cancel();
+
+  speechVersion++;
+
+  const currentVersion = speechVersion;
+
+  speakingIndex = index;
+
+
+  const listenButton =
+    document.getElementById("listen-" + index);
+
+  listenButton.textContent = "🔊 جاري القراءة...";
+
 
   const utterance =
     new SpeechSynthesisUtterance(
       azkar[index].text
     );
 
+
   utterance.lang = "ar-SA";
   utterance.rate = 0.75;
   utterance.pitch = 1.05;
   utterance.volume = 1;
 
+
+  /* ⭐ عند انتهاء القراءة فقط يزيد العداد */
+
+  utterance.onend = function() {
+
+    /*
+      نتأكد أن هذه هي القراءة الحالية
+      وليست قراءة قديمة تم إلغاؤها.
+    */
+
+    if (currentVersion !== speechVersion) {
+      return;
+    }
+
+
+    speakingIndex = null;
+
+    listenButton.textContent = "🔊 استمع";
+
+
+    /*
+      هنا أهم نقطة:
+      انتهاء الصوت = احتساب مرة واحدة
+    */
+
+    const counterButton =
+      document.getElementById("counter-" + index);
+
+    countZekr(index, counterButton);
+
+  };
+
+
+  utterance.onerror = function() {
+
+    if (currentVersion !== speechVersion) {
+      return;
+    }
+
+    speakingIndex = null;
+
+    listenButton.textContent = "🔊 استمع";
+
+  };
+
+
   window.speechSynthesis.speak(utterance);
+
 }
 
 
-/* 🏆 تشجيع الطفل */
+/* =========================
+   🏆 تشجيع الطفل
+========================= */
 
 function encouragement() {
 
@@ -275,12 +367,15 @@ function encouragement() {
     "ممتاز! بارك الله فيك ❤️"
   ];
 
+
   const message =
     messages[
       Math.floor(Math.random() * messages.length)
     ];
 
+
   speakText(message);
+
 }
 
 
@@ -292,21 +387,28 @@ function speakText(text) {
     return;
   }
 
+
   window.speechSynthesis.cancel();
+
 
   const utterance =
     new SpeechSynthesisUtterance(text);
+
 
   utterance.lang = "ar-SA";
   utterance.rate = 0.85;
   utterance.pitch = 1.15;
   utterance.volume = 1;
 
+
   window.speechSynthesis.speak(utterance);
+
 }
 
 
-/* ⭐ عدّ الذكر */
+/* =========================
+   ⭐ عدّ الذكر
+========================= */
 
 function countZekr(index, button) {
 
@@ -314,31 +416,41 @@ function countZekr(index, button) {
     counters[index] = 0;
   }
 
+
   if (counters[index] < azkar[index].count) {
 
     counters[index]++;
 
+
     button.textContent =
       counters[index] + " / " + azkar[index].count;
+
+
+    /* ⭐ اكتمل الذكر */
 
     if (counters[index] === azkar[index].count) {
 
       button.parentElement.parentElement
         .classList.add("completed");
 
+
       stars++;
+
 
       localStorage.setItem(
         "childStars",
         stars
       );
 
+
       document.getElementById("stars")
         .textContent = stars;
+
 
       /* 🏆 تشجيع عند إكمال الذكر */
 
       encouragement();
+
 
       /* 🎉 التأكد من إكمال جميع الأذكار */
 
@@ -347,6 +459,7 @@ function countZekr(index, button) {
           counters[i] === item.count
         );
 
+
       if (completed) {
 
         setTimeout(() => {
@@ -354,21 +467,28 @@ function countZekr(index, button) {
           const finish =
             document.getElementById("finishMessage");
 
+
           finish.style.display = "block";
+
 
           speakText(
             "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار المساء"
           );
 
         }, 1200);
+
       }
+
     }
+
   }
 
 }
 
 
-/* ❤️ المفضلة */
+/* =========================
+   ❤️ المفضلة
+========================= */
 
 function favoriteZekr(index) {
 
@@ -377,14 +497,17 @@ function favoriteZekr(index) {
       localStorage.getItem("favoriteAzkar")
     ) || [];
 
+
   if (!favorites.includes(azkar[index].text)) {
 
     favorites.push(azkar[index].text);
+
 
     localStorage.setItem(
       "favoriteAzkar",
       JSON.stringify(favorites)
     );
+
 
     alert("❤️ تمت إضافة الذكر إلى المفضلة");
 
@@ -397,7 +520,9 @@ function favoriteZekr(index) {
 }
 
 
-/* 🏠 العودة */
+/* =========================
+   🏠 العودة
+========================= */
 
 function goBack() {
 
