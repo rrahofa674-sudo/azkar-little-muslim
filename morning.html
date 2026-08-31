@@ -9,7 +9,6 @@
   <title>أذكار الصباح</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -114,8 +113,7 @@
         0 12px 25px rgba(0,0,0,.25),
         inset 0 1px 2px rgba(255,255,255,.12);
 
-      transition:
-        .3s ease;
+      transition: .3s ease;
     }
 
     .zekr.completed {
@@ -183,8 +181,7 @@
     }
 
     button:active {
-      transform:
-        scale(.94);
+      transform: scale(.94);
     }
 
     button:disabled {
@@ -193,9 +190,7 @@
     }
 
     .counter {
-      background:
-        #087f75;
-
+      background: #087f75;
       min-width: 90px;
     }
 
@@ -252,7 +247,6 @@
 
       opacity: .9;
     }
-
   </style>
 </head>
 
@@ -283,9 +277,7 @@
 
     <div class="count">
 
-      <span id="stars">
-        0
-      </span>
+      <span id="stars">0</span>
 
       ⭐
 
@@ -302,8 +294,9 @@
   <div id="azkar"></div>
 
 
-  <div id="finishMessage"
-       class="finish-message">
+  <div
+    id="finishMessage"
+    class="finish-message">
 
     🎉 أحسنت يا بطل! 🌟
 
@@ -331,9 +324,9 @@
 
 <script>
 
-
 /* ==================================================
    أذكار الصباح
+   نفس الأذكار والأعداد بدون تغيير
    ================================================== */
 
 const azkar = [
@@ -344,13 +337,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ، قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ.",
     count: 3
   },
-
 
   {
     text:
@@ -358,13 +349,11 @@ const azkar = [
     count: 3
   },
 
-
   {
     text:
       "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ، قُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ، إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ.",
     count: 3
   },
-
 
   {
     text:
@@ -372,13 +361,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.",
     count: 1
   },
-
 
   {
     text:
@@ -386,13 +373,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.",
     count: 4
   },
-
 
   {
     text:
@@ -400,13 +385,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
-      "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.",
+      "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.",
     count: 3
   },
-
 
   {
     text:
@@ -414,13 +397,11 @@ const azkar = [
     count: 7
   },
 
-
   {
     text:
       "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.",
     count: 1
   },
-
 
   {
     text:
@@ -428,13 +409,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.",
     count: 3
   },
-
 
   {
     text:
@@ -442,13 +421,11 @@ const azkar = [
     count: 3
   },
 
-
   {
     text:
       "يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.",
     count: 1
   },
-
 
   {
     text:
@@ -456,13 +433,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ، حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.",
     count: 1
   },
-
 
   {
     text:
@@ -470,13 +445,11 @@ const azkar = [
     count: 100
   },
 
-
   {
     text:
       "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
     count: 10
   },
-
 
   {
     text:
@@ -484,13 +457,11 @@ const azkar = [
     count: 100
   },
 
-
   {
     text:
       "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ: عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.",
     count: 3
   },
-
 
   {
     text:
@@ -498,13 +469,11 @@ const azkar = [
     count: 1
   },
 
-
   {
     text:
       "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.",
     count: 100
   },
-
 
   {
     text:
@@ -516,46 +485,63 @@ const azkar = [
 
 
 /* ==================================================
-   نجوم الطفل
+   النجوم
    ================================================== */
 
 let stars =
-  Number(
-    localStorage.getItem("childStars")
-  ) || 0;
+  Number(localStorage.getItem("childStars")) || 0;
 
-document.getElementById("stars")
-  .textContent = stars;
+document.getElementById("stars").textContent = stars;
 
 
 /* ==================================================
-   تحديد اليوم
+   التاريخ المحلي
+   بدل UTC
    ================================================== */
 
-const today =
-  new Date().toISOString().slice(0, 10);
+function getLocalDateKey() {
+
+  const now = new Date();
+
+  const year = now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1).padStart(2, "0");
+
+  const day =
+    String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+const today = getLocalDateKey();
 
 
 /* ==================================================
-   تحميل التقدم الخاص بهذا اليوم
+   تحميل التقدم
    ================================================== */
 
 let savedDay =
-  localStorage.getItem(
-    "morningAzkarDay"
-  );
+  localStorage.getItem("morningAzkarDay");
 
 let counters = {};
 
-
 if (savedDay === today) {
 
-  counters =
-    JSON.parse(
-      localStorage.getItem(
-        "morningAzkarCounters"
-      )
-    ) || {};
+  try {
+
+    counters =
+      JSON.parse(
+        localStorage.getItem(
+          "morningAzkarCounters"
+        )
+      ) || {};
+
+  } catch (error) {
+
+    counters = {};
+
+  }
 
 } else {
 
@@ -581,81 +567,119 @@ if (savedDay === today) {
 const container =
   document.getElementById("azkar");
 
+azkar.forEach((zekr, index) => {
 
-azkar.forEach(
-  (zekr, index) => {
+  const card =
+    document.createElement("div");
 
-    const card =
-      document.createElement("div");
+  card.className = "zekr";
 
-    card.className =
-      "zekr";
+  const current =
+    Math.min(
+      Number(counters[index]) || 0,
+      zekr.count
+    );
 
-    const current =
-      Number(counters[index]) || 0;
+  counters[index] = current;
 
-    if (current >= zekr.count) {
+  if (current >= zekr.count) {
 
-      card.classList.add(
-        "completed"
-      );
-
-    }
-
-    card.innerHTML = `
-
-      <div class="zekr-text">
-        ${zekr.text}
-      </div>
-
-      <div class="repeat-info">
-        عدد التكرار: ${zekr.count}
-      </div>
-
-      <div class="controls">
-
-        <button
-          class="listen"
-          id="listen-${index}"
-          onclick="speakZekr(${index})">
-
-          🔊 استمع
-
-        </button>
-
-        <button
-          class="counter"
-          id="counter-${index}"
-          onclick="countZekr(${index}, this)">
-
-          ${current} / ${zekr.count}
-
-        </button>
-
-        <button
-          class="favorite"
-          onclick="favoriteZekr(${index})">
-
-          ❤️
-
-        </button>
-
-      </div>
-    `;
-
-    container.appendChild(card);
+    card.classList.add("completed");
 
   }
+
+  card.innerHTML = `
+
+    <div class="zekr-text">
+      ${zekr.text}
+    </div>
+
+    <div class="repeat-info">
+      عدد التكرار: ${zekr.count}
+    </div>
+
+    <div class="controls">
+
+      <button
+        class="listen"
+        id="listen-${index}"
+        onclick="speakZekr(${index})">
+
+        🔊 استمع
+
+      </button>
+
+      <button
+        class="counter"
+        id="counter-${index}"
+        onclick="countZekr(${index}, this)">
+
+        ${current} / ${zekr.count}
+
+      </button>
+
+      <button
+        class="favorite"
+        aria-label="إضافة إلى المفضلة"
+        onclick="favoriteZekr(${index})">
+
+        ❤️
+
+      </button>
+
+    </div>
+  `;
+
+  container.appendChild(card);
+
+});
+
+
+/* ==================================================
+   حفظ العدادات بعد تنظيفها
+   ================================================== */
+
+localStorage.setItem(
+  "morningAzkarCounters",
+  JSON.stringify(counters)
 );
 
 
 /* ==================================================
-   الصوت
+   نظام الصوت
    ================================================== */
 
 let speakingIndex = null;
 
 let speechVersion = 0;
+
+let speechType = null;
+
+
+/* ==================================================
+   إيقاف الصوت الحالي
+   ================================================== */
+
+function stopSpeech() {
+
+  speechVersion++;
+
+  window.speechSynthesis.cancel();
+
+  speakingIndex = null;
+
+  speechType = null;
+
+  document
+    .querySelectorAll(".listen")
+    .forEach(button => {
+
+      button.disabled = false;
+
+      button.textContent = "🔊 استمع";
+
+    });
+}
 
 
 /* ==================================================
@@ -664,21 +688,16 @@ let speechVersion = 0;
 
 function speakZekr(index) {
 
-  if (
-    !("speechSynthesis" in window)
-  ) {
+  if (!("speechSynthesis" in window)) {
 
     alert(
       "عذرًا، جهازك لا يدعم تشغيل الصوت."
     );
 
     return;
-
   }
 
-  if (
-    speakingIndex === index
-  ) {
+  if (speakingIndex !== null) {
 
     return;
 
@@ -693,6 +712,8 @@ function speakZekr(index) {
 
   speakingIndex = index;
 
+  speechType = "zekr";
+
   const listenButton =
     document.getElementById(
       "listen-" + index
@@ -701,92 +722,88 @@ function speakZekr(index) {
   listenButton.textContent =
     "🔊 جاري القراءة...";
 
-  listenButton.disabled =
-    true;
+  listenButton.disabled = true;
+
 
   const utterance =
     new SpeechSynthesisUtterance(
       azkar[index].text
     );
 
-  utterance.lang =
-    "ar-SA";
+  utterance.lang = "ar-SA";
 
-  utterance.rate =
-    0.75;
+  utterance.rate = 0.75;
 
-  utterance.pitch =
-    1.05;
+  utterance.pitch = 1.05;
 
-  utterance.volume =
-    1;
+  utterance.volume = 1;
 
 
-  /*
-   * العداد يزيد فقط بعد انتهاء
-   * قراءة الذكر بالكامل.
-   */
+  utterance.onend = function() {
 
-  utterance.onend =
-    function() {
+    if (
+      currentVersion !== speechVersion ||
+      speechType !== "zekr"
+    ) {
 
-      if (
-        currentVersion !==
-        speechVersion
-      ) {
+      return;
 
-        return;
+    }
 
-      }
+    speakingIndex = null;
 
-      speakingIndex =
-        null;
+    speechType = null;
 
-      listenButton.textContent =
-        "🔊 استمع";
+    listenButton.textContent =
+      "🔊 استمع";
 
-      listenButton.disabled =
-        false;
+    listenButton.disabled = false;
 
-      const counterButton =
-        document.getElementById(
-          "counter-" + index
-        );
 
-      countZekr(
-        index,
-        counterButton
+    const counterButton =
+      document.getElementById(
+        "counter-" + index
       );
 
-    };
+
+    /*
+     * العداد يزيد مرة واحدة فقط
+     * بعد انتهاء القراءة بالكامل.
+     */
+
+    countZekr(
+      index,
+      counterButton
+    );
+
+  };
 
 
-  utterance.onerror =
-    function() {
+  utterance.onerror = function() {
 
-      if (
-        currentVersion !==
-        speechVersion
-      ) {
+    if (
+      currentVersion !== speechVersion
+    ) {
 
-        return;
+      return;
 
-      }
+    }
 
-      speakingIndex =
-        null;
+    speakingIndex = null;
 
-      listenButton.textContent =
-        "🔊 استمع";
+    speechType = null;
 
-      listenButton.disabled =
-        false;
+    listenButton.textContent =
+      "🔊 استمع";
 
-    };
+    listenButton.disabled = false;
+
+  };
 
 
-  window.speechSynthesis
-    .speak(utterance);
+  window.speechSynthesis.speak(
+    utterance
+  );
 
 }
 
@@ -817,46 +834,71 @@ function encouragement() {
       )
     ];
 
-  speakText(message);
+
+  /*
+   * ننتظر قليلًا حتى لا يتداخل
+   * صوت التشجيع مع الصوت السابق.
+   */
+
+  setTimeout(function() {
+
+    speakText(message);
+
+  }, 300);
 
 }
 
 
 /* ==================================================
-   صوت التشجيع
+   صوت التشجيع ورسالة الإكمال
    ================================================== */
 
 function speakText(text) {
 
-  if (
-    !("speechSynthesis" in window)
-  ) {
+  if (!("speechSynthesis" in window)) {
 
     return;
 
   }
 
+  speechVersion++;
+
   window.speechSynthesis.cancel();
 
+  speakingIndex = null;
+
+  speechType = "message";
+
+
   const utterance =
-    new SpeechSynthesisUtterance(
-      text
-    );
+    new SpeechSynthesisUtterance(text);
 
-  utterance.lang =
-    "ar-SA";
+  utterance.lang = "ar-SA";
 
-  utterance.rate =
-    0.85;
+  utterance.rate = 0.85;
 
-  utterance.pitch =
-    1.15;
+  utterance.pitch = 1.15;
 
-  utterance.volume =
-    1;
+  utterance.volume = 1;
 
-  window.speechSynthesis
-    .speak(utterance);
+
+  utterance.onend = function() {
+
+    speechType = null;
+
+  };
+
+
+  utterance.onerror = function() {
+
+    speechType = null;
+
+  };
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
 
 }
 
@@ -865,19 +907,16 @@ function speakText(text) {
    العدّاد
    ================================================== */
 
-function countZekr(
-  index,
-  button
-) {
+function countZekr(index, button) {
 
   if (
-    !counters[index]
+    counters[index] === undefined
   ) {
 
-    counters[index] =
-      0;
+    counters[index] = 0;
 
   }
+
 
   /*
    * لا نتجاوز العدد المطلوب.
@@ -891,6 +930,7 @@ function countZekr(
     return;
 
   }
+
 
   counters[index]++;
 
@@ -908,7 +948,7 @@ function countZekr(
 
 
   /*
-   * عند إكمال الذكر
+   * عند إكمال الذكر.
    */
 
   if (
@@ -926,7 +966,8 @@ function countZekr(
 
 
     /*
-     * منع إضافة النجمة مرتين.
+     * نجمة واحدة فقط لكل ذكر
+     * في اليوم.
      */
 
     const starKey =
@@ -937,9 +978,7 @@ function countZekr(
 
 
     if (
-      localStorage.getItem(
-        starKey
-      ) !== "1"
+      localStorage.getItem(starKey) !== "1"
     ) {
 
       stars++;
@@ -956,8 +995,8 @@ function countZekr(
 
       document.getElementById(
         "stars"
-      ).textContent =
-        stars;
+      ).textContent = stars;
+
 
       encouragement();
 
@@ -965,7 +1004,7 @@ function countZekr(
 
 
     /*
-     * التأكد من اكتمال جميع الأذكار.
+     * فحص اكتمال جميع أذكار الصباح.
      */
 
     const completed =
@@ -978,24 +1017,36 @@ function countZekr(
 
     if (completed) {
 
-      setTimeout(
-        function() {
+      setTimeout(function() {
 
-          const finish =
-            document.getElementById(
-              "finishMessage"
-            );
+        const finish =
+          document.getElementById(
+            "finishMessage"
+          );
 
-          finish.style.display =
-            "block";
+        finish.style.display =
+          "block";
+
+
+        /*
+         * رسالة الإكمال لا تظهر
+         * إلا مرة واحدة أثناء فتح الصفحة.
+         */
+
+        if (
+          !window.morningFinishedSpoken
+        ) {
+
+          window.morningFinishedSpoken =
+            true;
 
           speakText(
             "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار الصباح."
           );
 
-        },
-        1000
-      );
+        }
+
+      }, 1200);
 
     }
 
@@ -1010,12 +1061,22 @@ function countZekr(
 
 function favoriteZekr(index) {
 
-  let favorites =
-    JSON.parse(
-      localStorage.getItem(
-        "favoriteAzkar"
-      )
-    ) || [];
+  let favorites = [];
+
+  try {
+
+    favorites =
+      JSON.parse(
+        localStorage.getItem(
+          "favoriteAzkar"
+        )
+      ) || [];
+
+  } catch (error) {
+
+    favorites = [];
+
+  }
 
 
   if (
@@ -1051,10 +1112,12 @@ function favoriteZekr(index) {
 
 
 /* ==================================================
-   🏠 العودة
+   🏠 العودة للرئيسية
    ================================================== */
 
 function goBack() {
+
+  stopSpeech();
 
   window.location.href =
     "index.html";
@@ -1076,6 +1139,7 @@ function checkFinished() {
         item.count
     );
 
+
   if (completed) {
 
     document.getElementById(
@@ -1090,6 +1154,23 @@ function checkFinished() {
 
 checkFinished();
 
+
+/* ==================================================
+   تنظيف الصوت عند مغادرة الصفحة
+   ================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function() {
+
+    if ("speechSynthesis" in window) {
+
+      window.speechSynthesis.cancel();
+
+    }
+
+  }
+);
 
 </script>
 
