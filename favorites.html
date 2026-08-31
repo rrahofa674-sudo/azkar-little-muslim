@@ -1,146 +1,762 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>  <meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-  <title>أذكاري المفضلة ❤️</title>
+«»
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff8e7, #e8f8f0);
-      color: #333;
-      padding: 20px;
+<meta
+name="theme-color"
+content="#087f75"
+
+«»
+
+  <title>أذكاري المفضلة ❤️</title>  <style>
+
+    * {
+      box-sizing: border-box;
     }
+
+
+    body {
+
+      margin: 0;
+
+      font-family:
+        Arial,
+        Tahoma,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(255,255,255,.35),
+          transparent 25%
+        ),
+
+        linear-gradient(
+          145deg,
+          #fff8e7,
+          #e8f8f0
+        );
+
+      color: #333;
+
+      min-height: 100vh;
+
+      padding-bottom: 40px;
+    }
+
+
+    .app {
+
+      max-width: 600px;
+
+      margin: auto;
+
+      padding: 0 10px 30px;
+    }
+
+
+    /* =========================
+       الرأس
+    ========================= */
+
+    .header {
+
+      text-align: center;
+
+      padding: 30px 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #0b766e,
+          #064b55
+        );
+
+      color: white;
+
+      border-radius:
+        0 0 40px 40px;
+
+      box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.22);
+    }
+
+
+    .icon {
+
+      font-size: 58px;
+
+      filter:
+        drop-shadow(
+          0 6px 6px
+          rgba(0,0,0,.25)
+        );
+    }
+
 
     h1 {
-      text-align: center;
-      color: #5b8068;
-      margin-bottom: 25px;
+
+      margin:
+        10px 0 5px;
+
+      font-size: 29px;
     }
+
+
+    .subtitle {
+
+      font-size: 15px;
+
+      opacity: .9;
+    }
+
+
+    /* =========================
+       عدد المفضلة
+    ========================= */
+
+    .favorite-count {
+
+      margin:
+        20px 10px;
+
+      padding: 15px;
+
+      text-align: center;
+
+      border-radius: 22px;
+
+      background:
+        rgba(255,255,255,.85);
+
+      box-shadow:
+        0 8px 22px
+        rgba(0,0,0,.08);
+
+      color: #47715b;
+
+      font-weight: bold;
+
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       بطاقة الذكر
+    ========================= */
 
     .favorite {
+
       background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      line-height: 1.9;
-      font-size: 18px;
+
+      border-radius: 25px;
+
+      padding: 20px 17px;
+
+      margin:
+        15px 5px;
+
+      box-shadow:
+        0 8px 22px
+        rgba(0,0,0,.10);
+
+      border:
+        1px solid
+        rgba(91,128,104,.12);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
     }
+
+
+    .favorite:active {
+
+      transform:
+        scale(.985);
+    }
+
+
+    .favorite-number {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: #e8f6ef;
+
+      color: #087f75;
+
+      font-weight: bold;
+
+      margin-bottom: 12px;
+    }
+
+
+    .zekr-text {
+
+      font-size: 20px;
+
+      line-height: 2;
+
+      text-align: center;
+
+      font-weight: bold;
+
+      color: #333;
+
+      word-wrap: break-word;
+    }
+
+
+    /* =========================
+       الأزرار
+    ========================= */
+
+    .controls {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 18px;
+    }
+
+
+    button {
+
+      border: none;
+
+      cursor: pointer;
+
+      color: white;
+
+      border-radius: 16px;
+
+      padding: 11px 17px;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.12);
+
+      transition:
+        transform .15s ease,
+        opacity .2s ease;
+    }
+
+
+    button:active {
+
+      transform:
+        scale(.94);
+    }
+
+
+    .listen {
+
+      background:
+        #087f75;
+    }
+
 
     .delete {
-      margin-top: 12px;
-      border: none;
-      background: #f6a6a6;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 15px;
+
+      background:
+        #e88d8d;
     }
 
-    .back {
-      display: block;
-      margin: 25px auto 0;
-      border: none;
-      background: #6f9b7c;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 15px;
-      font-size: 16px;
-      cursor: pointer;
+
+    button:disabled {
+
+      opacity: .6;
+
+      cursor: default;
     }
+
+
+    /* =========================
+       الحالة الفارغة
+    ========================= */
 
     .empty {
+
       text-align: center;
+
       background: white;
-      padding: 25px;
-      border-radius: 20px;
+
+      padding: 30px 20px;
+
+      border-radius: 25px;
+
+      margin:
+        25px 5px;
+
       line-height: 2;
+
+      box-shadow:
+        0 8px 22px
+        rgba(0,0,0,.08);
+
+      font-size: 19px;
+
+      color: #527060;
     }
-  </style>
-</head>
 
-<body>
 
-  <h1>❤️ أذكاري المفضلة</h1>
+    .empty-icon {
 
-  <div id="favoritesList"></div>
+      font-size: 55px;
 
-  <button class="back" onclick="history.back()">
-    🏠 العودة
-  </button>
+      display: block;
 
-  <script>
+      margin-bottom: 10px;
+    }
 
-    function showFavorites() {
 
-      let favorites =
-        JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
+    /* =========================
+       العودة
+    ========================= */
 
-      let container =
-        document.getElementById("favoritesList");
+    .back {
 
-      container.innerHTML = "";
+      display: block;
 
-      if (favorites.length === 0) {
+      margin:
+        28px auto 0;
 
-        container.innerHTML = `
-          <div class="empty">
-            ❤️ لا توجد أذكار في المفضلة بعد
-            <br>
-            أضيفي أذكارك المفضلة لتجديها هنا 🌷
-          </div>
-        `;
+      background:
+        #087f75;
 
-        return;
-      }
+      padding:
+        13px 25px;
 
-      favorites.forEach((zekr, index) => {
+      font-size: 16px;
+    }
 
-        let card = document.createElement("div");
+  </style></head><body><div class="app">  <!-- الرأس -->  <header class="header"><div class="icon">
+  ❤️
+</div>
 
-        card.className = "favorite";
+<h1>
+  أذكاري المفضلة
+</h1>
 
-        card.innerHTML = `
-          <div>${zekr}</div>
+<div class="subtitle">
+  أذكارك الجميلة في مكان واحد 🌷
+</div>
 
-          <button class="delete"
-            onclick="removeFavorite(${index})">
-            🗑️ إزالة من المفضلة
+  </header>  <!-- عدد الأذكار -->  <div
+    id="favoriteCount"
+    class="favorite-count"
+  >
+    ❤️ عدد الأذكار: 0
+  </div>  <!-- القائمة -->  <div id="favoritesList"></div>  <!-- العودة --><button
+class="back"
+onclick="goHome()"
+
+«»
+
+🏠 العودة للرئيسية
+
+  </button></div><script>
+
+
+/* ==================================================
+   قراءة المفضلة
+================================================== */
+
+function getFavorites() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "favoriteAzkar"
+      )
+    ) || [];
+
+  } catch (error) {
+
+    return [];
+
+  }
+
+}
+
+
+/* ==================================================
+   عرض المفضلة
+================================================== */
+
+function showFavorites() {
+
+  const favorites =
+    getFavorites();
+
+  const container =
+    document.getElementById(
+      "favoritesList"
+    );
+
+  const countElement =
+    document.getElementById(
+      "favoriteCount"
+    );
+
+
+  container.innerHTML = "";
+
+
+  /* تحديث العدد */
+
+  countElement.textContent =
+    "❤️ عدد الأذكار: " +
+    favorites.length;
+
+
+  /* لا توجد مفضلة */
+
+  if (
+    favorites.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <span class="empty-icon">
+          ❤️
+        </span>
+
+        لا توجد أذكار في المفضلة بعد
+
+        <br>
+
+        أضيفي أذكارك المفضلة
+        لتجديها هنا 🌷
+
+        <br>
+
+        <small>
+          يمكنك الضغط على ❤️ بجانب أي ذكر
+        </small>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /* عرض الأذكار */
+
+  favorites.forEach(
+    (zekr, index) => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "favorite";
+
+
+      card.innerHTML = `
+
+        <div class="favorite-number">
+          ${index + 1}
+        </div>
+
+
+        <div class="zekr-text">
+          ${escapeHTML(zekr)}
+        </div>
+
+
+        <div class="controls">
+
+          <button
+            class="listen"
+            id="listen-${index}"
+            onclick="speakFavorite(${index})"
+          >
+
+            🔊 استمع
+
           </button>
-        `;
 
-        container.appendChild(card);
 
-      });
+          <button
+            class="delete"
+            onclick="removeFavorite(${index})"
+          >
+
+            🗑️ إزالة
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        card
+      );
 
     }
+  );
+
+}
 
 
-    function removeFavorite(index) {
+/* ==================================================
+   حماية النص
+================================================== */
 
-  let favorites =
-    JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
+function escapeHTML(text) {
 
-  favorites.splice(index, 1);
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+
+}
+
+
+/* ==================================================
+   🔊 قراءة الذكر
+================================================== */
+
+let speakingIndex = null;
+
+
+function speakFavorite(index) {
+
+  const favorites =
+    getFavorites();
+
+
+  if (
+    !favorites[index]
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
+    alert(
+      "عذرًا، جهازك لا يدعم تشغيل الصوت."
+    );
+
+    return;
+
+  }
+
+
+  /* منع الضغط أثناء القراءة */
+
+  if (
+    speakingIndex === index
+  ) {
+
+    return;
+
+  }
+
+
+  window.speechSynthesis.cancel();
+
+
+  speakingIndex =
+    index;
+
+
+  const button =
+    document.getElementById(
+      "listen-" + index
+    );
+
+
+  button.textContent =
+    "🔊 جاري القراءة...";
+
+
+  button.disabled =
+    true;
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      favorites[index]
+    );
+
+
+  utterance.lang =
+    "ar-SA";
+
+  utterance.rate =
+    0.75;
+
+  utterance.pitch =
+    1.05;
+
+  utterance.volume =
+    1;
+
+
+  utterance.onend =
+    function() {
+
+      speakingIndex =
+        null;
+
+      button.textContent =
+        "🔊 استمع";
+
+      button.disabled =
+        false;
+
+    };
+
+
+  utterance.onerror =
+    function() {
+
+      speakingIndex =
+        null;
+
+      button.textContent =
+        "🔊 استمع";
+
+      button.disabled =
+        false;
+
+    };
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* ==================================================
+   🗑️ حذف ذكر
+================================================== */
+
+function removeFavorite(index) {
+
+  const favorites =
+    getFavorites();
+
+
+  if (
+    !favorites[index]
+  ) {
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل تريد إزالة هذا الذكر من المفضلة؟ ❤️"
+    );
+
+
+  if (!confirmed) {
+
+    return;
+
+  }
+
+
+  /* إيقاف الصوت إذا كان يعمل */
+
+  if (
+    "speechSynthesis" in window
+  ) {
+
+    window.speechSynthesis.cancel();
+
+  }
+
+
+  speakingIndex =
+    null;
+
+
+  favorites.splice(
+    index,
+    1
+  );
+
 
   localStorage.setItem(
     "favoriteAzkar",
-    JSON.stringify(favorites)
+    JSON.stringify(
+      favorites
+    )
   );
+
 
   showFavorites();
 
 }
 
 
-    showFavorites();
+/* ==================================================
+   🏠 العودة للرئيسية
+================================================== */
 
-  </script>
+function goHome() {
 
-</body>
-</html>
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* ==================================================
+   تشغيل الصفحة
+================================================== */
+
+showFavorites();
+
+
+</script></body></html>
