@@ -11,13 +11,30 @@
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
       color: #333;
-      padding: 20px;
+      padding: 15px;
     }
 
     h1 {
       text-align: center;
       color: #2e7d32;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
       margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #1565c0;
+      background: white;
+      padding: 12px;
+      border-radius: 18px;
+      margin: 25px 0 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     }
 
     .zekr {
@@ -26,25 +43,105 @@
       padding: 20px;
       margin-bottom: 18px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      line-height: 2;
-      font-size: 18px;
+      line-height: 2.2;
+      font-size: 19px;
       text-align: center;
     }
 
+    .zekr-text {
+      margin: 0 0 15px;
+    }
+
     .count {
-      display: inline-block;
-      margin-top: 12px;
+      display: block;
+      margin: 10px auto;
+      width: fit-content;
       background: #4caf50;
       color: white;
-      padding: 8px 18px;
+      padding: 7px 18px;
       border-radius: 20px;
       font-size: 15px;
+    }
+
+    .counter {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2e7d32;
+      margin: 12px 0;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 25px;
+      padding: 10px 18px;
+      margin: 5px;
+    }
+
+    .listen {
+      background: #2196f3;
+      color: white;
+    }
+
+    .listen:disabled {
+      background: #90caf9;
+      cursor: not-allowed;
+    }
+
+    .repeat {
+      background: #4caf50;
+      color: white;
+    }
+
+    .favorite {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .favorite.active {
+      background: #ff9800;
+      color: white;
+    }
+
+    .complete {
+      border: 3px solid #4caf50;
+    }
+
+    .message {
+      color: #2e7d32;
+      font-weight: bold;
+      margin-top: 10px;
+      min-height: 25px;
+    }
+
+    .stars {
+      text-align: center;
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      color: #f9a825;
+      font-size: 24px;
+    }
+
+    .finish {
+      display: none;
+      text-align: center;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 18px;
+      border-radius: 20px;
+      margin: 25px 0;
+      font-size: 19px;
+      font-weight: bold;
     }
 
     .back {
       display: block;
       width: fit-content;
-      margin: 25px auto 10px;
+      margin: 30px auto 15px;
       padding: 12px 25px;
       background: #2e7d32;
       color: white;
@@ -57,62 +154,373 @@
 <body>
 
   <h1>🕌 أذكار الصلاة</h1>
+  <div class="subtitle">أذكار جميلة بعد الصلاة 🌷</div>
 
-  <div class="zekr">
-    <p>
-      أَسْتَغْفِرُ اللَّهَ
-    </p>
-    <span class="count">3 مرات</span>
+  <div class="stars">
+    ⭐ نجومك اليوم: <span id="starCount">0</span>
   </div>
 
-  <div class="zekr">
-    <p>
-      اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ،
-      تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ.
-    </p>
-    <span class="count">مرة واحدة</span>
-  </div>
+  <h2 class="section-title">🌸 من دعاء الاستفتاح</h2>
 
-  <div class="zekr">
-    <p>
-      لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ،
-      لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ،
-      وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.
-    </p>
-    <span class="count">مرة واحدة</span>
-  </div>
+  <div id="openingAzkar"></div>
 
-  <div class="zekr">
-    <p>
-      سُبْحَانَ اللَّهِ
-    </p>
-    <span class="count">33 مرة</span>
-  </div>
+  <h2 class="section-title">🤲 الأذكار بعد السلام من الصلاة</h2>
 
-  <div class="zekr">
-    <p>
-      الْحَمْدُ لِلَّهِ
-    </p>
-    <span class="count">33 مرة</span>
-  </div>
+  <div id="afterPrayerAzkar"></div>
 
-  <div class="zekr">
-    <p>
-      اللَّهُ أَكْبَرُ
-    </p>
-    <span class="count">33 مرة</span>
-  </div>
-
-  <div class="zekr">
-    <p>
-      لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ،
-      لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ،
-      وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.
-    </p>
-    <span class="count">مرة واحدة</span>
+  <div class="finish" id="finishMessage">
+    🎉 أحسنت يا بطل! أكملت أذكار الصلاة اليوم ❤️<br>
+    ⭐ بارك الله فيك وتقبل الله منك
   </div>
 
   <a href="index.html" class="back">⬅️ العودة للرئيسية</a>
+
+  <script>
+
+    const openingAzkar = [
+      {
+        text: "اللهم باعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم نقني من خطاياي كما ينقى الثوب الأبيض من الدنس، اللهم اغسلني من خطاياي، بالثلج والماء والبرد",
+        count: 1
+      },
+      {
+        text: "الله أكبر كبيرا، الله أكبر كبيرا، الله أكبر كبيرا، والحمد لله كثيرا، والحمد لله كثيرا، والحمد لله كثيرا، وسبحان الله بكرة وأصيلا. أعوذ بالله من الشيطان: من نفخه، ونفثه، وهمزه",
+        count: 1
+      }
+    ];
+
+    const afterPrayerAzkar = [
+      {
+        text: "أستغفر الله",
+        count: 3
+      },
+      {
+        text: "اللهم أنت السلام، ومنك السلام، تباركت يا ذا الجلال والإكرام",
+        count: 1
+      },
+      {
+        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، اللهم لا مانع لما أعطيت، ولا معطي لما منعت، ولا ينفع ذا الجد منك الجد",
+        count: 1
+      },
+      {
+        text: "لا إله إلا الله وحده لا شريك له، له الملك، وله الحمد، وهو على كل شيء قدير. لا حول ولا قوة إلا بالله، لا إله إلا الله، ولا نعبد إلا إياه، له النعمة وله الفضل وله الثناء الحسن، لا إله إلا الله مخلصين له الدين ولو كره الكافرون",
+        count: 1
+      },
+      {
+        text: "سبحان الله، والحمد لله، والله أكبر",
+        count: 33
+      },
+      {
+        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+        count: 1
+      },
+      {
+        text: "بسم الله الرحمن الرحيم ﴿قل هو الله أحد * الله الصمد * لم يلد ولم يولد * ولم يكن له كفوا أحد﴾",
+        count: 1
+      },
+      {
+        text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الفلق * من شر ما خلق * ومن شر غاسق إذا وقب * ومن شر النفاثات في العقد * ومن شر حاسد إذا حسد﴾",
+        count: 1
+      },
+      {
+        text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الناس * ملك الناس * إله الناس * من شر الوسواس الخناس * الذي يوسوس في صدور الناس * من الجنة والناس﴾",
+        count: 1
+      },
+      {
+        text: "﴿الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السموات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السموات والأرض ولا يؤوده حفظهما وهو العلي العظيم﴾",
+        count: 1
+      },
+      {
+        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد يحيي ويميت وهو على كل شيء قدير",
+        count: 1
+      },
+      {
+        text: "اللهم إني أسألك علما نافعا، ورزقا طيبا، وعملا متقبلا",
+        count: 1
+      }
+    ];
+
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    let savedData = JSON.parse(
+      localStorage.getItem("prayerAzkarProgress")
+    ) || {};
+
+    if (savedData.date !== today) {
+      savedData = {
+        date: today,
+        counters: {},
+        completed: {},
+        stars: 0
+      };
+      localStorage.setItem(
+        "prayerAzkarProgress",
+        JSON.stringify(savedData)
+      );
+    }
+
+    let favorites =
+      JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
+
+
+    function saveData() {
+      localStorage.setItem(
+        "prayerAzkarProgress",
+        JSON.stringify(savedData)
+      );
+    }
+
+
+    function updateStars() {
+      document.getElementById("starCount").textContent =
+        savedData.stars;
+    }
+
+
+    function createAzkar(list, containerId, prefix) {
+
+      const container =
+        document.getElementById(containerId);
+
+      list.forEach((zekr, index) => {
+
+        const id = prefix + index;
+
+        if (savedData.counters[id] === undefined) {
+          savedData.counters[id] = 0;
+        }
+
+        const card =
+          document.createElement("div");
+
+        card.className = "zekr";
+
+        card.id = "card-" + id;
+
+        const isFavorite =
+          favorites.includes(zekr.text);
+
+        card.innerHTML = `
+
+          <p class="zekr-text">${zekr.text}</p>
+
+          <span class="count">
+            ${zekr.count === 1 ? "مرة واحدة" : zekr.count + " مرات"}
+          </span>
+
+          <div class="counter" id="counter-${id}">
+            ${savedData.counters[id]} / ${zekr.count}
+          </div>
+
+          <button
+            class="listen"
+            id="listen-${id}"
+            onclick="listenZekr('${id}', ${zekr.count})">
+            🔊 استمع
+          </button>
+
+          <button
+            class="repeat"
+            onclick="increaseCounter('${id}', ${zekr.count})">
+            ✅ قرأت الذكر
+          </button>
+
+          <button
+            class="favorite ${isFavorite ? "active" : ""}"
+            id="fav-${id}"
+            onclick="toggleFavorite('${id}')">
+            ${isFavorite ? "❤️ في المفضلة" : "🤍 أضف للمفضلة"}
+          </button>
+
+          <div
+            class="message"
+            id="message-${id}">
+          </div>
+        `;
+
+        container.appendChild(card);
+
+        if (savedData.completed[id]) {
+          card.classList.add("complete");
+        }
+
+      });
+    }
+
+
+    function increaseCounter(id, max) {
+
+      if (savedData.counters[id] >= max) {
+        return;
+      }
+
+      savedData.counters[id]++;
+
+      const counter =
+        document.getElementById("counter-" + id);
+
+      counter.textContent =
+        savedData.counters[id] + " / " + max;
+
+      if (savedData.counters[id] >= max) {
+
+        savedData.completed[id] = true;
+
+        const card =
+          document.getElementById("card-" + id);
+
+        card.classList.add("complete");
+
+        const message =
+          document.getElementById("message-" + id);
+
+        message.textContent =
+          "🌟 أحسنت! أكملت هذا الذكر ❤️";
+
+        savedData.stars++;
+
+        updateStars();
+
+        checkAllCompleted();
+      }
+
+      saveData();
+    }
+
+
+    function listenZekr(id, max) {
+
+      const button =
+        document.getElementById("listen-" + id);
+
+      if (speechSynthesis.speaking) {
+        return;
+      }
+
+      const card =
+        document.getElementById("card-" + id);
+
+      const text =
+        card.querySelector(".zekr-text").innerText;
+
+      const utterance =
+        new SpeechSynthesisUtterance(text);
+
+      utterance.lang = "ar-SA";
+      utterance.rate = 0.85;
+      utterance.pitch = 1;
+
+      button.disabled = true;
+      button.textContent = "🔊 جاري القراءة...";
+
+      utterance.onend = function () {
+
+        button.disabled = false;
+        button.textContent = "🔊 استمع";
+
+        increaseCounter(id, max);
+      };
+
+      utterance.onerror = function () {
+
+        button.disabled = false;
+        button.textContent = "🔊 استمع";
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+
+    function toggleFavorite(id) {
+
+      const allAzkar =
+        [...openingAzkar, ...afterPrayerAzkar];
+
+      const index =
+        id.startsWith("opening")
+          ? parseInt(id.replace("opening", ""))
+          : openingAzkar.length +
+            parseInt(id.replace("after", ""));
+
+      const zekr =
+        allAzkar[index];
+
+      const button =
+        document.getElementById("fav-" + id);
+
+      const position =
+        favorites.indexOf(zekr.text);
+
+      if (position === -1) {
+
+        favorites.push(zekr.text);
+
+        button.classList.add("active");
+
+        button.textContent =
+          "❤️ في المفضلة";
+
+      } else {
+
+        favorites.splice(position, 1);
+
+        button.classList.remove("active");
+
+        button.textContent =
+          "🤍 أضف للمفضلة";
+      }
+
+      localStorage.setItem(
+        "favoriteAzkar",
+        JSON.stringify(favorites)
+      );
+    }
+
+
+    function checkAllCompleted() {
+
+      const total =
+        openingAzkar.length +
+        afterPrayerAzkar.length;
+
+      let completed = 0;
+
+      Object.keys(savedData.completed)
+        .forEach(key => {
+
+          if (savedData.completed[key]) {
+            completed++;
+          }
+
+        });
+
+      if (completed >= total) {
+
+        document.getElementById(
+          "finishMessage"
+        ).style.display = "block";
+
+      }
+    }
+
+
+    createAzkar(
+      openingAzkar,
+      "openingAzkar",
+      "opening"
+    );
+
+    createAzkar(
+      afterPrayerAzkar,
+      "afterPrayerAzkar",
+      "after"
+    );
+
+    updateStars();
+
+    checkAllCompleted();
+
+  </script>
 
 </body>
 </html>
