@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#087f75">
+  <meta name="theme-color" content="#087f75">  <title>أذكار النوم 🌙</title>  <style>
 
-  <title>أذكار النوم</title>
-
-  <style>
     * {
       box-sizing: border-box;
     }
@@ -15,9 +11,20 @@
     body {
       margin: 0;
       font-family: Arial, Tahoma, sans-serif;
+
       background:
-        radial-gradient(circle at 75% 10%, rgba(255,255,255,.12), transparent 25%),
-        linear-gradient(145deg, #07152f, #182d59 45%, #092f3b);
+        radial-gradient(
+          circle at 75% 10%,
+          rgba(255,255,255,.13),
+          transparent 25%
+        ),
+        linear-gradient(
+          145deg,
+          #07152f,
+          #182d59 45%,
+          #092f3b
+        );
+
       color: white;
       min-height: 100vh;
     }
@@ -25,342 +32,797 @@
     .app {
       max-width: 600px;
       margin: auto;
-      padding-bottom: 40px;
+      padding-bottom: 50px;
     }
 
+    /* =========================
+       الرأس
+    ========================= */
+
     .header {
+      position: relative;
+      overflow: hidden;
+
       text-align: center;
-      padding: 30px 15px;
-      background: linear-gradient(145deg, #172e5c, #091b3b);
-      border-radius: 0 0 40px 40px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+
+      padding: 35px 15px 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #172e5c,
+          #091b3b
+        );
+
+      border-radius: 0 0 45px 45px;
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+    }
+
+    .header::before {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.07);
+
+      top: -90px;
+      right: -50px;
+    }
+
+    .header::after {
+      content: "";
+
+      position: absolute;
+
+      width: 130px;
+      height: 130px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.06);
+
+      bottom: -70px;
+      left: -40px;
     }
 
     .icon {
-      font-size: 60px;
-      filter: drop-shadow(0 7px 7px rgba(0,0,0,.4));
+      position: relative;
+      z-index: 2;
+
+      font-size: 62px;
+
+      filter:
+        drop-shadow(
+          0 8px 8px rgba(0,0,0,.4)
+        );
     }
 
     h1 {
+      position: relative;
+      z-index: 2;
+
       margin: 10px 0 5px;
+
       font-size: 30px;
+
+      text-shadow:
+        0 4px 8px rgba(0,0,0,.35);
     }
 
     .subtitle {
-      opacity: .9;
+      position: relative;
+      z-index: 2;
+
+      display: inline-block;
+
+      margin-top: 10px;
+
+      padding: 9px 16px;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.10);
+
+      border:
+        1px solid rgba(255,255,255,.15);
+
       font-size: 15px;
+      font-weight: bold;
+
+      box-shadow:
+        0 7px 18px rgba(0,0,0,.20);
     }
 
+    /* =========================
+       النجوم
+    ========================= */
+
     .progress {
-      margin: 20px;
-      padding: 15px;
+      margin: 20px 15px;
+
+      padding: 18px;
+
       text-align: center;
-      border-radius: 22px;
-      background: rgba(255,255,255,.10);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.10);
+
+      border:
+        1px solid rgba(255,255,255,.15);
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
+
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-title {
+      font-size: 16px;
+      font-weight: bold;
     }
 
     .count {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 5px;
+      margin-top: 6px;
+
+      font-size: 27px;
+
+      font-weight: 900;
     }
 
+    /* =========================
+       البطاقات
+    ========================= */
+
     .zekr {
+      position: relative;
+
       margin: 15px;
-      padding: 22px 18px;
-      border-radius: 25px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.16);
+
+      padding: 23px 18px;
+
+      border-radius: 27px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.13),
+          rgba(255,255,255,.06)
+        );
+
+      border:
+        1px solid rgba(255,255,255,.17);
+
       box-shadow:
-        0 12px 25px rgba(0,0,0,.25),
-        inset 0 1px 2px rgba(255,255,255,.12);
+        0 14px 28px rgba(0,0,0,.27),
+        inset 0 1px 2px rgba(255,255,255,.13);
+
+      transition: .25s ease;
+    }
+
+    .zekr.completed {
+      border:
+        2px solid rgba(159,245,223,.65);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(55,190,160,.20),
+          rgba(255,255,255,.07)
+        );
     }
 
     .zekr-text {
       font-size: 21px;
+
       line-height: 2;
+
       text-align: center;
+
       font-weight: bold;
     }
 
     .note {
       margin-top: 12px;
-      font-size: 14px;
+
+      padding: 9px;
+
       text-align: center;
-      opacity: .85;
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.08);
+
+      font-size: 14px;
+
       line-height: 1.8;
+
+      opacity: .9;
     }
+
+    /* =========================
+       الأزرار
+    ========================= */
 
     .controls {
       display: flex;
+
       justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
+
+      align-items: center;
+
+      gap: 9px;
+
       flex-wrap: wrap;
+
+      margin-top: 20px;
     }
 
     button {
       border: none;
+
       cursor: pointer;
+
       color: white;
+
       border-radius: 18px;
-      padding: 12px 18px;
-      font-size: 16px;
+
+      padding: 12px 17px;
+
+      font-size: 15px;
+
       font-weight: bold;
-      background: rgba(255,255,255,.14);
-      box-shadow: 0 7px 15px rgba(0,0,0,.20);
-    }
 
-    .counter {
-      background: #087f75;
-      min-width: 90px;
-    }
+      background:
+        rgba(255,255,255,.14);
 
-    .listen {
-      background: rgba(255,193,7,.22);
+      box-shadow:
+        0 7px 15px rgba(0,0,0,.20);
+
+      transition: .2s ease;
     }
 
     button:active {
       transform: scale(.94);
     }
 
-    .favorite {
-      font-size: 22px;
-    }
-
-    .back {
-      display: block;
-      margin: 25px auto;
-      background: rgba(255,255,255,.12);
-    }
-
-    .completed {
+    button:disabled {
       opacity: .65;
-      border: 2px solid rgba(159,245,223,.5);
+
+      cursor: not-allowed;
+
+      transform: none;
     }
+
+    .listen {
+      background:
+        rgba(255,193,7,.25);
+    }
+
+    .counter {
+      min-width: 95px;
+
+      background:
+        #087f75;
+    }
+
+    .favorite {
+      font-size: 21px;
+
+      background:
+        rgba(255,255,255,.12);
+    }
+
+    .favorite.active {
+      background:
+        rgba(255,80,100,.25);
+    }
+
+    /* =========================
+       رسالة الذكر
+    ========================= */
+
+    .item-message {
+      min-height: 25px;
+
+      margin-top: 12px;
+
+      text-align: center;
+
+      color: #9ff5df;
+
+      font-size: 16px;
+
+      font-weight: bold;
+    }
+
+    /* =========================
+       رسالة الإكمال
+    ========================= */
 
     .finish-message {
       display: none;
-      margin: 20px 15px;
-      padding: 22px;
+
+      margin: 25px 15px;
+
+      padding: 24px 18px;
+
       text-align: center;
-      border-radius: 25px;
-      background: rgba(255,255,255,.13);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
-      font-size: 22px;
+
+      border-radius: 27px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(55,190,160,.22),
+          rgba(255,255,255,.10)
+        );
+
+      border:
+        2px solid rgba(159,245,223,.55);
+
+      box-shadow:
+        0 12px 28px rgba(0,0,0,.25);
+
+      font-size: 21px;
+
       font-weight: bold;
+
+      line-height: 1.8;
     }
-  </style>
-</head>
 
-<body>
+    /* =========================
+       العودة
+    ========================= */
 
-<div class="app">
+    .back {
+      display: block;
 
-  <header class="header">
-    <div class="icon">⭐</div>
+      margin: 30px auto 10px;
 
-    <h1>أذكار النوم</h1>
+      background:
+        rgba(255,255,255,.12);
 
-    <div class="subtitle">
-      اختم يومك بذكر الله وطمأنينة القلب 🌙
-    </div>
-  </header>
+      padding:
+        13px 24px;
+    }
 
+    /* =========================
+       الهاتف
+    ========================= */
 
-  <div class="progress">
-    🌟 نجومك اليوم
+    @media (max-width: 400px) {
 
-    <div class="count">
-      <span id="stars">0</span> ⭐
-    </div>
-  </div>
+      h1 {
+        font-size: 27px;
+      }
 
+      .icon {
+        font-size: 55px;
+      }
 
-  <div id="azkar"></div>
+      .zekr {
+        padding: 20px 14px;
+      }
 
+      .zekr-text {
+        font-size: 19px;
+      }
 
-  <div id="finishMessage" class="finish-message">
-    🎉 أحسنت يا بطل! 🌟<br>
-    بارك الله فيك ❤️
-  </div>
+      button {
+        padding: 11px 13px;
+        font-size: 14px;
+      }
 
+    }
 
-  <button class="back" onclick="goBack()">
-    🏠 العودة للرئيسية
-  </button>
-
+  </style></head><body><div class="app">  <!-- =========================
+       الرأس
+  ========================= -->  <header class="header"><div class="icon">
+  🌙⭐
 </div>
 
+<h1>
+  أذكار النوم
+</h1>
 
-<script>
+<div class="subtitle">
+  اختم يومك بذكر الله وطمأنينة القلب 🌿
+</div>
 
-/* =========================
+  </header>  <!-- =========================
+       النجوم
+  ========================= -->  <div class="progress"><div class="progress-title">
+  🌟 نجومك اليوم
+</div>
+
+<div class="count">
+  <span id="stars">0</span> ⭐
+</div>
+
+  </div>  <!-- =========================
+       الأذكار
+  ========================= -->  <div id="azkar"></div>  <!-- =========================
+       رسالة الإكمال
+  ========================= -->  <div
+    id="finishMessage"
+    class="finish-message">🎉 أحسنت يا بطل! 🌟
+
+<br>
+
+بارك الله فيك ❤️
+
+<br>
+
+لقد أكملت أذكار النوم اليوم 🌙⭐
+
+  </div>  <!-- =========================
+       العودة
+  ========================= --><button
+class="back"
+onclick="goBack()">
+
+🏠 العودة للرئيسية
+
+  </button></div><script>
+
+/* ==================================================
    😴 أذكار النوم
-========================= */
+================================================== */
 
 const azkar = [
 
   {
-    text: "يجمع كفيه ثم ينفث فيهما، فيقرأ فيهما: بسم الله الرحمن الرحيم ﴿قل هو الله أحد * الله الصمد * لم يلد ولم يولد * ولم يكن له كفوا أحد﴾. بسم الله الرحمن الرحيم ﴿قل أعوذ برب الفلق * من شر ما خلق * ومن شر غاسق إذا وقب * ومن شر النفاثات في العقد * ومن شر حاسد إذا حسد﴾. بسم الله الرحمن الرحيم ﴿قل أعوذ برب الناس * ملك الناس * إله الناس * من شر الوسواس الخناس * الذي يوسوس في صدور الناس * من الجنة والناس﴾. ثم يمسح بهما ما استطاع من جسده، يبدأ بهما على رأسه ووجهه وما أقبل من جسده.",
+    text:
+      "يجمع كفيه ثم ينفث فيهما، فيقرأ فيهما: بسم الله الرحمن الرحيم ﴿قل هو الله أحد * الله الصمد * لم يلد ولم يولد * ولم يكن له كفوا أحد﴾. بسم الله الرحمن الرحيم ﴿قل أعوذ برب الفلق * من شر ما خلق * ومن شر غاسق إذا وقب * ومن شر النفاثات في العقد * ومن شر حاسد إذا حسد﴾. بسم الله الرحمن الرحيم ﴿قل أعوذ برب الناس * ملك الناس * إله الناس * من شر الوسواس الخناس * الذي يوسوس في صدور الناس * من الجنة والناس﴾. ثم يمسح بهما ما استطاع من جسده، يبدأ بهما على رأسه ووجهه وما أقبل من جسده.",
+
     count: 3,
-    note: "يفعل ذلك ثلاث مرات"
+
+    note:
+      "يفعل ذلك ثلاث مرات"
   },
 
   {
-    text: "﴿الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السموات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السموات والأرض ولا يؤوده حفظهما وهو العلي العظيم﴾",
+    text:
+      "﴿الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السموات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السموات والأرض ولا يؤوده حفظهما وهو العلي العظيم﴾",
+
     count: 1
   },
 
   {
-    text: "﴿آمن الرسول بما أنزل إليه من ربه والمؤمنون كل آمن بالله وملائكته وكتبه ورسله لا نفرق بين أحد من رسله وقالوا سمعنا وأطعنا غفرانك ربنا وإليك المصير * لا يكلف الله نفسا إلا وسعها لها ما كسبت وعليها ما اكتسبت ربنا لا تؤاخذنا إن نسينا أو أخطأنا ربنا ولا تحمل علينا إصرا كما حملته على الذين من قبلنا ربنا ولا تحملنا ما لا طاقة لنا به واعف عنا واغفر لنا وارحمنا أنت مولانا فانصرنا على القوم الكافرين﴾",
+    text:
+      "﴿آمن الرسول بما أنزل إليه من ربه والمؤمنون كل آمن بالله وملائكته وكتبه ورسله لا نفرق بين أحد من رسله وقالوا سمعنا وأطعنا غفرانك ربنا وإليك المصير * لا يكلف الله نفسا إلا وسعها لها ما كسبت وعليها ما اكتسبت ربنا لا تؤاخذنا إن نسينا أو أخطأنا ربنا ولا تحمل علينا إصرا كما حملته على الذين من قبلنا ربنا ولا تحملنا ما لا طاقة لنا به واعف عنا واغفر لنا وارحمنا أنت مولانا فانصرنا على القوم الكافرين﴾",
+
     count: 1
   },
 
   {
-    text: "باسمك ربي وضعت جنبي، وبك أرفعه، فإن أمسكت نفسي فارحمها، وإن أرسلتها فاحفظها، بما تحفظ به عبادك الصالحين",
+    text:
+      "باسمك ربي وضعت جنبي، وبك أرفعه، فإن أمسكت نفسي فارحمها، وإن أرسلتها فاحفظها، بما تحفظ به عبادك الصالحين",
+
     count: 1
   },
 
   {
-    text: "اللهم إنك خلقت نفسي وأنت توفاها، لك مماتها ومحياها، إن أحييتها فاحفظها، وإن أمتها فاغفر لها. اللهم إني أسألك العافية",
+    text:
+      "اللهم إنك خلقت نفسي وأنت توفاها، لك مماتها ومحياها، إن أحييتها فاحفظها، وإن أمتها فاغفر لها. اللهم إني أسألك العافية",
+
     count: 1
   },
 
   {
-    text: "اللهم قني عذابك يوم تبعث عبادك",
+    text:
+      "اللهم قني عذابك يوم تبعث عبادك",
+
     count: 1
   },
 
   {
-    text: "باسمك اللهم أموت وأحيا",
+    text:
+      "باسمك اللهم أموت وأحيا",
+
     count: 1
   },
 
   {
-    text: "سبحان الله",
+    text:
+      "سبحان الله",
+
     count: 33
   },
 
   {
-    text: "الحمد لله",
+    text:
+      "الحمد لله",
+
     count: 33
   },
 
   {
-    text: "والله أكبر",
+    text:
+      "والله أكبر",
+
     count: 33
   },
 
   {
-    text: "اللهم رب السموات السبع ورب الأرض، ورب العرش العظيم، ربنا ورب كل شيء، فالق الحب والنوى، ومنزل التوراة والإنجيل، والفرقان، أعوذ بك من شر كل شيء أنت آخذ بناصيته. اللهم أنت الأول فليس قبلك شيء، وأنت الآخر فليس بعدك شيء، وأنت الظاهر فليس فوقك شيء، وأنت الباطن فليس دونك شيء، اقض عنا الدين وأغننا من الفقر",
+    text:
+      "اللهم رب السموات السبع ورب الأرض، ورب العرش العظيم، ربنا ورب كل شيء، فالق الحب والنوى، ومنزل التوراة والإنجيل، والفرقان، أعوذ بك من شر كل شيء أنت آخذ بناصيته. اللهم أنت الأول فليس قبلك شيء، وأنت الآخر فليس بعدك شيء، وأنت الظاهر فليس فوقك شيء، وأنت الباطن فليس دونك شيء، اقض عنا الدين وأغننا من الفقر",
+
     count: 1
   },
 
   {
-    text: "الحمد لله الذي أطعمنا وسقانا، وكفانا، وآوانا، فكم ممن لا كافي له ولا مؤوي",
+    text:
+      "الحمد لله الذي أطعمنا وسقانا، وكفانا، وآوانا، فكم ممن لا كافي له ولا مؤوي",
+
     count: 1
   },
 
   {
-    text: "اللهم عالم الغيب والشهادة فاطر السموات والأرض، رب كل شيء ومليكه، أشهد أن لا إله إلا أنت، أعوذ بك من شر نفسي، ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءا، أو أجره إلى مسلم",
+    text:
+      "اللهم عالم الغيب والشهادة فاطر السموات والأرض، رب كل شيء ومليكه، أشهد أن لا إله إلا أنت، أعوذ بك من شر نفسي، ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءا، أو أجره إلى مسلم",
+
     count: 1
   },
 
   {
-    text: "قراءة سورة الملك",
+    text:
+      "قراءة سورة الملك",
+
     count: 1,
-    note: "تُقرأ سورة الملك كاملة"
+
+    note:
+      "تُقرأ سورة الملك كاملة"
   },
 
   {
-    text: "اللهم أسلمت نفسي إليك، وفوضت أمري إليك، ووجهت وجهي إليك، وألجأت ظهري إليك، رغبة ورهبة إليك، لا ملجأ ولا منجا منك إلا إليك، آمنت بكتابك الذي أنزلت، وبنبيك الذي أرسلت",
+    text:
+      "اللهم أسلمت نفسي إليك، وفوضت أمري إليك، ووجهت وجهي إليك، وألجأت ظهري إليك، رغبة ورهبة إليك، لا ملجأ ولا منجا منك إلا إليك، آمنت بكتابك الذي أنزلت، وبنبيك الذي أرسلت",
+
     count: 1
   }
 
 ];
 
 
-/* =========================
-   ⭐ النجوم
-========================= */
+/* ==================================================
+   📅 التاريخ اليومي
+================================================== */
+
+function getToday() {
+
+  const now = new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1)
+      .padStart(2, "0");
+
+  const day =
+    String(now.getDate())
+      .padStart(2, "0");
+
+  return year + "-" + month + "-" + day;
+}
+
+
+const today = getToday();
+
+
+/* ==================================================
+   💾 بيانات أذكار النوم اليومية
+================================================== */
+
+let savedData =
+  JSON.parse(
+    localStorage.getItem(
+      "sleepAzkarProgress"
+    )
+  ) || {};
+
+
+if (savedData.date !== today) {
+
+  savedData = {
+
+    date: today,
+
+    counters: {},
+
+    completed: {},
+
+    stars: 0
+
+  };
+
+  localStorage.setItem(
+    "sleepAzkarProgress",
+    JSON.stringify(savedData)
+  );
+}
+
+
+function saveData() {
+
+  localStorage.setItem(
+    "sleepAzkarProgress",
+    JSON.stringify(savedData)
+  );
+
+}
+
+
+/* ==================================================
+   ⭐ مجموع النجوم العام
+================================================== */
 
 let stars =
-  Number(localStorage.getItem("childStars")) || 0;
+  Number(
+    localStorage.getItem(
+      "childStars"
+    )
+  ) || 0;
 
-document.getElementById("stars").textContent = stars;
+
+document.getElementById(
+  "stars"
+).textContent = stars;
 
 
-/* =========================
+/* ==================================================
+   ❤️ المفضلة
+================================================== */
+
+let favorites =
+  JSON.parse(
+    localStorage.getItem(
+      "favoriteAzkar"
+    )
+  ) || [];
+
+
+/* ==================================================
    إنشاء الأذكار
-========================= */
+================================================== */
 
 const container =
-  document.getElementById("azkar");
+  document.getElementById(
+    "azkar"
+  );
 
 
-azkar.forEach((zekr, index) => {
+azkar.forEach(
+  (zekr, index) => {
 
-  const card =
-    document.createElement("div");
+    const card =
+      document.createElement(
+        "div"
+      );
 
-  card.className = "zekr";
+    card.className =
+      "zekr";
+
+    card.id =
+      "card-" + index;
 
 
-  card.innerHTML = `
+    if (
+      savedData.completed[index]
+    ) {
 
-    <div class="zekr-text">
-      ${zekr.text}
-    </div>
+      card.classList.add(
+        "completed"
+      );
 
-    ${
-      zekr.note
-      ? `<div class="note">${zekr.note}</div>`
-      : ""
     }
 
-    <div class="controls">
 
-      <button
-        class="listen"
-        id="listen-${index}"
-        onclick="speakZekr(${index})">
-        🔊 استمع
-      </button>
-
-      <button
-        class="counter"
-        id="counter-${index}"
-        onclick="countZekr(${index}, this)">
-        0 / ${zekr.count}
-      </button>
-
-      <button
-        class="favorite"
-        onclick="favoriteZekr(${index})">
-        ❤️
-      </button>
-
-    </div>
-
-  `;
-
-  container.appendChild(card);
-
-});
+    const isFavorite =
+      favorites.includes(
+        zekr.text
+      );
 
 
-/* =========================
-   العدادات
-========================= */
+    card.innerHTML = `
 
-let counters = {};
+      <div class="zekr-text">
+        ${zekr.text}
+      </div>
+
+      ${
+        zekr.note
+          ? `
+            <div class="note">
+              ${zekr.note}
+            </div>
+          `
+          : ""
+      }
+
+      <div class="controls">
+
+        <button
+          class="listen"
+          id="listen-${index}"
+          onclick="speakZekr(${index})">
+
+          🔊 استمع
+
+        </button>
 
 
-/* =========================
+        <button
+          class="counter"
+          id="counter-${index}"
+          onclick="countZekr(${index})">
+
+          ${
+            savedData.counters[index] || 0
+          }
+          / ${zekr.count}
+
+        </button>
+
+
+        <button
+          class="favorite ${
+            isFavorite ? "active" : ""
+          }"
+          id="favorite-${index}"
+          onclick="toggleFavorite(${index})">
+
+          ${
+            isFavorite
+              ? "❤️ في المفضلة"
+              : "🤍 أضف للمفضلة"
+          }
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="item-message"
+        id="message-${index}">
+
+        ${
+          savedData.completed[index]
+            ? "🌟 أحسنت! أكملت هذا الذكر ❤️"
+            : ""
+        }
+
+      </div>
+
+    `;
+
+
+    container.appendChild(
+      card
+    );
+
+  }
+);
+
+
+/* ==================================================
    🔊 التحكم في الصوت
-========================= */
+================================================== */
 
 let speakingIndex = null;
 
@@ -369,37 +831,50 @@ let speechVersion = 0;
 
 function speakZekr(index) {
 
-  if (!("speechSynthesis" in window)) {
+  if (
+    !("speechSynthesis" in window)
+  ) {
 
-    alert("عذرًا، جهازك لا يدعم تشغيل الصوت.");
+    alert(
+      "عذرًا، جهازك لا يدعم تشغيل الصوت."
+    );
 
     return;
+
   }
 
 
-  /* منع الضغط أثناء القراءة */
+  if (
+    speakingIndex !== null
+  ) {
 
-  if (speakingIndex === index) {
     return;
+
   }
 
-
-  /* إلغاء أي قراءة سابقة */
 
   window.speechSynthesis.cancel();
 
+
   speechVersion++;
+
 
   const currentVersion =
     speechVersion;
 
-  speakingIndex = index;
+
+  speakingIndex =
+    index;
 
 
   const listenButton =
     document.getElementById(
       "listen-" + index
     );
+
+
+  listenButton.disabled =
+    true;
 
 
   listenButton.textContent =
@@ -412,60 +887,77 @@ function speakZekr(index) {
     );
 
 
-  utterance.lang = "ar-SA";
-  utterance.rate = 0.75;
-  utterance.pitch = 1.05;
-  utterance.volume = 1;
+  utterance.lang =
+    "ar-SA";
+
+  utterance.rate =
+    0.75;
+
+  utterance.pitch =
+    1.05;
+
+  utterance.volume =
+    1;
 
 
-  /* انتهاء الصوت = احتساب مرة واحدة */
+  utterance.onend =
+    function() {
 
-  utterance.onend = function() {
+      if (
+        currentVersion !==
+        speechVersion
+      ) {
 
-    if (
-      currentVersion !==
-      speechVersion
-    ) {
-      return;
-    }
+        return;
 
-
-    speakingIndex = null;
-
-    listenButton.textContent =
-      "🔊 استمع";
+      }
 
 
-    const counterButton =
-      document.getElementById(
-        "counter-" + index
-      );
+      speakingIndex =
+        null;
 
 
-    countZekr(
-      index,
-      counterButton
-    );
-
-  };
+      listenButton.disabled =
+        false;
 
 
-  utterance.onerror = function() {
-
-    if (
-      currentVersion !==
-      speechVersion
-    ) {
-      return;
-    }
+      listenButton.textContent =
+        "🔊 استمع";
 
 
-    speakingIndex = null;
+      /* بعد انتهاء القراءة
+         نزيد العداد مرة واحدة */
 
-    listenButton.textContent =
-      "🔊 استمع";
+      countZekr(index);
 
-  };
+    };
+
+
+  utterance.onerror =
+    function() {
+
+      if (
+        currentVersion !==
+        speechVersion
+      ) {
+
+        return;
+
+      }
+
+
+      speakingIndex =
+        null;
+
+
+      listenButton.disabled =
+        false;
+
+
+      listenButton.textContent =
+        "🔊 استمع";
+
+    };
 
 
   window.speechSynthesis.speak(
@@ -475,9 +967,139 @@ function speakZekr(index) {
 }
 
 
-/* =========================
+/* ==================================================
+   ⭐ عد الذكر
+================================================== */
+
+function countZekr(index) {
+
+  const max =
+    azkar[index].count;
+
+
+  if (
+    savedData.counters[index] === undefined
+  ) {
+
+    savedData.counters[index] =
+      0;
+
+  }
+
+
+  if (
+    savedData.counters[index] >=
+    max
+  ) {
+
+    return;
+
+  }
+
+
+  savedData.counters[index]++;
+
+
+  const counter =
+    document.getElementById(
+      "counter-" + index
+    );
+
+
+  counter.textContent =
+    savedData.counters[index] +
+    " / " +
+    max;
+
+
+  /* ==================================================
+     اكتمال الذكر
+  ================================================== */
+
+  if (
+    savedData.counters[index] >=
+    max
+  ) {
+
+    savedData.completed[index] =
+      true;
+
+
+    const card =
+      document.getElementById(
+        "card-" + index
+      );
+
+
+    card.classList.add(
+      "completed"
+    );
+
+
+    const message =
+      document.getElementById(
+        "message-" + index
+      );
+
+
+    message.textContent =
+      "🌟 أحسنت يا بطل! أكملت هذا الذكر ❤️";
+
+
+    /* ⭐ نجمة واحدة فقط */
+
+    if (
+      !savedData.completedStar ||
+      !savedData.completedStar[index]
+    ) {
+
+      if (
+        !savedData.completedStar
+      ) {
+
+        savedData.completedStar =
+          {};
+
+      }
+
+
+      savedData.completedStar[index] =
+        true;
+
+
+      stars++;
+
+
+      localStorage.setItem(
+        "childStars",
+        stars
+      );
+
+
+      document.getElementById(
+        "stars"
+      ).textContent =
+        stars;
+
+
+      encouragement();
+
+    }
+
+
+    checkAllCompleted();
+
+  }
+
+
+  saveData();
+
+}
+
+
+/* ==================================================
    🏆 التشجيع
-========================= */
+================================================== */
 
 function encouragement() {
 
@@ -489,7 +1111,11 @@ function encouragement() {
 
     "رائع يا بطل! ⭐",
 
-    "ممتاز! بارك الله فيك ❤️"
+    "ممتاز! بارك الله فيك ❤️",
+
+    "بطل! استمر في ذكر الله 🌙",
+
+    "ما شاء الله، أنت رائع! 🌟"
 
   ];
 
@@ -508,14 +1134,18 @@ function encouragement() {
 }
 
 
-/* =========================
+/* ==================================================
    🔊 نطق التشجيع
-========================= */
+================================================== */
 
 function speakText(text) {
 
-  if (!("speechSynthesis" in window)) {
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
     return;
+
   }
 
 
@@ -523,13 +1153,22 @@ function speakText(text) {
 
 
   const utterance =
-    new SpeechSynthesisUtterance(text);
+    new SpeechSynthesisUtterance(
+      text
+    );
 
 
-  utterance.lang = "ar-SA";
-  utterance.rate = 0.85;
-  utterance.pitch = 1.15;
-  utterance.volume = 1;
+  utterance.lang =
+    "ar-SA";
+
+  utterance.rate =
+    0.85;
+
+  utterance.pitch =
+    1.15;
+
+  utterance.volume =
+    1;
 
 
   window.speechSynthesis.speak(
@@ -539,134 +1178,73 @@ function speakText(text) {
 }
 
 
-/* =========================
-   ⭐ عدّ الذكر
-========================= */
+/* ==================================================
+   🎉 فحص إكمال القسم
+================================================== */
 
-function countZekr(index, button) {
+function checkAllCompleted() {
 
-  if (!counters[index]) {
-    counters[index] = 0;
-  }
-
-
-  if (
-    counters[index] <
-    azkar[index].count
-  ) {
-
-    counters[index]++;
+  const completed =
+    azkar.every(
+      (item, index) =>
+        savedData.counters[index] >=
+        item.count
+    );
 
 
-    button.textContent =
-      counters[index] +
-      " / " +
-      azkar[index].count;
+  const finish =
+    document.getElementById(
+      "finishMessage"
+    );
 
 
-    /* اكتمال الذكر */
+  if (completed) {
 
-    if (
-      counters[index] ===
-      azkar[index].count
-    ) {
+    finish.style.display =
+      "block";
 
-      button
-        .parentElement
-        .parentElement
-        .classList
-        .add("completed");
+  } else {
 
-
-      /* ⭐ نجمة واحدة عند إكمال الذكر */
-
-      stars++;
-
-
-      localStorage.setItem(
-        "childStars",
-        stars
-      );
-
-
-      document.getElementById(
-        "stars"
-      ).textContent = stars;
-
-
-      /* 🏆 تشجيع */
-
-      encouragement();
-
-
-      /* 🎉 فحص إكمال القسم */
-
-      const completed =
-        azkar.every(
-          (item, i) =>
-            counters[i] ===
-            item.count
-        );
-
-
-      if (completed) {
-
-        setTimeout(() => {
-
-          const finish =
-            document.getElementById(
-              "finishMessage"
-            );
-
-
-          finish.style.display =
-            "block";
-
-
-          speakText(
-            "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار النوم"
-          );
-
-        }, 1200);
-
-      }
-
-    }
+    finish.style.display =
+      "none";
 
   }
 
 }
 
 
-/* =========================
-   ❤️ المفضلة
-========================= */
+/* ==================================================
+   ❤️ إضافة / إزالة من المفضلة
+================================================== */
 
-function favoriteZekr(index) {
+function toggleFavorite(index) {
 
-  let favorites =
-    JSON.parse(
-      localStorage.getItem(
-        "favoriteAzkar"
-      )
-    ) || [];
+  const text =
+    azkar[index].text;
 
 
-  if (
-    !favorites.includes(
-      azkar[index].text
-    )
-  ) {
+  const position =
+    favorites.indexOf(text);
 
-    favorites.push(
-      azkar[index].text
+
+  const button =
+    document.getElementById(
+      "favorite-" + index
     );
 
 
-    localStorage.setItem(
-      "favoriteAzkar",
-      JSON.stringify(favorites)
+  if (position === -1) {
+
+    favorites.push(text);
+
+
+    button.classList.add(
+      "active"
     );
+
+
+    button.textContent =
+      "❤️ في المفضلة";
 
 
     alert(
@@ -675,18 +1253,41 @@ function favoriteZekr(index) {
 
   } else {
 
+    favorites.splice(
+      position,
+      1
+    );
+
+
+    button.classList.remove(
+      "active"
+    );
+
+
+    button.textContent =
+      "🤍 أضف للمفضلة";
+
+
     alert(
-      "❤️ الذكر موجود بالفعل في المفضلة"
+      "🤍 تمت إزالة الذكر من المفضلة"
     );
 
   }
 
+
+  localStorage.setItem(
+    "favoriteAzkar",
+    JSON.stringify(
+      favorites
+    )
+  );
+
 }
 
 
-/* =========================
-   🏠 العودة
-========================= */
+/* ==================================================
+   🏠 العودة للرئيسية
+================================================== */
 
 function goBack() {
 
@@ -695,7 +1296,12 @@ function goBack() {
 
 }
 
-</script>
 
-</body>
+/* ==================================================
+   تشغيل فحص الإكمال عند فتح الصفحة
+================================================== */
+
+checkAllCompleted();
+
+</script></body>
 </html>
