@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="theme-color" content="#087f75">
 
   <title>أذكار الطفل المسلم</title>
@@ -11,6 +10,11 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -28,10 +32,12 @@
       margin: auto;
       min-height: 100vh;
       overflow: hidden;
-      padding-bottom: 100px;
+      padding-bottom: 105px;
     }
 
-    /* ===== الرأس ===== */
+    /* =========================
+       الرأس
+    ========================= */
 
     .header {
       position: relative;
@@ -102,6 +108,7 @@
       border: 1px solid rgba(255,255,255,.18);
 
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
 
       font-size: 15px;
       font-weight: bold;
@@ -110,7 +117,9 @@
         0 8px 18px rgba(0,0,0,.20);
     }
 
-    /* ===== الأطفال ===== */
+    /* =========================
+       الأطفال
+    ========================= */
 
     .characters {
       display: flex;
@@ -123,6 +132,11 @@
       text-align: center;
       font-size: 65px;
       filter: drop-shadow(0 8px 7px rgba(0,0,0,.3));
+      animation: floatChild 3s ease-in-out infinite;
+    }
+
+    .child:nth-child(2) {
+      animation-delay: 1s;
     }
 
     .child-name {
@@ -131,7 +145,19 @@
       font-weight: bold;
     }
 
-    /* ===== الرسالة ===== */
+    @keyframes floatChild {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* =========================
+       الرسالة
+    ========================= */
 
     .message {
       margin: 8px 20px 22px;
@@ -151,9 +177,12 @@
         inset 0 1px 2px rgba(255,255,255,.15);
 
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    /* ===== بطاقات الأذكار ===== */
+    /* =========================
+       بطاقات الأذكار
+    ========================= */
 
     .cards {
       padding: 10px 15px;
@@ -166,14 +195,16 @@
       position: relative;
       overflow: hidden;
 
-      border: 1px solid rgba(255,255,255,.18);
-
+      width: 100%;
       min-height: 145px;
 
+      border: 1px solid rgba(255,255,255,.18);
       border-radius: 27px;
+
       padding: 18px 10px;
 
       color: white;
+      font-family: inherit;
       font-weight: bold;
       font-size: 16px;
 
@@ -190,7 +221,9 @@
         0 14px 25px rgba(0,0,0,.28),
         inset 0 2px 3px rgba(255,255,255,.18);
 
-      transition: .25s ease;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
     }
 
     .card::before {
@@ -209,15 +242,15 @@
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
 
       box-shadow:
-        0 22px 35px rgba(0,0,0,.35),
+        0 20px 32px rgba(0,0,0,.35),
         inset 0 2px 3px rgba(255,255,255,.20);
     }
 
     .card:active {
-      transform: translateY(3px) scale(.97);
+      transform: translateY(2px) scale(.97);
     }
 
     .icon {
@@ -238,7 +271,69 @@
       z-index: 2;
     }
 
-    /* ===== النجوم ===== */
+    /* =========================
+       ألوان بسيطة للأقسام
+    ========================= */
+
+    .morning {
+      background:
+        linear-gradient(145deg,
+        rgba(255,193,7,.27),
+        rgba(255,255,255,.07));
+    }
+
+    .evening {
+      background:
+        linear-gradient(145deg,
+        rgba(72,89,160,.30),
+        rgba(255,255,255,.07));
+    }
+
+    .sleep {
+      background:
+        linear-gradient(145deg,
+        rgba(88,70,150,.30),
+        rgba(255,255,255,.07));
+    }
+
+    .food {
+      background:
+        linear-gradient(145deg,
+        rgba(180,110,35,.30),
+        rgba(255,255,255,.07));
+    }
+
+    .home {
+      background:
+        linear-gradient(145deg,
+        rgba(30,130,105,.30),
+        rgba(255,255,255,.07));
+    }
+
+    .prayer {
+      background:
+        linear-gradient(145deg,
+        rgba(20,120,110,.30),
+        rgba(255,255,255,.07));
+    }
+
+    .favorite-card {
+      background:
+        linear-gradient(145deg,
+        rgba(190,70,90,.25),
+        rgba(255,255,255,.07));
+    }
+
+    .reminder {
+      background:
+        linear-gradient(145deg,
+        rgba(120,100,45,.30),
+        rgba(255,255,255,.07));
+    }
+
+    /* =========================
+       النجوم
+    ========================= */
 
     .stars {
       margin: 22px 15px;
@@ -259,6 +354,7 @@
         0 12px 25px rgba(0,0,0,.25);
 
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .big-star {
@@ -277,7 +373,9 @@
       font-size: 25px;
     }
 
-    /* ===== القائمة السفلية ===== */
+    /* =========================
+       القائمة السفلية
+    ========================= */
 
     .bottom-nav {
       position: fixed;
@@ -294,13 +392,14 @@
 
       padding: 9px 5px;
 
-      background: rgba(5,40,38,.90);
+      background: rgba(5,40,38,.92);
 
       border: 1px solid rgba(255,255,255,.13);
 
       border-radius: 25px;
 
       backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
 
       box-shadow:
         0 12px 30px rgba(0,0,0,.35);
@@ -314,11 +413,12 @@
 
       color: white;
 
+      font-family: inherit;
       font-size: 12px;
 
       cursor: pointer;
 
-      padding: 5px 10px;
+      padding: 6px 10px;
 
       border-radius: 15px;
 
@@ -339,7 +439,9 @@
       margin-bottom: 3px;
     }
 
-    /* ===== الهاتف ===== */
+    /* =========================
+       الهاتف
+    ========================= */
 
     @media (max-width: 400px) {
 
@@ -353,6 +455,7 @@
 
       .card {
         min-height: 135px;
+        font-size: 15px;
       }
 
       .icon {
@@ -376,7 +479,9 @@
 
 <div class="app">
 
-  <!-- الرأس -->
+  <!-- =========================
+       الرأس
+  ========================== -->
 
   <header class="header">
 
@@ -393,7 +498,9 @@
   </header>
 
 
-  <!-- الأطفال -->
+  <!-- =========================
+       الأطفال
+  ========================== -->
 
   <section class="characters">
 
@@ -414,28 +521,36 @@
   </section>
 
 
-  <!-- الرسالة -->
+  <!-- =========================
+       الرسالة
+  ========================== -->
 
   <div class="message">
     ❤️ احفظ الله يحفظك ❤️
   </div>
 
 
-  <!-- بطاقات الأذكار -->
+  <!-- =========================
+       بطاقات الأقسام
+  ========================== -->
 
   <section class="cards">
 
-    
-<button class="card morning"
-  onclick="window.location.href='morning.html'">
+    <button
+      class="card morning"
+      type="button"
+      onclick="openPage('morning.html')">
+
       <span class="icon">☀️</span>
       <span class="card-title">أذكار الصباح</span>
 
     </button>
 
 
-    <button class="card evening"
-  onclick="window.location.href='evening.html'">
+    <button
+      class="card evening"
+      type="button"
+      onclick="openPage('evening.html')">
 
       <span class="icon">🌙</span>
       <span class="card-title">أذكار المساء</span>
@@ -443,8 +558,10 @@
     </button>
 
 
-<button class="card sleep"
-  onclick="window.location.href='sleep.html'">
+    <button
+      class="card sleep"
+      type="button"
+      onclick="openPage('sleep.html')">
 
       <span class="icon">⭐</span>
       <span class="card-title">أذكار النوم</span>
@@ -452,8 +569,10 @@
     </button>
 
 
-    <button class="card food"
-  onclick="window.location.href='food.html'">
+    <button
+      class="card food"
+      type="button"
+      onclick="openPage('food.html')">
 
       <span class="icon">🍎</span>
       <span class="card-title">أذكار الطعام</span>
@@ -461,26 +580,32 @@
     </button>
 
 
-    <button class="card home"
-  onclick="window.location.href='home.html'">
+    <button
+      class="card home"
+      type="button"
+      onclick="openPage('home.html')">
 
-  <span class="icon">🏠</span>
-  <span class="card-title">أذكار المنزل</span>
+      <span class="icon">🏠</span>
+      <span class="card-title">أذكار المنزل</span>
 
-</button>
-
-
-    <button class="card prayer"
-  onclick="window.location.href='prayer.html'">
-
-  <span class="icon">🕌</span>
-  <span class="card-title">أذكار الصلاة</span>
-
-</button>
+    </button>
 
 
-    <button class="card favorite-card"
-  onclick="window.location.href='favorites.html'">
+    <button
+      class="card prayer"
+      type="button"
+      onclick="openPage('prayer.html')">
+
+      <span class="icon">🕌</span>
+      <span class="card-title">أذكار الصلاة</span>
+
+    </button>
+
+
+    <button
+      class="card favorite-card"
+      type="button"
+      onclick="openPage('favorites.html')">
 
       <span class="icon">❤️</span>
       <span class="card-title">أذكاري المفضلة</span>
@@ -488,18 +613,22 @@
     </button>
 
 
-    <button class="card reminder"
-  onclick="window.location.href='reminders.html'">
+    <button
+      class="card reminder"
+      type="button"
+      onclick="openPage('reminders.html')">
 
-  <span class="icon">🔔</span>
-  <span class="card-title">تذكير الأذكار</span>
+      <span class="icon">🔔</span>
+      <span class="card-title">تذكير الأذكار</span>
 
-</button>
+    </button>
 
   </section>
 
 
-  <!-- النجوم -->
+  <!-- =========================
+       النجوم
+  ========================== -->
 
   <section class="stars">
 
@@ -514,10 +643,8 @@
       </div>
 
       <div class="stars-number">
-
         <span id="starCount">0</span>
         ⭐
-
       </div>
 
     </div>
@@ -529,12 +656,15 @@
   </section>
 
 
-  <!-- القائمة السفلية -->
+  <!-- =========================
+       القائمة السفلية
+  ========================== -->
 
   <nav class="bottom-nav">
 
     <button
       class="nav-button active"
+      type="button"
       onclick="goHome()">
 
       <span class="nav-icon">🏠</span>
@@ -545,6 +675,7 @@
 
     <button
       class="nav-button"
+      type="button"
       onclick="openSection('تعلم')">
 
       <span class="nav-icon">📖</span>
@@ -555,6 +686,7 @@
 
     <button
       class="nav-button"
+      type="button"
       onclick="openSection('إنجازاتي')">
 
       <span class="nav-icon">🏆</span>
@@ -565,6 +697,7 @@
 
     <button
       class="nav-button"
+      type="button"
       onclick="openSection('الإعدادات')">
 
       <span class="nav-icon">⚙️</span>
@@ -578,30 +711,33 @@
 
 
 <script>
-
-  /* النجوم */
+  /* =========================
+     ⭐ النجوم
+  ========================= */
 
   let stars =
     Number(localStorage.getItem("childStars")) || 0;
 
-  document.getElementById("starCount")
-    .textContent = stars;
+  const starCount =
+    document.getElementById("starCount");
 
-
-  /* فتح الأقسام مؤقتًا */
-
-  function openSection(name) {
-
-    alert(
-      "🌟 " +
-      name +
-      "\n\nسنضيف هذه الصفحة في الخطوة القادمة ❤️"
-    );
-
+  if (starCount) {
+    starCount.textContent = stars;
   }
 
 
-  /* الرئيسية */
+  /* =========================
+     📂 فتح الأقسام
+  ========================= */
+
+  function openPage(page) {
+    window.location.href = page;
+  }
+
+
+  /* =========================
+     🏠 الرئيسية
+  ========================= */
 
   function goHome() {
 
@@ -612,71 +748,203 @@
 
   }
 
+
+  /* =========================
+     📖 الأقسام القادمة
+  ========================= */
+
+  function openSection(name) {
+
+    alert(
+      "🌟 " +
+      name +
+      "\n\nسنضيف هذه الصفحة في الخطوة القادمة ❤️"
+    );
+
+  }
 </script>
+
+
+<!-- =========================
+     🔥 Firebase Notifications
+========================== -->
+
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
   import {
     getMessaging,
     getToken,
     onMessage
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
+
   const firebaseConfig = {
-    apiKey: "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
-    authDomain: "muslim-kids-azkar.firebaseapp.com",
-    projectId: "muslim-kids-azkar",
-    storageBucket: "muslim-kids-azkar.firebasestorage.app",
-    messagingSenderId: "204235175360",
-    appId: "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+
+    apiKey:
+      "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
+
+    authDomain:
+      "muslim-kids-azkar.firebaseapp.com",
+
+    projectId:
+      "muslim-kids-azkar",
+
+    storageBucket:
+      "muslim-kids-azkar.firebasestorage.app",
+
+    messagingSenderId:
+      "204235175360",
+
+    appId:
+      "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+
   };
 
-  const app = initializeApp(firebaseConfig);
-  const messaging = getMessaging(app);
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const messaging =
+    getMessaging(app);
+
+
+  /* =========================
+     🔔 تفعيل الإشعارات
+  ========================= */
 
   async function enableNotifications() {
-    try {
-      const permission = await Notification.requestPermission();
 
-      if (permission !== "granted") {
-        alert("لم يتم السماح بالإشعارات 🔔");
+    try {
+
+      if (!("Notification" in window)) {
+
+        alert(
+          "عذرًا، متصفحك لا يدعم الإشعارات 🔔"
+        );
+
         return;
       }
 
-      const registration = await navigator.serviceWorker.register(
-        "/firebase-messaging-sw.js"
-      );
 
-      const token = await getToken(messaging, {
-        BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw
-        serviceWorkerRegistration: registration
-      });
+      const permission =
+        await Notification.requestPermission();
+
+
+      if (permission !== "granted") {
+
+        alert(
+          "لم يتم السماح بالإشعارات 🔔"
+        );
+
+        return;
+      }
+
+
+      const registration =
+        await navigator.serviceWorker.register(
+          "/firebase-messaging-sw.js"
+        );
+
+
+      const token =
+        await getToken(messaging, {
+
+          vapidKey:
+            "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
+
+          serviceWorkerRegistration:
+            registration
+
+        });
+
 
       if (token) {
-        console.log("FCM Token:", token);
-        localStorage.setItem("fcmToken", token);
-        alert("تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️");
+
+        console.log(
+          "FCM Token:",
+          token
+        );
+
+
+        localStorage.setItem(
+          "fcmToken",
+          token
+        );
+
+
+        alert(
+          "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
+        );
+
+      } else {
+
+        alert(
+          "لم يتم الحصول على رمز الإشعارات."
+        );
+
       }
 
     } catch (error) {
-      console.error("Notification error:", error);
-      alert("حدث خطأ أثناء تفعيل الإشعارات");
+
+      console.error(
+        "Notification error:",
+        error
+      );
+
+      alert(
+        "حدث خطأ أثناء تفعيل الإشعارات 🔔"
+      );
+
     }
+
   }
 
-  window.enableNotifications = enableNotifications;
 
-  onMessage(messaging, (payload) => {
-    console.log("رسالة أثناء فتح الموقع:", payload);
+  /* جعل الدالة متاحة للصفحات الأخرى */
 
-    if (payload.notification) {
-      new Notification(
-        payload.notification.title || "أذكار الطفل المسلم",
-        {
-          body: payload.notification.body || "حان وقت الأذكار 🌷"
-        }
+  window.enableNotifications =
+    enableNotifications;
+
+
+  /* =========================
+     🔔 استقبال الإشعار عند فتح الموقع
+  ========================= */
+
+  onMessage(
+    messaging,
+    (payload) => {
+
+      console.log(
+        "رسالة أثناء فتح الموقع:",
+        payload
       );
+
+
+      if (payload.notification) {
+
+        new Notification(
+          payload.notification.title ||
+            "أذكار الطفل المسلم",
+
+          {
+
+            body:
+              payload.notification.body ||
+              "حان وقت الأذكار 🌷"
+
+          }
+
+        );
+
+      }
+
     }
-  });
+  );
+
 </script>
+
 </body>
 </html>
