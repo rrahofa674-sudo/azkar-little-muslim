@@ -3,524 +3,1082 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087f75">
+
   <title>أذكار الصلاة 🕌</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
-      color: #333;
-      padding: 15px;
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.15), transparent 25%),
+        linear-gradient(145deg, #062e2b, #0b5d58 45%, #092f3b);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 600px;
+      margin: auto;
+      padding-bottom: 40px;
+    }
+
+    /* ===== الرأس ===== */
+
+    .header {
+      text-align: center;
+      padding: 30px 15px;
+      background: linear-gradient(145deg, #0b766e, #064b55);
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.30);
+    }
+
+    .icon {
+      font-size: 60px;
+      filter: drop-shadow(0 7px 7px rgba(0,0,0,.35));
     }
 
     h1 {
-      text-align: center;
-      color: #2e7d32;
-      margin-bottom: 8px;
+      margin: 10px 0 5px;
+      font-size: 30px;
+      text-shadow: 0 3px 7px rgba(0,0,0,.3);
     }
 
     .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 25px;
+      opacity: .9;
       font-size: 15px;
     }
 
-    .section-title {
+    /* ===== النجوم ===== */
+
+    .progress {
+      margin: 20px;
+      padding: 15px;
       text-align: center;
-      color: #1565c0;
-      background: white;
-      padding: 12px;
-      border-radius: 18px;
-      margin: 25px 0 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      border-radius: 22px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+      backdrop-filter: blur(10px);
     }
 
-    .zekr {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      line-height: 2.2;
-      font-size: 19px;
+    .count {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    /* ===== عنوان القسم ===== */
+
+    .section-title {
+      margin: 25px 15px 15px;
+      padding: 14px;
       text-align: center;
+      border-radius: 20px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,.20);
+      font-size: 20px;
+    }
+
+    /* ===== بطاقة الذكر ===== */
+
+    .zekr {
+      margin: 15px;
+      padding: 22px 18px;
+      border-radius: 25px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.25),
+        inset 0 1px 2px rgba(255,255,255,.12);
+      transition: .25s ease;
+    }
+
+    .zekr.complete {
+      border: 2px solid rgba(159,245,223,.65);
+      background: rgba(255,255,255,.14);
     }
 
     .zekr-text {
       margin: 0 0 15px;
+      font-size: 20px;
+      line-height: 2.1;
+      text-align: center;
+      font-weight: bold;
     }
 
-    .count {
+    .required-count {
       display: block;
-      margin: 10px auto;
       width: fit-content;
-      background: #4caf50;
-      color: white;
-      padding: 7px 18px;
+      margin: 10px auto;
+      padding: 7px 16px;
       border-radius: 20px;
-      font-size: 15px;
+      background: rgba(255,193,7,.18);
+      font-size: 14px;
+      font-weight: bold;
     }
 
     .counter {
-      font-size: 18px;
+      text-align: center;
+      margin: 15px 0;
+      font-size: 22px;
       font-weight: bold;
-      color: #2e7d32;
-      margin: 12px 0;
+    }
+
+    /* ===== الأزرار ===== */
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 15px;
     }
 
     button {
       border: none;
       cursor: pointer;
-      font-size: 16px;
-      border-radius: 25px;
-      padding: 10px 18px;
-      margin: 5px;
+      color: white;
+      border-radius: 18px;
+      padding: 11px 15px;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 7px 15px rgba(0,0,0,.20);
+      transition: .15s ease;
+    }
+
+    button:active {
+      transform: scale(.94);
+    }
+
+    button:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .listen {
-      background: #2196f3;
-      color: white;
-    }
-
-    .listen:disabled {
-      background: #90caf9;
-      cursor: not-allowed;
+      background: rgba(255,193,7,.25);
     }
 
     .repeat {
-      background: #4caf50;
-      color: white;
+      background: #087f75;
     }
 
     .favorite {
-      background: #fff3e0;
-      color: #e65100;
+      background: rgba(255,255,255,.14);
+      font-size: 14px;
     }
 
     .favorite.active {
-      background: #ff9800;
-      color: white;
+      background: #d97706;
     }
 
-    .complete {
-      border: 3px solid #4caf50;
-    }
+    /* ===== رسالة إكمال الذكر ===== */
 
     .message {
-      color: #2e7d32;
-      font-weight: bold;
-      margin-top: 10px;
       min-height: 25px;
+      margin-top: 12px;
+      text-align: center;
+      color: #9ff5df;
+      font-weight: bold;
+      font-size: 16px;
     }
 
-    .stars {
-      text-align: center;
-      background: white;
-      border-radius: 20px;
-      padding: 15px;
-      margin: 20px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-      color: #f9a825;
-      font-size: 24px;
-    }
+    /* ===== رسالة الإكمال الكامل ===== */
 
     .finish {
       display: none;
+      margin: 20px 15px;
+      padding: 22px;
       text-align: center;
-      background: #e8f5e9;
-      color: #2e7d32;
-      padding: 18px;
-      border-radius: 20px;
-      margin: 25px 0;
-      font-size: 19px;
+      border-radius: 25px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(159,245,223,.35);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      font-size: 21px;
       font-weight: bold;
+      line-height: 1.8;
     }
+
+    /* ===== العودة ===== */
 
     .back {
       display: block;
-      width: fit-content;
-      margin: 30px auto 15px;
-      padding: 12px 25px;
-      background: #2e7d32;
+      margin: 28px auto;
+      border: none;
+      background: rgba(255,255,255,.13);
       color: white;
-      text-decoration: none;
-      border-radius: 25px;
+      padding: 13px 25px;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 400px) {
+
+      h1 {
+        font-size: 27px;
+      }
+
+      .icon {
+        font-size: 52px;
+      }
+
+      .zekr-text {
+        font-size: 18px;
+      }
+
+      button {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>🕌 أذكار الصلاة</h1>
-  <div class="subtitle">أذكار جميلة بعد الصلاة 🌷</div>
+<div class="app">
 
-  <div class="stars">
-    ⭐ نجومك اليوم: <span id="starCount">0</span>
+  <!-- ===== الرأس ===== -->
+
+  <header class="header">
+
+    <div class="icon">🕌</div>
+
+    <h1>أذكار الصلاة</h1>
+
+    <div class="subtitle">
+      اذكر الله بعد صلاتك 🌿
+    </div>
+
+  </header>
+
+
+  <!-- ===== النجوم ===== -->
+
+  <div class="progress">
+
+    🌟 نجومك اليوم
+
+    <div class="count">
+      <span id="starCount">0</span> ⭐
+    </div>
+
   </div>
 
-  <h2 class="section-title">🌸 من دعاء الاستفتاح</h2>
+
+  <!-- ===== دعاء الاستفتاح ===== -->
+
+  <h2 class="section-title">
+    🌸 من دعاء الاستفتاح
+  </h2>
 
   <div id="openingAzkar"></div>
 
-  <h2 class="section-title">🤲 الأذكار بعد السلام من الصلاة</h2>
+
+  <!-- ===== بعد الصلاة ===== -->
+
+  <h2 class="section-title">
+    🤲 الأذكار بعد السلام من الصلاة
+  </h2>
 
   <div id="afterPrayerAzkar"></div>
 
+
+  <!-- ===== الإكمال ===== -->
+
   <div class="finish" id="finishMessage">
-    🎉 أحسنت يا بطل! أكملت أذكار الصلاة اليوم ❤️<br>
-    ⭐ بارك الله فيك وتقبل الله منك
+
+    🎉 أحسنت يا بطل! 🌟<br>
+
+    لقد أكملت أذكار الصلاة ❤️<br>
+
+    بارك الله فيك وتقبل الله منك 🤲
+
   </div>
 
-  <a href="index.html" class="back">⬅️ العودة للرئيسية</a>
 
-  <script>
+  <!-- ===== العودة ===== -->
 
-    const openingAzkar = [
-      {
-        text: "اللهم باعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم نقني من خطاياي كما ينقى الثوب الأبيض من الدنس، اللهم اغسلني من خطاياي، بالثلج والماء والبرد",
-        count: 1
-      },
-      {
-        text: "الله أكبر كبيرا، الله أكبر كبيرا، الله أكبر كبيرا، والحمد لله كثيرا، والحمد لله كثيرا، والحمد لله كثيرا، وسبحان الله بكرة وأصيلا. أعوذ بالله من الشيطان: من نفخه، ونفثه، وهمزه",
-        count: 1
-      }
-    ];
+  <button class="back" onclick="goBack()">
+    🏠 العودة للرئيسية
+  </button>
 
-    const afterPrayerAzkar = [
-      {
-        text: "أستغفر الله",
-        count: 3
-      },
-      {
-        text: "اللهم أنت السلام، ومنك السلام، تباركت يا ذا الجلال والإكرام",
-        count: 1
-      },
-      {
-        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، اللهم لا مانع لما أعطيت، ولا معطي لما منعت، ولا ينفع ذا الجد منك الجد",
-        count: 1
-      },
-      {
-        text: "لا إله إلا الله وحده لا شريك له، له الملك، وله الحمد، وهو على كل شيء قدير. لا حول ولا قوة إلا بالله، لا إله إلا الله، ولا نعبد إلا إياه، له النعمة وله الفضل وله الثناء الحسن، لا إله إلا الله مخلصين له الدين ولو كره الكافرون",
-        count: 1
-      },
-      {
-        text: "سبحان الله، والحمد لله، والله أكبر",
-        count: 33
-      },
-      {
-        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
-        count: 1
-      },
-      {
-        text: "بسم الله الرحمن الرحيم ﴿قل هو الله أحد * الله الصمد * لم يلد ولم يولد * ولم يكن له كفوا أحد﴾",
-        count: 1
-      },
-      {
-        text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الفلق * من شر ما خلق * ومن شر غاسق إذا وقب * ومن شر النفاثات في العقد * ومن شر حاسد إذا حسد﴾",
-        count: 1
-      },
-      {
-        text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الناس * ملك الناس * إله الناس * من شر الوسواس الخناس * الذي يوسوس في صدور الناس * من الجنة والناس﴾",
-        count: 1
-      },
-      {
-        text: "﴿الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السموات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السموات والأرض ولا يؤوده حفظهما وهو العلي العظيم﴾",
-        count: 1
-      },
-      {
-        text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد يحيي ويميت وهو على كل شيء قدير",
-        count: 1
-      },
-      {
-        text: "اللهم إني أسألك علما نافعا، ورزقا طيبا، وعملا متقبلا",
-        count: 1
-      }
-    ];
+</div>
 
 
-    const today = new Date().toISOString().slice(0, 10);
+<script>
 
-    let savedData = JSON.parse(
-      localStorage.getItem("prayerAzkarProgress")
-    ) || {};
+/* ==================================================
+   🕌 أذكار الصلاة
+   ⚠️ الأذكار والأعداد محفوظة كما هي
+================================================== */
 
-    if (savedData.date !== today) {
-      savedData = {
-        date: today,
-        counters: {},
-        completed: {},
-        stars: 0
-      };
-      localStorage.setItem(
-        "prayerAzkarProgress",
-        JSON.stringify(savedData)
-      );
-    }
+const openingAzkar = [
 
-    let favorites =
-      JSON.parse(localStorage.getItem("favoriteAzkar")) || [];
+  {
+    text: "اللهم باعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم نقني من خطاياي كما ينقى الثوب الأبيض من الدنس، اللهم اغسلني من خطاياي، بالثلج والماء والبرد",
+    count: 1
+  },
 
+  {
+    text: "الله أكبر كبيرا، الله أكبر كبيرا، الله أكبر كبيرا، والحمد لله كثيرا، والحمد لله كثيرا، والحمد لله كثيرا، وسبحان الله بكرة وأصيلا. أعوذ بالله من الشيطان: من نفخه، ونفثه، وهمزه",
+    count: 1
+  }
 
-    function saveData() {
-      localStorage.setItem(
-        "prayerAzkarProgress",
-        JSON.stringify(savedData)
-      );
-    }
+];
 
 
-    function updateStars() {
-      document.getElementById("starCount").textContent =
-        savedData.stars;
-    }
+const afterPrayerAzkar = [
+
+  {
+    text: "أستغفر الله",
+    count: 3
+  },
+
+  {
+    text: "اللهم أنت السلام، ومنك السلام، تباركت يا ذا الجلال والإكرام",
+    count: 1
+  },
+
+  {
+    text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، اللهم لا مانع لما أعطيت، ولا معطي لما منعت، ولا ينفع ذا الجد منك الجد",
+    count: 1
+  },
+
+  {
+    text: "لا إله إلا الله وحده لا شريك له، له الملك، وله الحمد، وهو على كل شيء قدير. لا حول ولا قوة إلا بالله، لا إله إلا الله، ولا نعبد إلا إياه، له النعمة وله الفضل وله الثناء الحسن، لا إله إلا الله مخلصين له الدين ولو كره الكافرون",
+    count: 1
+  },
+
+  {
+    text: "سبحان الله، والحمد لله، والله أكبر",
+    count: 33
+  },
+
+  {
+    text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+    count: 1
+  },
+
+  {
+    text: "بسم الله الرحمن الرحيم ﴿قل هو الله أحد * الله الصمد * لم يلد ولم يولد * ولم يكن له كفوا أحد﴾",
+    count: 1
+  },
+
+  {
+    text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الفلق * من شر ما خلق * ومن شر غاسق إذا وقب * ومن شر النفاثات في العقد * ومن شر حاسد إذا حسد﴾",
+    count: 1
+  },
+
+  {
+    text: "بسم الله الرحمن الرحيم ﴿قل أعوذ برب الناس * ملك الناس * إله الناس * من شر الوسواس الخناس * الذي يوسوس في صدور الناس * من الجنة والناس﴾",
+    count: 1
+  },
+
+  {
+    text: "﴿الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم له ما في السموات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيء من علمه إلا بما شاء وسع كرسيه السموات والأرض ولا يؤوده حفظهما وهو العلي العظيم﴾",
+    count: 1
+  },
+
+  {
+    text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد يحيي ويميت وهو على كل شيء قدير",
+    count: 1
+  },
+
+  {
+    text: "اللهم إني أسألك علما نافعا، ورزقا طيبا، وعملا متقبلا",
+    count: 1
+  }
+
+];
 
 
-    function createAzkar(list, containerId, prefix) {
+/* ==================================================
+   📅 حفظ التقدم اليومي
+================================================== */
 
-      const container =
-        document.getElementById(containerId);
+function getToday() {
 
-      list.forEach((zekr, index) => {
+  const now = new Date();
 
-        const id = prefix + index;
+  const year = now.getFullYear();
 
-        if (savedData.counters[id] === undefined) {
-          savedData.counters[id] = 0;
-        }
+  const month =
+    String(now.getMonth() + 1).padStart(2, "0");
 
-        const card =
-          document.createElement("div");
+  const day =
+    String(now.getDate()).padStart(2, "0");
 
-        card.className = "zekr";
-
-        card.id = "card-" + id;
-
-        const isFavorite =
-          favorites.includes(zekr.text);
-
-        card.innerHTML = `
-
-          <p class="zekr-text">${zekr.text}</p>
-
-          <span class="count">
-            ${zekr.count === 1 ? "مرة واحدة" : zekr.count + " مرات"}
-          </span>
-
-          <div class="counter" id="counter-${id}">
-            ${savedData.counters[id]} / ${zekr.count}
-          </div>
-
-          <button
-            class="listen"
-            id="listen-${id}"
-            onclick="listenZekr('${id}', ${zekr.count})">
-            🔊 استمع
-          </button>
-
-          <button
-            class="repeat"
-            onclick="increaseCounter('${id}', ${zekr.count})">
-            ✅ قرأت الذكر
-          </button>
-
-          <button
-            class="favorite ${isFavorite ? "active" : ""}"
-            id="fav-${id}"
-            onclick="toggleFavorite('${id}')">
-            ${isFavorite ? "❤️ في المفضلة" : "🤍 أضف للمفضلة"}
-          </button>
-
-          <div
-            class="message"
-            id="message-${id}">
-          </div>
-        `;
-
-        container.appendChild(card);
-
-        if (savedData.completed[id]) {
-          card.classList.add("complete");
-        }
-
-      });
-    }
+  return `${year}-${month}-${day}`;
+}
 
 
-    function increaseCounter(id, max) {
+const today = getToday();
 
-      if (savedData.counters[id] >= max) {
-        return;
-      }
 
-      savedData.counters[id]++;
+let savedData =
+  JSON.parse(
+    localStorage.getItem("prayerAzkarProgress")
+  ) || {};
 
-      const counter =
-        document.getElementById("counter-" + id);
 
-      counter.textContent =
-        savedData.counters[id] + " / " + max;
+if (savedData.date !== today) {
 
-      if (savedData.counters[id] >= max) {
+  savedData = {
 
-        savedData.completed[id] = true;
+    date: today,
 
-        const card =
-          document.getElementById("card-" + id);
+    counters: {},
 
-        card.classList.add("complete");
+    completed: {},
 
-        const message =
-          document.getElementById("message-" + id);
+    stars: 0
 
-        message.textContent =
-          "🌟 أحسنت! أكملت هذا الذكر ❤️";
+  };
 
-        savedData.stars++;
+  localStorage.setItem(
+    "prayerAzkarProgress",
+    JSON.stringify(savedData)
+  );
 
-        updateStars();
+}
 
-        checkAllCompleted();
-      }
 
-      saveData();
+/* ==================================================
+   💾 حفظ البيانات
+================================================== */
+
+function saveData() {
+
+  localStorage.setItem(
+    "prayerAzkarProgress",
+    JSON.stringify(savedData)
+  );
+
+}
+
+
+/* ==================================================
+   ⭐ تحديث النجوم
+================================================== */
+
+function updateStars() {
+
+  document.getElementById("starCount")
+    .textContent = savedData.stars;
+
+}
+
+
+/* ==================================================
+   ❤️ المفضلة
+================================================== */
+
+let favorites =
+  JSON.parse(
+    localStorage.getItem("favoriteAzkar")
+  ) || [];
+
+
+/* ==================================================
+   إنشاء البطاقات
+================================================== */
+
+function createAzkar(list, containerId, prefix) {
+
+  const container =
+    document.getElementById(containerId);
+
+
+  list.forEach((zekr, index) => {
+
+    const id =
+      prefix + index;
+
+
+    if (
+      savedData.counters[id] === undefined
+    ) {
+
+      savedData.counters[id] = 0;
+
     }
 
 
-    function listenZekr(id, max) {
+    const card =
+      document.createElement("div");
 
-      const button =
-        document.getElementById("listen-" + id);
+    card.className = "zekr";
 
-      if (speechSynthesis.speaking) {
-        return;
-      }
+    card.id = "card-" + id;
+
+
+    const isFavorite =
+      favorites.includes(zekr.text);
+
+
+    card.innerHTML = `
+
+      <p class="zekr-text">
+        ${zekr.text}
+      </p>
+
+      <span class="required-count">
+
+        ${zekr.count === 1
+          ? "مرة واحدة"
+          : zekr.count + " مرات"}
+
+      </span>
+
+      <div
+        class="counter"
+        id="counter-${id}">
+
+        ${savedData.counters[id]} / ${zekr.count}
+
+      </div>
+
+      <div class="controls">
+
+        <button
+          class="listen"
+          id="listen-${id}"
+          onclick="listenZekr('${id}', ${zekr.count})">
+
+          🔊 استمع
+
+        </button>
+
+
+        <button
+          class="repeat"
+          onclick="increaseCounter('${id}', ${zekr.count})">
+
+          ✅ قرأت الذكر
+
+        </button>
+
+
+        <button
+          class="favorite ${isFavorite ? "active" : ""}"
+          id="fav-${id}"
+          onclick="toggleFavorite('${id}')">
+
+          ${isFavorite
+            ? "❤️ في المفضلة"
+            : "🤍 أضف للمفضلة"}
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="message"
+        id="message-${id}">
+
+      </div>
+
+    `;
+
+
+    container.appendChild(card);
+
+
+    if (savedData.completed[id]) {
+
+      card.classList.add("complete");
+
+      document.getElementById(
+        "message-" + id
+      ).textContent =
+        "🌟 أحسنت يا بطل! أكملت هذا الذكر ❤️";
+
+    }
+
+  });
+
+}
+
+
+/* ==================================================
+   ⭐ زيادة العداد
+================================================== */
+
+function increaseCounter(id, max) {
+
+  if (
+    savedData.counters[id] >= max
+  ) {
+
+    return;
+
+  }
+
+
+  savedData.counters[id]++;
+
+
+  const counter =
+    document.getElementById(
+      "counter-" + id
+    );
+
+
+  counter.textContent =
+    savedData.counters[id] +
+    " / " +
+    max;
+
+
+  /* اكتمال الذكر */
+
+  if (
+    savedData.counters[id] === max
+  ) {
+
+    /* منع احتساب النجمة مرة ثانية */
+
+    if (!savedData.completed[id]) {
+
+      savedData.completed[id] = true;
+
 
       const card =
-        document.getElementById("card-" + id);
-
-      const text =
-        card.querySelector(".zekr-text").innerText;
-
-      const utterance =
-        new SpeechSynthesisUtterance(text);
-
-      utterance.lang = "ar-SA";
-      utterance.rate = 0.85;
-      utterance.pitch = 1;
-
-      button.disabled = true;
-      button.textContent = "🔊 جاري القراءة...";
-
-      utterance.onend = function () {
-
-        button.disabled = false;
-        button.textContent = "🔊 استمع";
-
-        increaseCounter(id, max);
-      };
-
-      utterance.onerror = function () {
-
-        button.disabled = false;
-        button.textContent = "🔊 استمع";
-      };
-
-      speechSynthesis.speak(utterance);
-    }
-
-
-    function toggleFavorite(id) {
-
-      const allAzkar =
-        [...openingAzkar, ...afterPrayerAzkar];
-
-      const index =
-        id.startsWith("opening")
-          ? parseInt(id.replace("opening", ""))
-          : openingAzkar.length +
-            parseInt(id.replace("after", ""));
-
-      const zekr =
-        allAzkar[index];
-
-      const button =
-        document.getElementById("fav-" + id);
-
-      const position =
-        favorites.indexOf(zekr.text);
-
-      if (position === -1) {
-
-        favorites.push(zekr.text);
-
-        button.classList.add("active");
-
-        button.textContent =
-          "❤️ في المفضلة";
-
-      } else {
-
-        favorites.splice(position, 1);
-
-        button.classList.remove("active");
-
-        button.textContent =
-          "🤍 أضف للمفضلة";
-      }
-
-      localStorage.setItem(
-        "favoriteAzkar",
-        JSON.stringify(favorites)
-      );
-    }
-
-
-    function checkAllCompleted() {
-
-      const total =
-        openingAzkar.length +
-        afterPrayerAzkar.length;
-
-      let completed = 0;
-
-      Object.keys(savedData.completed)
-        .forEach(key => {
-
-          if (savedData.completed[key]) {
-            completed++;
-          }
-
-        });
-
-      if (completed >= total) {
-
         document.getElementById(
-          "finishMessage"
-        ).style.display = "block";
+          "card-" + id
+        );
 
-      }
+
+      card.classList.add("complete");
+
+
+      const message =
+        document.getElementById(
+          "message-" + id
+        );
+
+
+      message.textContent =
+        "🌟 أحسنت يا بطل! أكملت هذا الذكر ❤️";
+
+
+      /* نجمة واحدة فقط */
+
+      savedData.stars++;
+
+
+      updateStars();
+
+
+      saveData();
+
+
+      /* تشجيع صوتي */
+
+      setTimeout(() => {
+
+        speakText(
+          "أحسنت يا بطل!"
+        );
+
+      }, 150);
+
+
+      checkAllCompleted();
+
+    }
+
+  }
+
+
+  saveData();
+
+}
+
+
+/* ==================================================
+   🔊 الاستماع للذكر
+   انتهاء الصوت = تكرار واحد فقط
+================================================== */
+
+let speakingId = null;
+
+let speechVersion = 0;
+
+
+function listenZekr(id, max) {
+
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
+    alert(
+      "عذرًا، جهازك لا يدعم تشغيل الصوت."
+    );
+
+    return;
+
+  }
+
+
+  /* منع الضغط أثناء القراءة */
+
+  if (speakingId !== null) {
+
+    return;
+
+  }
+
+
+  window.speechSynthesis.cancel();
+
+
+  speechVersion++;
+
+  const currentVersion =
+    speechVersion;
+
+
+  speakingId = id;
+
+
+  const button =
+    document.getElementById(
+      "listen-" + id
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "🔊 جاري القراءة...";
+
+
+  const card =
+    document.getElementById(
+      "card-" + id
+    );
+
+
+  const text =
+    card.querySelector(
+      ".zekr-text"
+    ).innerText;
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+
+  utterance.lang = "ar-SA";
+
+  utterance.rate = 0.78;
+
+  utterance.pitch = 1.05;
+
+  utterance.volume = 1;
+
+
+  utterance.onend = function() {
+
+    if (
+      currentVersion !== speechVersion
+    ) {
+
+      return;
+
     }
 
 
-    createAzkar(
-      openingAzkar,
-      "openingAzkar",
-      "opening"
+    speakingId = null;
+
+
+    button.disabled = false;
+
+    button.textContent =
+      "🔊 استمع";
+
+
+    /* احتساب مرة واحدة */
+
+    increaseCounter(
+      id,
+      max
     );
 
-    createAzkar(
-      afterPrayerAzkar,
-      "afterPrayerAzkar",
-      "after"
+  };
+
+
+  utterance.onerror = function() {
+
+    if (
+      currentVersion !== speechVersion
+    ) {
+
+      return;
+
+    }
+
+
+    speakingId = null;
+
+
+    button.disabled = false;
+
+    button.textContent =
+      "🔊 استمع";
+
+  };
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* ==================================================
+   🏆 التشجيع الصوتي
+================================================== */
+
+function speakText(text) {
+
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
+    return;
+
+  }
+
+
+  window.speechSynthesis.cancel();
+
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+
+  utterance.lang = "ar-SA";
+
+  utterance.rate = 0.85;
+
+  utterance.pitch = 1.15;
+
+  utterance.volume = 1;
+
+
+  window.speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+/* ==================================================
+   ❤️ المفضلة
+================================================== */
+
+function toggleFavorite(id) {
+
+  const allAzkar = [
+    ...openingAzkar,
+    ...afterPrayerAzkar
+  ];
+
+
+  let index;
+
+
+  if (
+    id.startsWith("opening")
+  ) {
+
+    index =
+      parseInt(
+        id.replace("opening", "")
+      );
+
+  } else {
+
+    index =
+      openingAzkar.length +
+      parseInt(
+        id.replace("after", "")
+      );
+
+  }
+
+
+  const zekr =
+    allAzkar[index];
+
+
+  const button =
+    document.getElementById(
+      "fav-" + id
     );
 
-    updateStars();
 
-    checkAllCompleted();
+  const position =
+    favorites.indexOf(
+      zekr.text
+    );
 
-  </script>
+
+  if (position === -1) {
+
+    favorites.push(
+      zekr.text
+    );
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    button.textContent =
+      "❤️ في المفضلة";
+
+
+    alert(
+      "❤️ تمت إضافة الذكر إلى المفضلة"
+    );
+
+  } else {
+
+    favorites.splice(
+      position,
+      1
+    );
+
+
+    button.classList.remove(
+      "active"
+    );
+
+
+    button.textContent =
+      "🤍 أضف للمفضلة";
+
+
+    alert(
+      "💔 تمت إزالة الذكر من المفضلة"
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "favoriteAzkar",
+    JSON.stringify(favorites)
+  );
+
+}
+
+
+/* ==================================================
+   🎉 فحص إكمال جميع الأذكار
+================================================== */
+
+function checkAllCompleted() {
+
+  const allAzkar = [
+    ...openingAzkar,
+    ...afterPrayerAzkar
+  ];
+
+
+  const completed =
+    allAzkar.every(
+      (zekr, index) => {
+
+        const id =
+          index < openingAzkar.length
+            ? "opening" + index
+            : "after" +
+              (index - openingAzkar.length);
+
+
+        return (
+          savedData.completed[id] === true
+        );
+
+      }
+    );
+
+
+  const finish =
+    document.getElementById(
+      "finishMessage"
+    );
+
+
+  if (completed) {
+
+    finish.style.display =
+      "block";
+
+  } else {
+
+    finish.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* ==================================================
+   🏠 العودة
+================================================== */
+
+function goBack() {
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* ==================================================
+   🚀 تشغيل الصفحة
+================================================== */
+
+createAzkar(
+  openingAzkar,
+  "openingAzkar",
+  "opening"
+);
+
+
+createAzkar(
+  afterPrayerAzkar,
+  "afterPrayerAzkar",
+  "after"
+);
+
+
+updateStars();
+
+checkAllCompleted();
+
+saveData();
+
+</script>
 
 </body>
 </html>
