@@ -1,7 +1,14 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#087f75">  <title>أذكار الصباح</title>  <style>
+  <meta name="theme-color" content="#087f75">
+
+  <title>أذكار الصباح</title>
+
+  <style>
 
     * {
       box-sizing: border-box;
@@ -28,13 +35,11 @@
       min-height: 100vh;
     }
 
-
     .app {
       max-width: 600px;
       margin: auto;
       padding-bottom: 40px;
     }
-
 
     .header {
       text-align: center;
@@ -53,7 +58,6 @@
         0 12px 30px rgba(0,0,0,.30);
     }
 
-
     .icon {
       font-size: 60px;
 
@@ -63,18 +67,15 @@
         );
     }
 
-
     h1 {
       margin: 10px 0 5px;
       font-size: 30px;
     }
 
-
     .subtitle {
       opacity: .9;
       font-size: 15px;
     }
-
 
     .progress {
       margin: 20px;
@@ -91,13 +92,11 @@
         0 10px 25px rgba(0,0,0,.20);
     }
 
-
     .count {
       font-size: 24px;
       font-weight: bold;
       margin-top: 5px;
     }
-
 
     .zekr {
       margin: 15px;
@@ -119,14 +118,12 @@
         .3s ease;
     }
 
-
     .zekr.completed {
       opacity: .65;
 
       border:
         2px solid rgba(159,245,223,.5);
     }
-
 
     .zekr-text {
       font-size: 21px;
@@ -137,7 +134,6 @@
       font-weight: bold;
     }
 
-
     .repeat-info {
       text-align: center;
 
@@ -147,7 +143,6 @@
 
       font-size: 14px;
     }
-
 
     .controls {
       display: flex;
@@ -160,7 +155,6 @@
 
       flex-wrap: wrap;
     }
-
 
     button {
       border: none;
@@ -188,18 +182,15 @@
         opacity .2s ease;
     }
 
-
     button:active {
       transform:
         scale(.94);
     }
 
-
     button:disabled {
       opacity: .6;
       cursor: default;
     }
-
 
     .counter {
       background:
@@ -208,19 +199,16 @@
       min-width: 90px;
     }
 
-
     .listen {
       background:
         rgba(255,193,7,.22);
     }
-
 
     .favorite {
       font-size: 22px;
       padding-left: 15px;
       padding-right: 15px;
     }
-
 
     .back {
       display: block;
@@ -230,7 +218,6 @@
       background:
         rgba(255,255,255,.12);
     }
-
 
     .finish-message {
       display: none;
@@ -256,7 +243,6 @@
       line-height: 1.8;
     }
 
-
     .section-title {
       text-align: center;
 
@@ -267,50 +253,83 @@
       opacity: .9;
     }
 
-  </style></head><body><div class="app">  <header class="header"><div class="icon">
-  ☀️
-</div>
+  </style>
+</head>
 
-<h1>
-  أذكار الصباح
-</h1>
+<body>
 
-<div class="subtitle">
-  ابدأ يومك بذكر الله 🌿
-</div>
+<div class="app">
 
-  </header>  <div class="progress">🌟 نجومك اليوم
+  <header class="header">
 
-<div class="count">
+    <div class="icon">
+      ☀️
+    </div>
 
-  <span id="stars">
-    0
-  </span>
+    <h1>
+      أذكار الصباح
+    </h1>
 
-  ⭐
+    <div class="subtitle">
+      ابدأ يومك بذكر الله 🌿
+    </div>
 
-</div>
+  </header>
 
-  </div>  <div class="section-title">
+
+  <div class="progress">
+
+    🌟 نجومك اليوم
+
+    <div class="count">
+
+      <span id="stars">
+        0
+      </span>
+
+      ⭐
+
+    </div>
+
+  </div>
+
+
+  <div class="section-title">
     🌅 أذكار الصباح
-  </div>  <div id="azkar"></div>  <div id="finishMessage"
-       class="finish-message">🎉 أحسنت يا بطل! 🌟
+  </div>
 
-<br>
 
-لقد أكملت أذكار الصباح
+  <div id="azkar"></div>
 
-<br>
 
-بارك الله فيك ❤️
+  <div id="finishMessage"
+       class="finish-message">
 
-  </div><button
-class="back"
-onclick="goBack()">
+    🎉 أحسنت يا بطل! 🌟
 
-🏠 العودة للرئيسية
+    <br>
 
-  </button></div><script>
+    لقد أكملت أذكار الصباح
+
+    <br>
+
+    بارك الله فيك ❤️
+
+  </div>
+
+
+  <button
+    class="back"
+    onclick="goBack()">
+
+    🏠 العودة للرئيسية
+
+  </button>
+
+</div>
+
+
+<script>
 
 
 /* ==================================================
@@ -321,8 +340,35 @@ const azkar = [
 
   {
     text:
-      "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
+      "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَئُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ.",
+    count: 1
+  },
 
+
+  {
+    text:
+      "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ، قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ.",
+    count: 3
+  },
+
+
+  {
+    text:
+      "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ، قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ.",
+    count: 3
+  },
+
+
+  {
+    text:
+      "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ، قُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ، إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ.",
+    count: 3
+  },
+
+
+  {
+    text:
+      "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.",
     count: 1
   },
 
@@ -330,15 +376,34 @@ const azkar = [
   {
     text:
       "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.",
-
     count: 1
   },
 
 
   {
     text:
-      "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.",
+      "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+    count: 1
+  },
 
+
+  {
+    text:
+      "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.",
+    count: 4
+  },
+
+
+  {
+    text:
+      "اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.",
+    count: 1
+  },
+
+
+  {
+    text:
+      "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.",
     count: 3
   },
 
@@ -346,66 +411,105 @@ const azkar = [
   {
     text:
       "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
-
     count: 7
   },
 
 
   {
     text:
-      "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.",
-
-    count: 100
-  },
-
-
-  /* إضافات من أذكار الصباح والمساء */
-
-  {
-    text:
-      "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ، مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ، وَلَا يَئُودُهُ حِفْظُهُمَا، وَهُوَ الْعَلِيُّ الْعَظِيمُ.",
-
+      "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.",
     count: 1
   },
 
 
   {
     text:
-      "قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ.",
+      "اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا، أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ.",
+    count: 1
+  },
 
+
+  {
+    text:
+      "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.",
     count: 3
   },
 
 
   {
     text:
-      "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ.",
-
+      "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا.",
     count: 3
   },
 
 
   {
     text:
-      "قُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ، إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ.",
-
-    count: 3
+      "يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.",
+    count: 1
   },
 
 
   {
     text:
-      "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ.",
+      "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ: فَتْحَهُ، وَنَصْرَهُ، وَنُورَهُ، وَبَرَكَتَهُ، وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ.",
+    count: 1
+  },
 
+
+  {
+    text:
+      "أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ، حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.",
+    count: 1
+  },
+
+
+  {
+    text:
+      "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.",
+    count: 100
+  },
+
+
+  {
+    text:
+      "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
     count: 10
   },
 
 
   {
     text:
-      "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ.",
+      "لَا إِلَهَ إِلَّا اللَّهُ، وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
+    count: 100
+  },
 
+
+  {
+    text:
+      "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ: عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.",
+    count: 3
+  },
+
+
+  {
+    text:
+      "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.",
     count: 1
+  },
+
+
+  {
+    text:
+      "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.",
+    count: 100
+  },
+
+
+  {
+    text:
+      "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ.",
+    count: 10
   }
 
 ];
@@ -419,7 +523,6 @@ let stars =
   Number(
     localStorage.getItem("childStars")
   ) || 0;
-
 
 document.getElementById("stars")
   .textContent = stars;
@@ -441,7 +544,6 @@ let savedDay =
   localStorage.getItem(
     "morningAzkarDay"
   );
-
 
 let counters = {};
 
@@ -486,14 +588,11 @@ azkar.forEach(
     const card =
       document.createElement("div");
 
-
     card.className =
       "zekr";
 
-
     const current =
       Number(counters[index]) || 0;
-
 
     if (current >= zekr.count) {
 
@@ -502,7 +601,6 @@ azkar.forEach(
       );
 
     }
-
 
     card.innerHTML = `
 
@@ -525,7 +623,6 @@ azkar.forEach(
 
         </button>
 
-
         <button
           class="counter"
           id="counter-${index}"
@@ -534,7 +631,6 @@ azkar.forEach(
           ${current} / ${zekr.count}
 
         </button>
-
 
         <button
           class="favorite"
@@ -546,7 +642,6 @@ azkar.forEach(
 
       </div>
     `;
-
 
     container.appendChild(card);
 
@@ -569,7 +664,6 @@ let speechVersion = 0;
 
 function speakZekr(index) {
 
-
   if (
     !("speechSynthesis" in window)
   ) {
@@ -582,12 +676,6 @@ function speakZekr(index) {
 
   }
 
-
-  /*
-   * إذا كان هذا الذكر يُقرأ حاليًا
-   * لا نسمح بتكرار الضغط.
-   */
-
   if (
     speakingIndex === index
   ) {
@@ -596,77 +684,51 @@ function speakZekr(index) {
 
   }
 
-
-  /*
-   * إلغاء أي قراءة أخرى.
-   */
-
   window.speechSynthesis.cancel();
 
-
   speechVersion++;
-
 
   const currentVersion =
     speechVersion;
 
-
   speakingIndex = index;
-
 
   const listenButton =
     document.getElementById(
       "listen-" + index
     );
 
-
   listenButton.textContent =
     "🔊 جاري القراءة...";
 
-
   listenButton.disabled =
     true;
-
 
   const utterance =
     new SpeechSynthesisUtterance(
       azkar[index].text
     );
 
-
   utterance.lang =
     "ar-SA";
-
 
   utterance.rate =
     0.75;
 
-
   utterance.pitch =
     1.05;
-
 
   utterance.volume =
     1;
 
 
   /*
-   * ⭐ هذه أهم نقطة:
-   *
-   * لا نزيد العداد عند الضغط.
-   *
-   * الزيادة تحدث فقط عندما
-   * ينتهي الصوت فعلًا.
+   * العداد يزيد فقط بعد انتهاء
+   * قراءة الذكر بالكامل.
    */
 
   utterance.onend =
     function() {
-
-
-      /*
-       * نتأكد أن القراءة
-       * الحالية وليست قراءة قديمة.
-       */
 
       if (
         currentVersion !==
@@ -677,28 +739,19 @@ function speakZekr(index) {
 
       }
 
-
       speakingIndex =
         null;
-
 
       listenButton.textContent =
         "🔊 استمع";
 
-
       listenButton.disabled =
         false;
-
 
       const counterButton =
         document.getElementById(
           "counter-" + index
         );
-
-
-      /*
-       * احتساب مرة واحدة.
-       */
 
       countZekr(
         index,
@@ -711,7 +764,6 @@ function speakZekr(index) {
   utterance.onerror =
     function() {
 
-
       if (
         currentVersion !==
         speechVersion
@@ -721,14 +773,11 @@ function speakZekr(index) {
 
       }
 
-
       speakingIndex =
         null;
 
-
       listenButton.textContent =
         "🔊 استمع";
-
 
       listenButton.disabled =
         false;
@@ -748,7 +797,6 @@ function speakZekr(index) {
 
 function encouragement() {
 
-
   const messages = [
 
     "أحسنت يا بطل! 🌟",
@@ -761,7 +809,6 @@ function encouragement() {
 
   ];
 
-
   const message =
     messages[
       Math.floor(
@@ -769,7 +816,6 @@ function encouragement() {
         messages.length
       )
     ];
-
 
   speakText(message);
 
@@ -782,7 +828,6 @@ function encouragement() {
 
 function speakText(text) {
 
-
   if (
     !("speechSynthesis" in window)
   ) {
@@ -791,31 +836,24 @@ function speakText(text) {
 
   }
 
-
   window.speechSynthesis.cancel();
-
 
   const utterance =
     new SpeechSynthesisUtterance(
       text
     );
 
-
   utterance.lang =
     "ar-SA";
-
 
   utterance.rate =
     0.85;
 
-
   utterance.pitch =
     1.15;
 
-
   utterance.volume =
     1;
-
 
   window.speechSynthesis
     .speak(utterance);
@@ -832,7 +870,6 @@ function countZekr(
   button
 ) {
 
-
   if (
     !counters[index]
   ) {
@@ -841,7 +878,6 @@ function countZekr(
       0;
 
   }
-
 
   /*
    * لا نتجاوز العدد المطلوب.
@@ -856,7 +892,6 @@ function countZekr(
 
   }
 
-
   counters[index]++;
 
 
@@ -866,10 +901,6 @@ function countZekr(
     azkar[index].count;
 
 
-  /*
-   * حفظ التقدم.
-   */
-
   localStorage.setItem(
     "morningAzkarCounters",
     JSON.stringify(counters)
@@ -877,7 +908,7 @@ function countZekr(
 
 
   /*
-   * ⭐ عند إكمال الذكر
+   * عند إكمال الذكر
    */
 
   if (
@@ -885,11 +916,9 @@ function countZekr(
     azkar[index].count
   ) {
 
-
     const card =
       button.parentElement
         .parentElement;
-
 
     card.classList.add(
       "completed"
@@ -913,27 +942,22 @@ function countZekr(
       ) !== "1"
     ) {
 
-
       stars++;
-
 
       localStorage.setItem(
         "childStars",
         stars
       );
 
-
       localStorage.setItem(
         starKey,
         "1"
       );
 
-
       document.getElementById(
         "stars"
       ).textContent =
         stars;
-
 
       encouragement();
 
@@ -954,25 +978,20 @@ function countZekr(
 
     if (completed) {
 
-
       setTimeout(
         function() {
-
 
           const finish =
             document.getElementById(
               "finishMessage"
             );
 
-
           finish.style.display =
             "block";
-
 
           speakText(
             "أحسنت يا بطل! بارك الله فيك، لقد أكملت أذكار الصباح."
           );
-
 
         },
         1000
@@ -991,7 +1010,6 @@ function countZekr(
 
 function favoriteZekr(index) {
 
-
   let favorites =
     JSON.parse(
       localStorage.getItem(
@@ -1006,11 +1024,9 @@ function favoriteZekr(index) {
     )
   ) {
 
-
     favorites.push(
       azkar[index].text
     );
-
 
     localStorage.setItem(
       "favoriteAzkar",
@@ -1019,14 +1035,11 @@ function favoriteZekr(index) {
       )
     );
 
-
     alert(
       "❤️ تمت إضافة الذكر إلى المفضلة"
     );
 
-
   } else {
-
 
     alert(
       "❤️ الذكر موجود بالفعل في المفضلة"
@@ -1056,14 +1069,12 @@ function goBack() {
 
 function checkFinished() {
 
-
   const completed =
     azkar.every(
       (item, i) =>
         Number(counters[i]) ===
         item.count
     );
-
 
   if (completed) {
 
@@ -1080,5 +1091,7 @@ function checkFinished() {
 checkFinished();
 
 
-</script></body>
+</script>
+
+</body>
 </html>
