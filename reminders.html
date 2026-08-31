@@ -1,403 +1,745 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087f75">  <title>تذكير الأذكار 🔔</title>  <style>
 
-  <title>التذكيرات 🔔</title>
+    * {
+      box-sizing: border-box;
+    }
 
-  <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
-      color: #333;
+      font-family: Arial, Tahoma, sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(255,255,255,.15),
+          transparent 25%
+        ),
+        linear-gradient(
+          145deg,
+          #062e2b,
+          #0b5d58 45%,
+          #092f3b
+        );
+
+      color: white;
+      min-height: 100vh;
+    }
+
+
+    .app {
+      max-width: 600px;
+      margin: auto;
+      padding-bottom: 50px;
+    }
+
+
+    /* ===== الرأس ===== */
+
+    .header {
+      position: relative;
+      overflow: hidden;
+
+      text-align: center;
+
+      padding: 32px 15px 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #0b766e,
+          #064b55
+        );
+
+      border-radius: 0 0 45px 45px;
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+    }
+
+
+    .header::before {
+      content: "";
+
+      position: absolute;
+
+      width: 170px;
+      height: 170px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.08);
+
+      top: -80px;
+      right: -45px;
+    }
+
+
+    .header-icon {
+      position: relative;
+      z-index: 2;
+
+      font-size: 60px;
+
+      filter:
+        drop-shadow(
+          0 8px 7px rgba(0,0,0,.35)
+        );
+    }
+
+
+    h1 {
+      position: relative;
+      z-index: 2;
+
+      margin: 10px 0 6px;
+
+      font-size: 30px;
+      font-weight: 900;
+
+      text-shadow:
+        0 4px 8px rgba(0,0,0,.3);
+    }
+
+
+    .subtitle {
+      position: relative;
+      z-index: 2;
+
+      display: inline-block;
+
+      margin-top: 8px;
+
+      padding: 9px 17px;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.12);
+
+      border:
+        1px solid rgba(255,255,255,.18);
+
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+
+    /* ===== الحالة ===== */
+
+    .status-card {
+      margin: 20px 15px;
+
+      padding: 18px;
+
+      text-align: center;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.10);
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.25);
+
+      backdrop-filter: blur(10px);
+    }
+
+
+    .status-icon {
+      font-size: 35px;
+      margin-bottom: 7px;
+    }
+
+
+    #status {
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.8;
+    }
+
+
+    .success {
+      color: #9ff5df;
+    }
+
+
+    .warning {
+      color: #ffe082;
+    }
+
+
+    /* ===== البطاقات ===== */
+
+    .card {
+      margin: 16px 15px;
+
+      padding: 22px 18px;
+
+      border-radius: 27px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.16),
+          rgba(255,255,255,.07)
+        );
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
+      box-shadow:
+        0 12px 25px rgba(0,0,0,.25),
+        inset 0 1px 2px rgba(255,255,255,.12);
+
+      backdrop-filter: blur(10px);
+
       text-align: center;
     }
 
-    header {
-      background: #4caf50;
-      color: white;
-      padding: 22px;
-      font-size: 26px;
-      font-weight: bold;
-      border-radius: 0 0 25px 25px;
-    }
-
-    .container {
-      padding: 25px 15px;
-    }
-
-    .card {
-      background: white;
-      margin: 18px auto;
-      padding: 22px;
-      max-width: 400px;
-      border-radius: 22px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
 
     .icon {
-      font-size: 45px;
+      font-size: 48px;
+
+      filter:
+        drop-shadow(
+          0 7px 6px rgba(0,0,0,.3)
+        );
     }
+
 
     h2 {
       margin: 10px 0;
-      color: #388e3c;
+
+      font-size: 23px;
     }
 
+
+    .description {
+      font-size: 14px;
+
+      opacity: .85;
+
+      margin-bottom: 15px;
+
+      line-height: 1.7;
+    }
+
+
+    /* ===== الوقت ===== */
+
     input[type="time"] {
+      display: block;
+
       width: 80%;
-      padding: 12px;
-      margin: 12px 0;
-      border: 2px solid #a5d6a7;
-      border-radius: 12px;
-      font-size: 20px;
+
+      max-width: 250px;
+
+      margin: 15px auto;
+
+      padding: 13px;
+
+      border: 2px solid
+        rgba(159,245,223,.5);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.95);
+
+      color: #174d48;
+
+      font-size: 21px;
+
+      font-weight: bold;
+
       text-align: center;
     }
 
+
+    /* ===== الأزرار ===== */
+
     button {
       border: none;
-      padding: 12px 25px;
-      border-radius: 15px;
-      color: white;
-      font-size: 17px;
+
       cursor: pointer;
+
+      color: white;
+
+      border-radius: 18px;
+
+      padding: 12px 20px;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      box-shadow:
+        0 7px 15px rgba(0,0,0,.20);
+
+      transition: .2s;
     }
+
+
+    button:active {
+      transform: scale(.94);
+    }
+
 
     .save {
-      background: #4caf50;
+      background: #087f75;
     }
 
-    .back {
-      background: #607d8b;
-      margin-top: 10px;
-    }
-
-    .notification {
-      display: block;
-      width: 90%;
-      max-width: 350px;
-      margin: 20px auto;
-      padding: 14px 24px;
-      border-radius: 15px;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-    }
-
-    .test {
-      background: #1565c0;
-    }
 
     .enable {
-      background: #2e7d32;
+      display: block;
+
+      width: calc(100% - 30px);
+
+      margin: 22px 15px;
+
+      padding: 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #0b8f82,
+          #087065
+        );
+
+      font-size: 18px;
     }
 
-    #status {
-      margin-top: 20px;
-      font-size: 17px;
-      color: #388e3c;
-      font-weight: bold;
-      min-height: 25px;
+
+    .test {
+      display: block;
+
+      width: calc(100% - 30px);
+
+      margin: 15px;
+
+      background:
+        rgba(33,150,243,.25);
     }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    🔔 تذكيراتي
-  </header>
-
-  <div class="container">
-
-    <!-- أذكار الصباح -->
-    <div class="card">
-
-      <div class="icon">🌅</div>
-
-      <h2>أذكار الصباح</h2>
-
-      <input type="time" id="morningTime">
-
-      <br>
-
-      <button
-        class="save"
-        onclick="saveMorning()">
-        💾 حفظ التذكير
-      </button>
-
-    </div>
 
 
-    <!-- أذكار المساء -->
-    <div class="card">
+    .back {
+      display: block;
 
-      <div class="icon">🌙</div>
+      width: calc(100% - 30px);
 
-      <h2>أذكار المساء</h2>
+      margin: 25px 15px;
 
-      <input type="time" id="eveningTime">
-
-      <br>
-
-      <button
-        class="save"
-        onclick="saveEvening()">
-        💾 حفظ التذكير
-      </button>
-
-    </div>
+      background:
+        rgba(255,255,255,.12);
+    }
 
 
-    <!-- أذكار النوم -->
-    <div class="card">
+    /* ===== معلومات ===== */
 
-      <div class="icon">😴</div>
+    .info {
+      margin: 20px 15px;
 
-      <h2>أذكار النوم</h2>
+      padding: 17px;
 
-      <input type="time" id="sleepTime">
+      border-radius: 22px;
 
-      <br>
+      background:
+        rgba(255,255,255,.08);
 
-      <button
-        class="save"
-        onclick="saveSleep()">
-        💾 حفظ التذكير
-      </button>
+      text-align: center;
 
-    </div>
+      font-size: 14px;
 
+      line-height: 1.9;
 
-    <div id="status"></div>
-
-
-    <!-- اختبار إشعار -->
-    <button
-      class="notification test"
-      onclick="testNotification()">
-      🔔 اختبار إشعار الآن
-    </button>
+      opacity: .9;
+    }
 
 
-    <!-- تفعيل الإشعارات -->
-    <button
-      class="notification enable"
-      onclick="enableNotifications()">
-      🔔 تفعيل الإشعارات
-    </button>
+    @media (max-width: 400px) {
 
-
-    <!-- العودة -->
-    <button
-      class="notification back"
-      onclick="history.back()">
-      ↩️ العودة
-    </button>
-
-  </div>
-
-
-  <!-- وظائف التذكيرات -->
-  <script>
-
-    // تحميل الأوقات المحفوظة
-
-    document.getElementById("morningTime").value =
-      localStorage.getItem("morningReminder") || "";
-
-    document.getElementById("eveningTime").value =
-      localStorage.getItem("eveningReminder") || "";
-
-    document.getElementById("sleepTime").value =
-      localStorage.getItem("sleepReminder") || "";
-
-
-    // حفظ أذكار الصباح
-
-    function saveMorning() {
-
-      const time =
-        document.getElementById("morningTime").value;
-
-      if (!time) {
-
-        alert("اختاري وقت أذكار الصباح 🌅");
-
-        return;
+      h1 {
+        font-size: 27px;
       }
 
-      localStorage.setItem(
-        "morningReminder",
-        time
-      );
-
-      document.getElementById("status").innerText =
-        "✅ تم حفظ تذكير أذكار الصباح";
-
-    }
-
-
-    // حفظ أذكار المساء
-
-    function saveEvening() {
-
-      const time =
-        document.getElementById("eveningTime").value;
-
-      if (!time) {
-
-        alert("اختاري وقت أذكار المساء 🌙");
-
-        return;
+      .card {
+        padding: 20px 14px;
       }
 
-      localStorage.setItem(
-        "eveningReminder",
-        time
-      );
-
-      document.getElementById("status").innerText =
-        "✅ تم حفظ تذكير أذكار المساء";
-
-    }
-
-
-    // حفظ أذكار النوم
-
-    function saveSleep() {
-
-      const time =
-        document.getElementById("sleepTime").value;
-
-      if (!time) {
-
-        alert("اختاري وقت أذكار النوم 😴");
-
-        return;
+      input[type="time"] {
+        width: 90%;
       }
 
-      localStorage.setItem(
-        "sleepReminder",
-        time
-      );
-
-      document.getElementById("status").innerText =
-        "✅ تم حفظ تذكير أذكار النوم";
-
     }
 
-  </script>
+  </style></head><body><div class="app">  <!-- الرأس -->  <header class="header"><div class="header-icon">
+  🔔
+</div>
+
+<h1>
+  تذكير الأذكار
+</h1>
+
+<div class="subtitle">
+  لا تنسَ ذكر الله 🌿❤️
+</div>
+
+  </header>  <!-- حالة الإشعارات -->  <div class="status-card"><div class="status-icon">
+  🔔
+</div>
+
+<div id="status" class="warning">
+  لم يتم تفعيل الإشعارات بعد
+</div>
+
+  </div>  <!-- أذكار الصباح -->  <div class="card"><div class="icon">
+  🌅
+</div>
+
+<h2>
+  أذكار الصباح
+</h2>
+
+<div class="description">
+  اختاري الوقت الذي تريدين فيه تذكيرك بأذكار الصباح 🌷
+</div>
+
+<input
+  type="time"
+  id="morningTime"
+>
+
+<button
+  class="save"
+  onclick="saveMorning()">
+
+  💾 حفظ التذكير
+
+</button>
+
+  </div>  <!-- أذكار المساء -->  <div class="card"><div class="icon">
+  🌙
+</div>
+
+<h2>
+  أذكار المساء
+</h2>
+
+<div class="description">
+  اختاري الوقت الذي تريدين فيه تذكيرك بأذكار المساء 🌷
+</div>
+
+<input
+  type="time"
+  id="eveningTime"
+>
+
+<button
+  class="save"
+  onclick="saveEvening()">
+
+  💾 حفظ التذكير
+
+</button>
+
+  </div>  <!-- أذكار النوم -->  <div class="card"><div class="icon">
+  😴
+</div>
+
+<h2>
+  أذكار النوم
+</h2>
+
+<div class="description">
+  اختاري الوقت الذي تريدين فيه تذكيرك بأذكار النوم 🌙
+</div>
+
+<input
+  type="time"
+  id="sleepTime"
+>
+
+<button
+  class="save"
+  onclick="saveSleep()">
+
+  💾 حفظ التذكير
+
+</button>
+
+  </div>  <!-- تفعيل الإشعارات --><button
+class="enable"
+onclick="enableNotifications()">
+
+🔔 تفعيل الإشعارات
+
+  </button>  <!-- اختبار --><button
+class="test"
+onclick="testNotification()">
+
+🧪 اختبار إشعار الآن
+
+  </button>  <div class="info">💡 بعد تفعيل الإشعارات، يمكن للهاتف استقبال
+تنبيهات الأذكار حتى عندما لا تكون الصفحة مفتوحة.
+
+  </div>  <!-- العودة --><button
+class="back"
+onclick="goBack()">
+
+🏠 العودة للرئيسية
+
+  </button></div><script>
+
+/* =====================================
+   🔔 تحميل الأوقات المحفوظة
+===================================== */
+
+document.getElementById("morningTime").value =
+  localStorage.getItem("morningReminder") || "";
 
 
-  <!-- Firebase Cloud Messaging -->
-
-  <script type="module">
-
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+document.getElementById("eveningTime").value =
+  localStorage.getItem("eveningReminder") || "";
 
 
-    import {
-      getMessaging,
-      getToken,
-      onMessage
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+document.getElementById("sleepTime").value =
+  localStorage.getItem("sleepReminder") || "";
 
 
-    // إعداد Firebase
+/* =====================================
+   🌅 حفظ الصباح
+===================================== */
 
-    const firebaseConfig = {
+function saveMorning() {
 
-      apiKey:
+  const time =
+    document.getElementById("morningTime").value;
+
+  if (!time) {
+
+    alert("اختاري وقت أذكار الصباح 🌅");
+
+    return;
+  }
+
+  localStorage.setItem(
+    "morningReminder",
+    time
+  );
+
+  showStatus(
+    "✅ تم حفظ تذكير أذكار الصباح 🌅",
+    "success"
+  );
+}
+
+
+/* =====================================
+   🌙 حفظ المساء
+===================================== */
+
+function saveEvening() {
+
+  const time =
+    document.getElementById("eveningTime").value;
+
+  if (!time) {
+
+    alert("اختاري وقت أذكار المساء 🌙");
+
+    return;
+  }
+
+  localStorage.setItem(
+    "eveningReminder",
+    time
+  );
+
+  showStatus(
+    "✅ تم حفظ تذكير أذكار المساء 🌙",
+    "success"
+  );
+}
+
+
+/* =====================================
+   😴 حفظ النوم
+===================================== */
+
+function saveSleep() {
+
+  const time =
+    document.getElementById("sleepTime").value;
+
+  if (!time) {
+
+    alert("اختاري وقت أذكار النوم 😴");
+
+    return;
+  }
+
+  localStorage.setItem(
+    "sleepReminder",
+    time
+  );
+
+  showStatus(
+    "✅ تم حفظ تذكير أذكار النوم 😴",
+    "success"
+  );
+}
+
+
+/* =====================================
+   💬 حالة الصفحة
+===================================== */
+
+function showStatus(message, type) {
+
+  const status =
+    document.getElementById("status");
+
+  status.textContent = message;
+
+  status.className = type;
+
+}
+
+
+/* =====================================
+   🏠 العودة
+===================================== */
+
+function goBack() {
+
+  window.location.href =
+    "index.html";
+
+}
+
+</script><!-- =====================================
+     🔥 Firebase Cloud Messaging
+===================================== --><script type="module">
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+  import {
+    getMessaging,
+    getToken,
+    onMessage
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+
+
+  /* =====================================
+     🔥 إعداد Firebase
+  ===================================== */
+
+  const firebaseConfig = {
+
+    apiKey:
         "AIzaSyAVXjifBL3sFF6n4CYy39ur4Al6L7J_KeQ",
 
-      authDomain:
-        "muslim-kids-azkar.firebaseapp.com",
+    authDomain:
+      "muslim-kids-azkar.firebaseapp.com",
 
-      projectId:
-        "muslim-kids-azkar",
+    projectId:
+      "muslim-kids-azkar",
 
-      storageBucket:
-        "muslim-kids-azkar.firebasestorage.app",
+    storageBucket:
+      "muslim-kids-azkar.firebasestorage.app",
 
-      messagingSenderId:
-        "204235175360",
+    messagingSenderId:
+      "204235175360",
 
-      appId:
-        "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
+    appId:
+      "1:204235175360:web:cd6f4aac2d8f9e1d4f0425"
 
-    };
-
-
-    // تشغيل Firebase
-
-    const app =
-      initializeApp(firebaseConfig);
+  };
 
 
-    const messaging =
-      getMessaging(app);
+  const app =
+    initializeApp(firebaseConfig);
 
 
-    console.log(
-      "✅ Firebase Messaging يعمل"
-    );
+  const messaging =
+    getMessaging(app);
 
 
-    // تفعيل الإشعارات والحصول على FCM Token
-
-    async function enableNotifications() {
-
-      try {
-
-        // التأكد من دعم الإشعارات
-
-        if (!("Notification" in window)) {
-
-          alert(
-            "❌ هذا المتصفح لا يدعم الإشعارات"
-          );
-
-          return;
-        }
+  console.log(
+    "✅ Firebase Messaging يعمل"
+  );
 
 
-        // طلب إذن الإشعارات
+  /* =====================================
+     🔔 تفعيل الإشعارات
+  ===================================== */
 
-        const permission =
-          await Notification.requestPermission();
+  async function enableNotifications() {
 
+    try {
 
-        if (permission !== "granted") {
+      if (!("Notification" in window)) {
 
-          alert(
-            "❌ لم يتم السماح بالإشعارات"
-          );
+        alert(
+          "❌ هذا المتصفح لا يدعم الإشعارات"
+        );
 
-          return;
-        }
-
-
-        // تسجيل Service Worker
-
-        const registration =
-          await navigator.serviceWorker.register(
-            "/azkar-little-muslim/firebase-messaging-sw.js"
-          );
+        return;
+      }
 
 
-        // انتظار Service Worker
+      /* طلب الإذن */
 
-        await navigator.serviceWorker.ready;
+      const permission =
+        await Notification.requestPermission();
 
 
-        // الحصول على FCM Token
+      if (permission !== "granted") {
+
+        showNotificationStatus(
+          "❌ لم يتم السماح بالإشعارات"
+        );
+
+        return;
+      }
+
+
+      /* تسجيل Service Worker */
+
+      const registration =
+        await navigator.serviceWorker.register(
+          "/azkar-little-muslim/firebase-messaging-sw.js"
+        );
+
+
+      /* انتظار جاهزية Service Worker */
+
+      await navigator.serviceWorker.ready;
+
+
+      /* =====================================
+         🔑 الحصول على FCM Token
+      ===================================== */
+
+      const token =
+        await getToken(messaging, {
+
+          /*
+             ضعي هنا VAPID Key
+             الموجود في Firebase Console
+          */
+
+          // الحصول على FCM Token
 
         const token =
           await getToken(
@@ -407,142 +749,188 @@
               vapidKey:
                 "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
 
-              serviceWorkerRegistration:
-                registration
+          serviceWorkerRegistration:
+            registration
 
-            }
-          );
+        });
 
 
-        if (!token) {
+      if (!token) {
+
+        alert(
+          "❌ لم يتم الحصول على FCM Token"
+        );
+
+        return;
+      }
+
+
+      /* حفظ التوكن على الجهاز */
+
+      localStorage.setItem(
+        "fcmToken",
+        token
+      );
+
+
+      console.log(
+        "✅ تم الحصول على FCM Token وحفظه"
+      );
+
+
+      showNotificationStatus(
+        "✅ تم تفعيل الإشعارات بنجاح 🔔❤️"
+      );
+
+
+      alert(
+        "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Notification error:",
+        error
+      );
+
+
+      alert(
+        "❌ حدث خطأ أثناء تفعيل الإشعارات:\n\n" +
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /* =====================================
+     🔔 تحديث حالة الإشعارات
+  ===================================== */
+
+  function showNotificationStatus(message) {
+
+    const status =
+      document.getElementById("status");
+
+    status.textContent =
+      message;
+
+    status.className =
+      "success";
+
+  }
+
+
+  /* =====================================
+     جعل الدالة متاحة للزر
+  ===================================== */
+
+  window.enableNotifications =
+    enableNotifications;
+
+
+  /* =====================================
+     🧪 اختبار إشعار محلي
+  ===================================== */
+
+  window.testNotification =
+    async function () {
+
+      try {
+
+        if (
+          Notification.permission !==
+          "granted"
+        ) {
 
           alert(
-            "❌ لم يتم الحصول على FCM Token"
+            "❌ يجب أولًا تفعيل الإشعارات"
           );
 
           return;
         }
 
 
-        // حفظ التوكن فقط في الجهاز
-        // لا يتم عرضه داخل الصفحة
+        const registration =
+          await navigator.serviceWorker.ready;
 
-        localStorage.setItem(
-          "fcmToken",
-          token
+
+        await registration.showNotification(
+
+          "أذكار الطفل المسلم 🌷",
+
+          {
+
+            body:
+              "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
+
+            icon:
+              "/azkar-little-muslim/icon-192.png",
+
+            badge:
+              "/azkar-little-muslim/icon-192.png"
+
+          }
+
         );
 
-
-        console.log(
-          "✅ FCM Token تم حفظه بنجاح"
-        );
-
-
-        alert(
-          "✅ تم تفعيل الإشعارات وحفظ التوكن بنجاح 🔔❤️"
-        );
 
       } catch (error) {
 
         console.error(
-          "Notification error:",
+          "Test notification error:",
           error
         );
 
 
         alert(
-          "❌ حدث خطأ أثناء تفعيل الإشعارات:\n\n" +
+          "❌ لم يتم إرسال الإشعار:\n\n" +
           error.message
+        );
+
+      }
+
+    };
+
+
+  /* =====================================
+     📩 استقبال الرسائل أثناء فتح الصفحة
+  ===================================== */
+
+  onMessage(
+    messaging,
+    (payload) => {
+
+      console.log(
+        "🔔 وصلت رسالة Firebase:",
+        payload
+      );
+
+      if (payload.notification) {
+
+        new Notification(
+
+          payload.notification.title ||
+          "أذكار الطفل المسلم",
+
+          {
+
+            body:
+              payload.notification.body ||
+              "حان وقت الأذكار 🌷"
+
+          }
+
         );
 
       }
 
     }
 
+  );
 
-    // جعل الدالة متاحة للزر
-
-    window.enableNotifications =
-      enableNotifications;
-
-
-    // اختبار إشعار محلي
-
-    window.testNotification =
-      async function () {
-
-        try {
-
-          if (
-            Notification.permission !==
-            "granted"
-          ) {
-
-            alert(
-              "❌ يجب أولًا تفعيل الإشعارات"
-            );
-
-            return;
-          }
-
-
-          const registration =
-            await navigator.serviceWorker.ready;
-
-
-          await registration.showNotification(
-
-            "أذكار الطفل المسلم 🌷",
-
-            {
-
-              body:
-                "🔔 هذا إشعار تجريبي، الإشعارات تعمل بنجاح ❤️",
-
-              icon:
-                "/azkar-little-muslim/icon-192.png",
-
-              badge:
-                "/azkar-little-muslim/icon-192.png"
-
-            }
-
-          );
-
-        } catch (error) {
-
-          console.error(
-            "Test notification error:",
-            error
-          );
-
-
-          alert(
-            "❌ لم يتم إرسال الإشعار:\n\n" +
-            error.message
-          );
-
-        }
-
-      };
-
-
-    // استقبال رسائل Firebase
-    // عندما تكون الصفحة مفتوحة
-
-    onMessage(
-      messaging,
-      (payload) => {
-
-        console.log(
-          "🔔 وصلت رسالة Firebase:",
-          payload
-        );
-
-      }
-    );
-
-  </script>
-
-</body>
+</script></body>
 </html>
