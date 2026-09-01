@@ -6,7 +6,119 @@
   <meta name="theme-color" content="#087f75">
 
   <title>أذكار الطفل المسلم</title>
+/* ================================
+   ✨ تصميم أذكار الطفل المسلم الجديد
+   تغيير الواجهة فقط - لا يحذف الوظائف
+   ================================ */
 
+body {
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,.9), transparent 35%),
+    linear-gradient(180deg, #e9fbf7 0%, #f8fffd 45%, #fffaf0 100%);
+  color: #174b46;
+  font-family: "Tajawal", "Arial", sans-serif;
+}
+
+/* العنوان الرئيسي */
+h1 {
+  color: #087f75;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(8,127,117,.12);
+}
+
+/* العناوين */
+h2, h3 {
+  color: #126b64;
+  font-weight: 800;
+}
+
+/* البطاقات */
+.card,
+section,
+.menu-card,
+.category-card {
+  border: none !important;
+  border-radius: 24px !important;
+  background: rgba(255,255,255,.92) !important;
+  box-shadow:
+    0 8px 25px rgba(20, 110, 100, .10),
+    0 2px 6px rgba(0,0,0,.04) !important;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* حركة لطيفة عند لمس البطاقة */
+.card:active,
+.menu-card:active,
+.category-card:active {
+  transform: scale(.97);
+}
+
+/* الأزرار */
+button {
+  border: none;
+  border-radius: 18px !important;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+/* زر الاستماع */
+button[onclick*="speak"],
+button[onclick*="listen"] {
+  background: linear-gradient(135deg, #0a9b8e, #087f75) !important;
+  color: white !important;
+  box-shadow: 0 5px 14px rgba(8,127,117,.22);
+}
+
+/* زر الحفظ / التأكيد */
+button[onclick*="save"],
+button[onclick*="Save"] {
+  background: linear-gradient(135deg, #f6b73c, #e89b19) !important;
+  color: white !important;
+}
+
+/* الروابط */
+a {
+  text-decoration: none;
+}
+
+/* النجوم */
+.star,
+.stars {
+  filter: drop-shadow(0 3px 4px rgba(230,170,30,.20));
+}
+
+/* شريط التنقل إن كان موجودًا */
+nav,
+.bottom-nav,
+.navbar {
+  border-radius: 24px 24px 0 0 !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow: 0 -5px 20px rgba(0,0,0,.08) !important;
+}
+
+/* تحسين العرض على الهاتف */
+@media (max-width: 600px) {
+
+  body {
+    padding-bottom: 20px;
+  }
+
+  .card,
+  .menu-card,
+  .category-card {
+    margin-bottom: 14px;
+  }
+
+  button {
+    min-height: 46px;
+  }
+}
   <style>
     * {
       box-sizing: border-box;
