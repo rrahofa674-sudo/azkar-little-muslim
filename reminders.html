@@ -728,41 +728,49 @@ function goBack() {
 
 
       /* =====================================
-         🔑 الحصول على FCM Token
-      ===================================== */
+   🔑 الحصول على FCM Token
+===================================== */
 
-      const token =
-        await getToken(messaging, {
+const token = await getToken(messaging, {
+  vapidKey:
+    "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
 
-          /*
-             ضعي هنا VAPID Key
-             الموجود في Firebase Console
-          */
-
-          // الحصول على FCM Token
-
-        const token =
-          await getToken(
-            messaging,
-            {
-
-              vapidKey:
-                "BIJWsZf174Mxmb5nnwUk8-L6g4tRL3kPYMr10jS7YAGYL5-S9ArjUN05x38RIsZSgHkyRw5XHAUw9fjRnZnQ2Hw",
-
-          serviceWorkerRegistration:
-            registration
-
-        });
+  serviceWorkerRegistration:
+    registration
+});
 
 
-      if (!token) {
+if (!token) {
 
-        alert(
-          "❌ لم يتم الحصول على FCM Token"
-        );
+  alert(
+    "❌ لم يتم الحصول على FCM Token"
+  );
 
-        return;
-      }
+  return;
+}
+
+
+/* حفظ التوكن على الجهاز */
+
+localStorage.setItem(
+  "fcmToken",
+  token
+);
+
+
+console.log(
+  "✅ تم الحصول على FCM Token وحفظه"
+);
+
+
+showNotificationStatus(
+  "✅ تم تفعيل الإشعارات بنجاح 🔔❤️"
+);
+
+
+alert(
+  "✅ تم تفعيل إشعارات أذكار الطفل المسلم 🔔❤️"
+);
 
 
       /* حفظ التوكن على الجهاز */
