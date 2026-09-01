@@ -5,132 +5,225 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#087f75">
 
+  <title>أذكار الطفل المسلم</title>
+
   <style>
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
     html {
+      min-height: 100%;
       scroll-behavior: smooth;
+      background: #f5fbf9;
     }
 
     body {
       margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,.15), transparent 25%),
-        linear-gradient(145deg, #062e2b, #0b5d58 45%, #092f3b);
-      color: white;
       min-height: 100vh;
+
+      font-family: Arial, Tahoma, sans-serif;
+
+      color: #31504d;
+
+      background:
+        radial-gradient(
+          circle at 15% 8%,
+          #fff8d9 0 9%,
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          #e5f7ff 0 10%,
+          transparent 27%
+        ),
+        linear-gradient(
+          180deg,
+          #f9fffd 0%,
+          #eefcf8 55%,
+          #fffaf0 100%
+        );
+    }
+
+    button {
+      font: inherit;
     }
 
     .app {
+      width: 100%;
       max-width: 600px;
       margin: auto;
       min-height: 100vh;
       overflow: hidden;
-      padding-bottom: 105px;
+      padding: 0 0 110px;
     }
 
+
     /* =========================
-       الرأس
+       🌈 الرأس
     ========================= */
 
     .header {
       position: relative;
       overflow: hidden;
+
       text-align: center;
-      padding: 35px 15px 30px;
+
+      padding: 30px 18px 38px;
 
       background:
-        linear-gradient(145deg, #0b766e, #064b55);
+        linear-gradient(
+          145deg,
+          #bff3e7,
+          #8eddd1 55%,
+          #bfeee7
+        );
 
       border-radius: 0 0 45px 45px;
 
       box-shadow:
-        0 12px 30px rgba(0,0,0,.30);
+        0 12px 25px rgba(53,130,120,.18),
+        inset 0 -3px 8px rgba(255,255,255,.35);
     }
 
     .header::before {
       content: "";
+
       position: absolute;
-      width: 180px;
-      height: 180px;
+
+      width: 190px;
+      height: 190px;
+
       border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      top: -90px;
-      right: -50px;
+
+      background: rgba(255,255,255,.35);
+
+      top: -100px;
+      right: -60px;
     }
 
     .header::after {
       content: "";
+
       position: absolute;
+
       width: 130px;
       height: 130px;
+
       border-radius: 50%;
-      background: rgba(255,255,255,.07);
-      bottom: -70px;
+
+      background: rgba(255,255,255,.25);
+
+      bottom: -75px;
       left: -40px;
     }
+
 
     .sun {
       position: relative;
       z-index: 2;
-      font-size: 60px;
-      filter: drop-shadow(0 8px 8px rgba(0,0,0,.35));
+
+      width: 82px;
+      height: 82px;
+
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 50px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fff9cf,
+          #ffd86b
+        );
+
+      border-radius: 28px;
+
+      box-shadow:
+        0 10px 18px rgba(191,145,35,.22),
+        inset 4px 4px 8px rgba(255,255,255,.8),
+        inset -5px -5px 9px rgba(208,153,30,.16);
     }
+
 
     .title {
       position: relative;
       z-index: 2;
-      margin-top: 8px;
-      font-size: 32px;
+
+      margin-top: 15px;
+
+      font-size: 30px;
       font-weight: 900;
-      text-shadow: 0 4px 8px rgba(0,0,0,.35);
+
+      color: #24655e;
+
+      text-shadow:
+        0 2px 0 white,
+        0 4px 8px rgba(50,110,100,.15);
     }
 
     .title span {
-      color: #9ff5df;
+      color: #087f75;
     }
+
 
     .subtitle {
       position: relative;
       z-index: 2;
+
       display: inline-block;
+
       margin-top: 12px;
-      padding: 10px 18px;
-      border-radius: 25px;
 
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
+      padding: 9px 17px;
 
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
 
-      font-size: 15px;
+      background: rgba(255,255,255,.65);
+
+      color: #39716a;
+
+      font-size: 14px;
       font-weight: bold;
 
       box-shadow:
-        0 8px 18px rgba(0,0,0,.20);
+        0 5px 12px rgba(50,120,110,.12),
+        inset 0 1px 2px white;
     }
 
+
     /* =========================
-       الأطفال
+       👧🧒 الأطفال
     ========================= */
 
     .characters {
       display: flex;
+
       justify-content: space-around;
+
       align-items: center;
-      padding: 25px 15px 15px;
+
+      padding: 24px 18px 12px;
     }
 
     .child {
       text-align: center;
-      font-size: 65px;
-      filter: drop-shadow(0 8px 7px rgba(0,0,0,.3));
-      animation: floatChild 3s ease-in-out infinite;
+
+      font-size: 60px;
+
+      filter:
+        drop-shadow(
+          0 8px 5px rgba(50,100,95,.16)
+        );
+
+      animation:
+        floatChild 3s ease-in-out infinite;
     }
 
     .child:nth-child(2) {
@@ -139,198 +232,293 @@
 
     .child-name {
       margin-top: 5px;
+
+      color: #4c7771;
+
       font-size: 14px;
       font-weight: bold;
     }
 
     @keyframes floatChild {
-      0%, 100% {
+
+      0%,100% {
         transform: translateY(0);
       }
 
       50% {
-        transform: translateY(-5px);
+        transform: translateY(-6px);
       }
     }
 
+
     /* =========================
-       الرسالة
+       ❤️ الرسالة
     ========================= */
 
     .message {
-      margin: 8px 20px 22px;
-      padding: 18px;
+      margin: 8px 18px 22px;
+
+      padding: 17px;
 
       text-align: center;
-      font-size: 20px;
-      font-weight: bold;
 
-      background: rgba(255,255,255,.10);
+      font-size: 19px;
+      font-weight: 900;
 
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 25px;
-
-      box-shadow:
-        0 12px 25px rgba(0,0,0,.22),
-        inset 0 1px 2px rgba(255,255,255,.15);
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    /* =========================
-       بطاقات الأذكار
-    ========================= */
-
-    .cards {
-      padding: 10px 15px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .card {
-      position: relative;
-      overflow: hidden;
-
-      width: 100%;
-      min-height: 145px;
-
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 27px;
-
-      padding: 18px 10px;
-
-      color: white;
-      font-family: inherit;
-      font-weight: bold;
-      font-size: 16px;
-
-      cursor: pointer;
+      color: #a45c69;
 
       background:
         linear-gradient(
           145deg,
-          rgba(255,255,255,.20),
-          rgba(255,255,255,.06)
+          #fff1f4,
+          #ffe5eb
         );
 
+      border-radius: 25px;
+
+      border: 1px solid #ffd3dc;
+
       box-shadow:
-        0 14px 25px rgba(0,0,0,.28),
-        inset 0 2px 3px rgba(255,255,255,.18);
+        0 8px 18px rgba(190,100,120,.12),
+        inset 3px 3px 8px rgba(255,255,255,.9),
+        inset -3px -3px 7px rgba(210,120,140,.08);
+    }
+
+
+    /* =========================
+       🌈 بطاقات الأذكار
+    ========================= */
+
+    .cards {
+      padding: 8px 15px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 16px;
+    }
+
+
+    .card {
+      position: relative;
+
+      overflow: hidden;
+
+      min-height: 160px;
+
+      width: 100%;
+
+      border: 1px solid rgba(255,255,255,.95);
+
+      border-radius: 30px;
+
+      padding: 18px 10px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #355b57;
+
+      font-family: inherit;
+
+      font-size: 16px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 0 rgba(0,0,0,.07),
+        0 16px 25px rgba(50,100,95,.13),
+        inset 5px 5px 10px rgba(255,255,255,.8),
+        inset -6px -7px 12px rgba(70,100,95,.07);
 
       transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .18s ease,
+        box-shadow .18s ease;
     }
+
 
     .card::before {
       content: "";
+
       position: absolute;
 
-      width: 80px;
-      height: 80px;
+      width: 105px;
+      height: 105px;
 
       border-radius: 50%;
 
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.35);
 
-      top: -25px;
-      right: -20px;
+      top: -45px;
+      right: -30px;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
 
-      box-shadow:
-        0 20px 32px rgba(0,0,0,.35),
-        inset 0 2px 3px rgba(255,255,255,.20);
+    .card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 60px;
+      height: 60px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.22);
+
+      bottom: -25px;
+      left: -18px;
     }
+
 
     .card:active {
-      transform: translateY(2px) scale(.97);
+      transform:
+        translateY(5px)
+        scale(.96);
+
+      box-shadow:
+        0 4px 0 rgba(0,0,0,.06),
+        0 8px 15px rgba(50,100,95,.10),
+        inset 4px 4px 8px rgba(255,255,255,.7);
     }
+
+
+    /* =========================
+       🔆 الأيقونات
+    ========================= */
 
     .icon {
       position: relative;
+
       z-index: 2;
 
-      display: block;
+      width: 76px;
+      height: 76px;
 
-      font-size: 48px;
-      margin-bottom: 12px;
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-bottom: 11px;
+
+      font-size: 45px;
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,.58);
+
+      box-shadow:
+        0 8px 12px rgba(50,100,95,.12),
+        inset 4px 4px 8px rgba(255,255,255,.95),
+        inset -4px -4px 8px rgba(70,100,95,.08);
 
       filter:
-        drop-shadow(0 7px 6px rgba(0,0,0,.35));
+        drop-shadow(
+          0 4px 3px rgba(50,90,85,.15)
+        );
     }
+
 
     .card-title {
       position: relative;
       z-index: 2;
+
+      font-size: 17px;
+      letter-spacing: .2px;
     }
 
+
     /* =========================
-       ألوان بسيطة للأقسام
+       🎨 ألوان الأقسام
     ========================= */
 
     .morning {
       background:
-        linear-gradient(145deg,
-        rgba(255,193,7,.27),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #fff4b8,
+          #ffe39a
+        );
     }
 
     .evening {
       background:
-        linear-gradient(145deg,
-        rgba(72,89,160,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #dce9ff,
+          #c6d9ff
+        );
     }
 
     .sleep {
       background:
-        linear-gradient(145deg,
-        rgba(88,70,150,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #e8ddff,
+          #d8c8f7
+        );
     }
 
     .food {
       background:
-        linear-gradient(145deg,
-        rgba(180,110,35,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #ffe0cf,
+          #ffd0ba
+        );
     }
 
     .home {
       background:
-        linear-gradient(145deg,
-        rgba(30,130,105,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #d4f4e6,
+          #bde9d7
+        );
     }
 
     .prayer {
       background:
-        linear-gradient(145deg,
-        rgba(20,120,110,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #d3f2f4,
+          #bce5e8
+        );
     }
 
     .favorite-card {
       background:
-        linear-gradient(145deg,
-        rgba(190,70,90,.25),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #ffe0e8,
+          #ffcdd9
+        );
     }
 
     .reminder {
       background:
-        linear-gradient(145deg,
-        rgba(120,100,45,.30),
-        rgba(255,255,255,.07));
+        linear-gradient(
+          145deg,
+          #fff0c9,
+          #ffe1a2
+        );
     }
 
+
     /* =========================
-       النجوم
+       ⭐ النجوم
     ========================= */
 
     .stars {
@@ -339,209 +527,194 @@
       padding: 18px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-around;
 
-      border-radius: 25px;
+      border-radius: 28px;
 
-      background: rgba(255,255,255,.10);
+      background:
+        linear-gradient(
+          145deg,
+          #fff9dc,
+          #fff0b8
+        );
 
-      border: 1px solid rgba(255,255,255,.15);
+      border: 1px solid #ffe4a1;
+
+      color: #80652d;
 
       box-shadow:
-        0 12px 25px rgba(0,0,0,.25);
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+        0 10px 20px rgba(180,140,45,.13),
+        inset 5px 5px 10px rgba(255,255,255,.9),
+        inset -4px -4px 8px rgba(210,170,70,.08);
     }
+
 
     .big-star {
-      font-size: 45px;
-      filter: drop-shadow(0 6px 5px rgba(0,0,0,.3));
+      font-size: 46px;
+
+      filter:
+        drop-shadow(
+          0 7px 4px rgba(180,130,20,.2)
+        );
     }
+
 
     .stars-text {
       text-align: center;
-      font-weight: bold;
-      font-size: 16px;
+
+      font-weight: 900;
     }
+
 
     .stars-number {
-      margin-top: 5px;
+      margin-top: 4px;
+
       font-size: 25px;
+
+      color: #d39a19;
     }
 
+
     /* =========================
-       القائمة السفلية
+       🏠 القائمة السفلية
     ========================= */
 
     .bottom-nav {
       position: fixed;
 
       bottom: 12px;
+
       left: 12px;
       right: 12px;
 
+      width: auto;
       max-width: 576px;
+
       margin: auto;
 
       display: flex;
+
       justify-content: space-around;
 
       padding: 9px 5px;
 
-      background: rgba(5,40,38,.92);
+      background:
+        rgba(255,255,255,.94);
 
-      border: 1px solid rgba(255,255,255,.13);
+      border: 1px solid
+        rgba(190,220,215,.9);
 
-      border-radius: 25px;
+      border-radius: 27px;
 
       backdrop-filter: blur(15px);
+
       -webkit-backdrop-filter: blur(15px);
 
       box-shadow:
-        0 12px 30px rgba(0,0,0,.35);
+        0 10px 28px rgba(40,100,95,.18),
+        inset 0 1px 2px white;
 
       z-index: 100;
     }
 
+
     .nav-button {
+      flex: 1;
+
       border: none;
+
       background: transparent;
 
-      color: white;
+      color: #51716c;
 
       font-family: inherit;
-      font-size: 12px;
+
+      font-size: 11px;
+
+      font-weight: bold;
 
       cursor: pointer;
 
       padding: 6px 10px;
 
-      border-radius: 15px;
+      border-radius: 17px;
 
-      transition: .2s;
+      transition: .18s;
     }
+
 
     .nav-button.active {
-      background: rgba(255,255,255,.12);
+      background: #dff7f1;
+
+      color: #087f75;
+
+      box-shadow:
+        inset 2px 2px 5px rgba(255,255,255,.9),
+        0 4px 8px rgba(50,120,110,.10);
     }
+
 
     .nav-button:active {
       transform: scale(.92);
     }
 
+
     .nav-icon {
       display: block;
+
       font-size: 23px;
+
       margin-bottom: 3px;
     }
 
+
     /* =========================
-       الهاتف
+       📱 الهاتف
     ========================= */
 
     @media (max-width: 400px) {
 
       .title {
-        font-size: 28px;
+        font-size: 27px;
       }
 
       .child {
-        font-size: 55px;
+        font-size: 54px;
+      }
+
+      .cards {
+        gap: 13px;
+
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       .card {
-        min-height: 135px;
-        font-size: 15px;
+        min-height: 148px;
+
+        border-radius: 26px;
       }
 
       .icon {
-        font-size: 42px;
+        width: 68px;
+        height: 68px;
+
+        font-size: 40px;
+      }
+
+      .card-title {
+        font-size: 15px;
       }
 
       .bottom-nav {
         left: 8px;
         right: 8px;
       }
-
-      .nav-button {
-        padding: 5px 7px;
-        font-size: 11px;
-      }
     }
-    /* ✨ اللمسة الجديدة للواجهة */
 
-body {
-  background:
-    radial-gradient(circle at top, #e9fff9 0%, transparent 35%),
-    linear-gradient(180deg, #083c39 0%, #075e59 45%, #f4fffc 100%);
-}
-
-/* تحسين بطاقات الأقسام */
-.card {
-  min-height: 155px;
-  border-radius: 30px;
-  background: rgba(255,255,255,.13);
-  border: 1px solid rgba(255,255,255,.25);
-  box-shadow:
-    0 12px 25px rgba(0,0,0,.25),
-    inset 0 1px 2px rgba(255,255,255,.2);
-}
-
-/* الأيقونات أكبر وأجمل */
-.card .icon {
-  font-size: 54px;
-  margin-bottom: 14px;
-  filter: drop-shadow(0 7px 5px rgba(0,0,0,.3));
-}
-
-/* اسم القسم */
-.card-title {
-  font-size: 17px;
-  letter-spacing: .2px;
-}
-
-/* تأثير لمس جميل */
-.card:active {
-  transform: scale(.94);
-}
-
-/* النجوم */
-.stars {
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.16),
-    rgba(255,255,255,.07)
-  );
-  border: 1px solid rgba(255,255,255,.22);
-}
-
-/* الرسالة */
-.message {
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.16),
-    rgba(255,255,255,.08)
-  );
-  border: 1px solid rgba(255,255,255,.22);
-}
-
-/* شريط الأسفل */
-.bottom-nav {
-  background: rgba(3,45,43,.96);
-  border: 1px solid rgba(255,255,255,.2);
-}
-
-/* الزر المحدد */
-.nav-button.active {
-  background: linear-gradient(
-    135deg,
-    rgba(159,245,223,.25),
-    rgba(255,255,255,.10)
-  );
-  box-shadow: 0 4px 12px rgba(0,0,0,.18);
-}
   </style>
 </head>
 
