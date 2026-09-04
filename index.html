@@ -409,48 +409,6 @@ function renderDhikr(){
  <p>الذكر ${currentIndex+1} من ${total}</p>
  </div>`;
 }
-function countRepeat(){
-  const item=adhkar[currentCategory].items[currentIndex];
-
-  currentRepeat++;
-
-  document.getElementById("repeatCount").textContent=currentRepeat;
-
-  // صوت عند تكرار الذكر
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-
-    const voice = new SpeechSynthesisUtterance(item.text);
-    voice.lang = "ar-SA";
-    voice.rate = 0.85;
-    voice.pitch = 1;
-
-    window.speechSynthesis.speak(voice);
-  }
-
-  // عند انتهاء العدد
-  if(currentRepeat >= item.count){
-
-    // صوت تشجيع للطفل 🌟
-    setTimeout(() => {
-      if ("speechSynthesis" in window) {
-        const encouragement = new SpeechSynthesisUtterance(
-          "ما شاء الله! أحسنت! 🌟"
-        );
-        encouragement.lang = "ar-SA";
-        encouragement.rate = 0.9;
-        encouragement.pitch = 1.1;
-
-        window.speechSynthesis.speak(encouragement);
-      }
-    }, 500);
-
-    setTimeout(() => {
-      nextDhikr();
-    }, 2200);
-  }
-}
-
 
 function nextDhikr(){
  currentIndex++;
