@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+عن<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -409,7 +409,26 @@ function renderDhikr(){
  <p>الذكر ${currentIndex+1} من ${total}</p>
  </div>`;
 }
+function countRepeat() {
+  const item = adhkar[currentCategory].items[currentIndex];
 
+  currentRepeat++;
+
+  document.getElementById("repeatCount").textContent =
+    currentRepeat + " / " + item.repeat;
+
+  if (currentRepeat >= item.repeat) {
+    currentRepeat = 0;
+
+    currentIndex++;
+
+    if (currentIndex >= adhkar[currentCategory].items.length) {
+      currentIndex = 0;
+    }
+
+    showDhikr();
+  }
+  }
 function nextDhikr(){
  currentIndex++;
  if(currentIndex>=adhkar[currentCategory].items.length){
