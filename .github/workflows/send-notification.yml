@@ -2,8 +2,11 @@ name: Send Azkar Notifications
 
 on:
   schedule:
-    # فحص كل 5 دقائق
-    - cron: "*/5 * * * *"
+    # 06:05 بتوقيت الجزائر (UTC+1)
+    - cron: "5 5 * * *"
+
+    # 17:05 بتوقيت الجزائر (UTC+1)
+    - cron: "5 16 * * *"
 
   workflow_dispatch:
 
@@ -23,7 +26,7 @@ jobs:
       - name: Install Firebase Admin
         run: npm install firebase-admin@13.6.0
 
-      - name: Check and send notification
+      - name: Send notification
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           FCM_TOKEN: ${{ secrets.FCM_TOKEN }}
