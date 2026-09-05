@@ -21,6 +21,15 @@ async function sendNotification() {
       );
     }
 
+    // معرفة نوع تشغيل GitHub Actions
+    const eventName = process.env.GITHUB_EVENT_NAME;
+
+    console.log("🚀 نوع التشغيل:", eventName);
+
+    // إذا تم تشغيل Workflow يدويًا
+    // نرسل الإشعار فورًا للاختبار
+    const isManualRun = eventName === "workflow_dispatch";
+
     // الوقت الحالي بتوقيت الجزائر
     const now = new Date();
 
@@ -33,32 +42,41 @@ async function sendNotification() {
 
     console.log("🇩🇿 الوقت الحالي في الجزائر:", algeriaTime);
 
-    // أوقات الإشعارات
+    // أوقات الإشعارات التلقائية
     const notificationTimes = [
       "06:05",
       "17:05"
     ];
 
-    // نرسل فقط إذا كان الوقت قريبًا من الموعد
-    const shouldSend = notificationTimes.some(time => {
-      const [h, m] = time.split(":").map(Number);
-      const [currentH, currentM] = algeriaTime
-        .split(":")
-        .map(Number);
+    // في التشغيل اليدوي: نرسل مباشرة
+    let shouldSend = isManualRun;
 
-      const targetMinutes = h * 60 + m;
-      const currentMinutes = currentH * 60 + currentM;
+    // في التشغيل التلقائي: نرسل فقط قرب موعد الإشعار
+    if (!isManualRun) {
+      shouldSend = notificationTimes.some(time => {
+        const [h, m] = time.split(":").map(Number);
 
-      return Math.abs(currentMinutes - targetMinutes) <= 2;
-    });
+        const [currentH, currentM] = algeriaTime
+          .split(":")
+          .map(Number);
 
+        const targetMinutes = h * 60 + m;
+        const currentMinutes = currentH * 60 + currentM;
+
+        return Math.abs(currentMinutes - targetMinutes) <= 2;
+      });
+    }
+
+    // إذا لم يكن وقت الإرسال
     if (!shouldSend) {
       console.log(
-        "⏰ ليس وقت إرسال الإشعار. لن يتم إرسال شيء."
+        "⏰ ليس وقت إرسال الإشعار التلقائي. لن يتم إرسال شيء."
       );
 
       return;
     }
+
+    console.log("📤 جاري إرسال الإشعار...");
 
     // إرسال الإشعار
     const response = await admin.messaging().send({
@@ -80,8 +98,8 @@ async function sendNotification() {
       }
     });
 
-    console.log("✅ تم إرسال الإشعار بنجاح");
-    console.log("Message ID:", response);
+    console.log("✅ تم إرسال الإشعار بنجاح!");
+    console.log("📨 Message ID:", response);
 
   } catch (error) {
     console.error("❌ فشل إرسال الإشعار:");
