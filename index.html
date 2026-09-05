@@ -573,6 +573,19 @@ function getUserLocation(){
 if(localStorage.getItem("darkMode")==="1")document.body.classList.add("dark");
 setMode("home");
 function updateStars(){const v=localStorage.getItem("childStars");let n=0;if(v){try{const x=JSON.parse(v);n=typeof x==="number"?x:(x.total||x.stars||0)}catch(e){n=parseInt(v)||0}}document.getElementById("starCount").textContent=n}document.addEventListener("DOMContentLoaded",updateStars);
+window.addEventListener("load", function(){
+
+  const savedCity = localStorage.getItem("userCity");
+
+  if (savedCity) {
+    const result = document.getElementById("locationResult");
+
+    if (result) {
+      result.textContent = "📍 مدينتك: " + savedCity;
+    }
+  }
+
+});
 </script>
 </body>
 </html>
