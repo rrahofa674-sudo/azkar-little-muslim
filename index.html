@@ -291,14 +291,41 @@ footer span{display:block;font-size:25px;margin-bottom:2px}
     <p>كلما واظبت على الأذكار، اقتربت من مكافآت أكثر ⭐</p>
   </div>
 </div>
-
 <div id="settings" class="section">
 <h2 class="section-title">⚙️ الإعدادات</h2>
+
 <div class="settings">
-<button onclick="toggleDarkMode()">🌙 تشغيل / إيقاف الوضع الليلي</button>
-<button onclick="alert('سيتم إضافة التذكيرات في النسخة القادمة بإذن الله 🌷')">🔔 التذكيرات</button>
-<button onclick="alert('أذكاري اليومية - تطبيق مجاني للأذكار اليومية 🤍')">ℹ️ حول التطبيق</button>
-</div></div>
+
+<button onclick="toggleDarkMode()">
+🌙 تشغيل / إيقاف الوضع الليلي
+</button>
+
+<button onclick="getUserLocation()">
+📍 تحديد مدينتي
+</button>
+
+<div id="locationResult"
+style="
+text-align:center;
+padding:12px;
+margin:8px 0;
+border-radius:15px;
+background:#fff8e9;
+color:#493d36;
+font-weight:700;
+">
+📍 لم يتم تحديد المدينة بعد
+</div>
+
+<button onclick="alert('سيتم إضافة التذكيرات في النسخة القادمة بإذن الله 🌷')">
+🔔 التذكيرات
+</button>
+
+<button onclick="alert('أذكاري اليومية - تطبيق مجاني للأذكار اليومية 🤍')">
+ℹ️ حول التطبيق
+</button>
+
+</div>
 </div>
 
 
